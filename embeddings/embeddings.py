@@ -7,7 +7,7 @@ This is a walkthrough that introduces different types of word embeddings:
 - GloVe
 - FastText
 The code below shows the methods for obtaining the word vectors and vocabulary dictionary.
-Please take note that the inputs are raw text from the corpus variable below. Thus, it has not been preprocessed/cleaned.
+Please take note that the inputs are raw text from the `sentences` variable below. Thus, it has not been preprocessed/cleaned.
 Author: birdx0810
 '''
 
@@ -100,4 +100,4 @@ ft = fasttext.FastText(tokenized, min_count=1)
 vocabulary = ft.wv.vocab
 vectors = ft.wv.vectors
 
-# Using fasttext
+# TODO: Using fasttext
