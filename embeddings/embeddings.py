@@ -31,13 +31,14 @@ tc_sent = [
 # Count Vectorizer (One-hot encoding)
 # Method: count the occurrence of each word in each document
 #########################
+def count_embeddings(sentences):
+    from sklearn.feature_extraction.text import CountVectorizer
 
-from sklearn.feature_extraction.text import CountVectorizer
-
-cv = CountVectorizer()
-count_vectors = cv.fit_transform(sentences)
-vocabulary = cv.vocabulary_
-vectors = count_vectors.toarray()
+    cv = CountVectorizer()
+    count_vectors = cv.fit_transform(sentences)
+    vocabulary = cv.vocabulary_
+    vectors = count_vectors.toarray()
+    return vocabulary, vectors
 
 #########################
 # TF-IDF Transformation/Vectorization
@@ -47,19 +48,25 @@ vectors = count_vectors.toarray()
 #########################
 
 # Transformer Method
+'''
 from sklearn.feature_extraction.text import TfidfTransformer
 
 transformer = TfidfTransformer(smooth_idf=True,use_idf=True)
 tfidf_weight = transformer.fit(count_vectors)
 tfidf_score = transformer.transform(count_vectors)
+vocabulary = transformer.vocabulary_
 vectors = tfidf_score.toarray()
+'''
 
 # Vectorizer Method
-from sklearn.feature_extraction.text import TfidfVectorizer
+def tfidf_embeddings(sentences):
+    from sklearn.feature_extraction.text import TfidfVectorizer
 
-vectorizer = TfidfVectorizer(use_idf=True)
-tfidf_score = vectorizer.fit_transform(sentences)
-vectors = tfidf_score.toarray()
+    tfidf = TfidfVectorizer(use_idf=True)
+    tfidf_score = tfidf.fit_transform(sentences)
+    vocabulary = tfidf.vocabulary_
+    vectors = tfidf_score.toarray()
+    return vocabulary, vectors
 
 #########################
 # word2vec
@@ -70,26 +77,30 @@ vectors = tfidf_score.toarray()
 # - w2v.train(more_sentences) to learn new sentences (online learning)
 #########################
 
-from gensim.models import word2vec
+def w2v_embeddings(sentences):
+    from gensim.models import word2vec
 
-tokenized = [sentence.split() for sentence in sentences]
-w2v = word2vec.Word2Vec(tokenized, min_count=1)
-vocabulary = w2v.wv.vocab
-vectors = w2v.wv.vectors
+    tokenized = [sentence.split() for sentence in sentences]
+    w2v = word2vec.Word2Vec(tokenized, min_count=1)
+    vocabulary = w2v.wv.vocab
+    vectors = w2v.wv.vectors
+    return vocabulary, vectors
 
 #########################
 # GloVe
 # Method: Capturing word embeddings through word-frequency and co-occurrence counts with a matrix.
 #########################
 
-from glove import Corpus, Glove
+def glove_embeddings(sentences):
+    from glove import Corpus, Glove
 
-corpus = Corpus()
-corpus.fit(tokenized, window=10)
-glove = Glove(no_components=512, learning_rate=0.05)
-glove.fit(corpus.matrix, epochs=5, no_threads=2)
-vocabulary = corpus.dictionary
-vectors = glove.word_vectors
+    corpus = Corpus()
+    corpus.fit(tokenized, window=10)
+    glove = Glove(no_components=512, learning_rate=0.05)
+    glove.fit(corpus.matrix, epochs=5, no_threads=2)
+    vocabulary = corpus.dictionary
+    vectors = glove.word_vectors
+    return vocabulary, vectors
 
 #########################
 # FastText
@@ -99,16 +110,18 @@ vectors = glove.word_vectors
 # - Another method used is the bag of tricks supervised method available using Facebook's original module.
 #########################
 
-# Using gensim
-from gensim.models import fasttext
+def fasttext_embeddings(sentences):
+    # Using gensim
+    from gensim.models import fasttext
 
-tokenized = [sentence.split() for sentence in sentences]
-ft = fasttext.FastText(tokenized, min_count=1)
-vocabulary = ft.wv.vocab
-vectors = ft.wv.vectors
+    tokenized = [sentence.split() for sentence in sentences]
+    ft = fasttext.FastText(tokenized, min_count=1)
+    vocabulary = ft.wv.vocab
+    vectors = ft.wv.vectors
+    return vocabulary, vectors
+    # TODO: Using fasttext
 
-# TODO: Using fasttext
 
-
-# if __name__ == '__main__':
-    # Do...
+if __name__ == '__main__':
+    voc, vec = tfidf_embeddings(sentences)
+    print(voc)
