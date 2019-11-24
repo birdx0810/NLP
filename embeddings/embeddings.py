@@ -20,7 +20,7 @@ sentences = [
 ]
 
 tc_sent = [
-    '資管系的技術課程幾乎都離不開程式。
+    '資管系的技術課程幾乎都離不開程式。', 
     '當然，有一個好的編譯器可以提高撰寫程式的效率。',
     'Visual Studio Code 是微軟所開發的免費開源程式碼編譯器；',
     '也是根據 Stack Overflow 最多開發者在使用的編譯器哦～',
@@ -110,5 +110,5 @@ vectors = ft.wv.vectors
 # TODO: Using fasttext
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # Do...
