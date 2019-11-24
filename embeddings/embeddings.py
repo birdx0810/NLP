@@ -19,6 +19,14 @@ sentences = [
     'One of their other known projects is Digital Attack Map.'
 ]
 
+tc_sent = [
+    '資管系的技術課程幾乎都離不開程式。
+    '當然，有一個好的編譯器可以提高撰寫程式的效率。',
+    'Visual Studio Code 是微軟所開發的免費開源程式碼編譯器；',
+    '也是根據 Stack Overflow 最多開發者在使用的編譯器哦～',
+    '那我們來看看這個編譯器為啥會這麼厲害吧～'
+]
+
 #########################
 # Count Vectorizer (One-hot encoding)
 # Method: count the occurrence of each word in each document
@@ -82,7 +90,6 @@ glove = Glove(no_components=512, learning_rate=0.05)
 glove.fit(corpus.matrix, epochs=5, no_threads=2)
 vocabulary = corpus.dictionary
 vectors = glove.word_vectors
-print(vectors.shape)
 
 #########################
 # FastText
@@ -101,3 +108,7 @@ vocabulary = ft.wv.vocab
 vectors = ft.wv.vectors
 
 # TODO: Using fasttext
+
+
+if __name__ == '__main__':
+    # Do...
