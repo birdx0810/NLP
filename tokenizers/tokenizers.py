@@ -43,13 +43,27 @@ def word_tokenizer(sentences):
 def bpe_tokenizer(sentences, count=5):
     # Create Character Level Vocab
     tokens = char_tokenizer(sentences)
+
     processed = []
     for sentence in tokens:
-        sent = ' '.join(sentence) + (' </w>')
+        sent = ' '.join(sentence) + (' </s>')
         processed.append(sent)
+
+    # Create Frequency Vocabulary
+    vocabulary = {}
+    for sentence in processed:
+        for char in sentence.split(' '):
+            if char not in vocabulary:
+                vocabulary[char] = 1
+            elif char in vocabulary:
+                vocabulary[char] += 1
     
+    print(vocabulary)
+
     for i in range(count):
         # Get pairing statistics
+        pairs = {}
+        for c in processed:
 
         # Merge Vocabulary
 
