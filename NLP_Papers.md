@@ -19,19 +19,22 @@ Key properties for Embeddings:
 Syntax(syntactic): Grammatical structure
 Semantics(Sentiment): Meaning of vocabulary
 
-### Goals of NLP:
+[Neural Language Modeling](https://ofir.io/Neural-Language-Modeling-From-Scratch/)
+[Embed, Encode, Attend, Predict](https://explosion.ai/blog/deep-learning-formula-nlp)
+[What can we cram into a vector](https://arxiv.org/abs/1805.01070)
+
+#### Goals of NLP:
 - Classification/Prediction
 - Generation
 
-[Neural Language Modeling](https://ofir.io/Neural-Language-Modeling-From-Scratch/)
-[Embed, Encode, Attend, Predict](https://explosion.ai/blog/deep-learning-formula-nlp)
-
-### Process
+#### Process
 0. Define goal
 1. Text pre-processing
 2. Tokenize
 3. Build dictionary
     - {ID: WORD/SENT}
+
+---
 
 ## Text Pre-processing
 - removing tags (HTML, XML)
@@ -45,172 +48,7 @@ Semantics(Sentiment): Meaning of vocabulary
 - remove whitespace, lowercasing, spelling/grammar corrections etc.
 - [Example Code](https://github.com/dipanjanS/practical-machine-learning-with-python/blob/master/notebooks/Ch07_Analyzing_Movie_Reviews_Sentiment/Text%20Normalization%20Demo.ipynb)
 
----
-
-## n-gram: Probabilistic Language Model
-> Bengio et. al (2003)
-> Journal of Machine Learning Research
-> Paper: [Link](http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)
-
-Derived from Markov Model
-A sequence of N words
-- unigram: "this" "that"
-- bigram: "this word" "that boy"
-- 3-gram: "this is tom" "he is gay"
-- e.g. 3-gram model
->I would **not like them** here or there.
->I would **not like them** anywhere.
->I do not like green eggs and ham.
->I do **not like them**, Sam-I-Am.
-
-$P(w|h)$
-- The probability the next word being $w$ in a history sentence $h$
-
-
-$$
-\begin{align*}
-P(w_i|w_{i-1}w_{i-2}) &= P(them|not \ like) \\
-&= \frac{C(w_{i-2}w_{i-1}w_{i})}{C(w_{i-2}w_{i-1})}\\
-&= 3/4
-\end{align*}
-$$
-
-Where $C(w_i)$ is the occurence count of word(or words) $w_i$ in corpus
-
-Objective Function: Maximize Log-Likelihood
-
-## CRF
-Conditional Random Fields
-![](https://i.imgur.com/Tp4EV7E.png)
-Reference:
-[CRF short survey](https://www.datasciencecentral.com/profiles/blogs/conditional-random-fields-crf-short-survey)
-
----
-
-## Word2Vec
-###### Word Embedding
-input: corpus
-framework: 2-layer (shallow) NN
-[Example](https://github.com/tensorflow/tensorflow/blob/r1.1/tensorflow/examples/tutorials/word2vec/word2vec_basic.py) (Tensorflow)
-Features = the number of neurons in the projection(hidden) layer
-Other implementations: [CBOW](https://hackmd.io/bdlAIXpKS7-J1FZot2DFyQ?both#CBOW), [Skip-gram](https://hackmd.io/bdlAIXpKS7-J1FZot2DFyQ?both#Skip-gram)
-
-[Word Embedding Visual Inspector](https://ronxin.github.io/wevi/)
-[Word2Vec](https://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html)
-
-![](https://i.imgur.com/veeC83b.png)
-
-### CBOW
-Goal: Predict center word based on context words
-![](https://i.imgur.com/0n4bJpZ.png)
-
-$Q = (N \times D) + (D \times log_2(V))$
-$Q$ is the model complexity
-$(N \times D)$ is the complexity of the hidden layer
-$(D \times log_2(V))$ is the output layer
-
-Better syntactic performance
-
-### Skip-gram
-Goal: Predict context words based on center word
-![](https://i.imgur.com/9rbBGmp.png)
-The input would be a one-hot vector of the center word. Since it is predicting the possibility of the next word, the output vector would be a probability distribution (Problem: High dimension output)
-![](https://i.imgur.com/FWCkspb.png)
-
-$Q = C \times D + (D \times log_2(V))$
-$Q$ is the model complexity
-$C$ is the size of the context window
-$D$ is the complexity of the hidden layer
-$(D \times log_2(V))$ is the output layer
-
-Better overall performance
-
-### Hierarchical Softmax
-- A Huffman binary tree, where the root node is the hidden layer activations (or context vector $C$ ), and the leaves are the probabilities of each word.
-- The goal of this method in word2vec is to reduce the amount of updates required for each learning step in the word vector learning algorithm.
-- Rather than update all words in the vocabulary during training, only $log(W)$ words are updated (where $W$ is the size of the vocabulary).
-$$
-\displaystyle p(w|w_I) = \prod_{j=1}^{L(w)-1}\sigma\bigg(\big[n(w,j+1) = ch(n(w,j))\big] \cdot v'_{n(w,j)} v_{w_I}^{\intercal} \bigg)
-$$
-
-![](https://i.imgur.com/JlTkpC1.png)
-
-### Negative Sampling
-- Solves time complexity of Skip-gram.
-- Sample part of vocabulary for negative values, rather than whole vocab. (for $k$ negative examples, we have 1 positive example)
-- Determine is this word from context? or sampled randomly
-- E.g. "the" "bird" might have high co-occurence values, but they might not mean anything useful.
-
-$$
-log\ \sigma(v'_{w_O} \top v_{w_I}) + \sum^{k}_{i=1} \mathbb{E}_{w_i \sim P_n(w)} \big[log\ \sigma (-v'_{w_i} \top v_{w_I} \big]
-$$
-
-$$
-\text{Softmax} = p(t|c) = \frac{e^{\theta^{T}_{t} e_c}}{\sum^{10000}_{j=1} e^{\theta^{T}_{t} e_c}}
-$$
-
-Where $\theta_t$ is the target word, and $e_c$ is context word. If the target word is true has probabillity of 1. By reducing the context words from 10000 to $k$ we could reduce the model complexity and runtime.
-
-$$
-\begin{align*}
-P(w_i) &= \bigg(\sqrt{\frac{z(w_i)}{0.001}}+1\bigg)⋅\frac{0.001}{z(wi)} \\
-P(w_i) &= 1 - \sqrt{\frac{t}{f(w_i)}} \\
-\end{align*}
-$$
-
-How to sample negative examples?
-- according to empirical frequency
-- $\frac{1}{|Vocabulary|}$
-- $\frac {f(w_i)^{3/4}}{\sum^{10000}_{j=1}f(w_j)^{3/4}}$
-
----
-
-## GloVe
-###### Word Embedding
-Global Vectors for Word Representations
-: Capture global statistics directly through model
-
-2 main models for learning word vectors:
-- latent semantic analysis (Good use of statistics, bad anology)
-    - e.g. TF-IDF, HAL, COALS
-- local context window (Good anology, bad use of statistics)
-    - e.g. CBOW, vLBL, PPMI
-
-$X$ is a word-word co-occurence matrix
-
-$X_{ij}$ is the number of times word $j$ occurs in the context of word $i$
-
-$X_i = \sum_k X_{ik}$ is the number of times any word appears in the context of word $i$
-
-$P_{ij} = P(i|j) = \frac{X_{ij}}{X_i}$ be the probability that the word $j$ appear in the context of word $i$
-
-Error Function
-$$
-J = \sum^{V}_{i,j=1} f(X_{ij})(w^T_i \tilde{w}_j + b_i + \tilde{b_j} - logX_{ij})^2
-$$
-
-![](https://i.imgur.com/l2PN1lJ.png)
-
-Although $i$ and $j$ is highly related (e.g. ice, steam), they might not frequently appear together $P_{ij}$. But, through observing neighbouring context words $k$, we could identify the similarity between them through $P_{ik}$ and $P_{ij}$. If $i$ and $j$ is similar, when $P_{ik}$ is small $P_{jk}$ would also be small, and vice versa. Thus, $\frac{P_{ik}}{P_{jk}} \approx 1$.
-
----
-## RNN
-![](https://i.imgur.com/8LBdgID.png)
-
-$w(t)$ is the vector of word at time $t$ (one-hot)
-$U$ is a word matrix where each column represents a word
-$s(t-1)$ is the history input, passed from the last $s(t)$
-
-$$\begin{align*}
-w(t) &= v \times 1 \\
-s(t) &= s(t-1) = d \times 1 \\
-U &= d \times v \\
-W &= d \times d \\
-V &= V \times d \\
-y(t) &= V \times 1 \\
-\end{align*}
-$$
----
+### Tokenizers
 
 ## Byte Pair Encoding (BPE)
 ###### Tokenizer (2016)
@@ -273,22 +111,191 @@ for i in range(num_merges):
 ## SentencePiece(WordPiece)
 ###### Tokenizer (2018/2012)
 - WordPiece tokenizes characters within words (BERT uses a variant of WP)
-- SentencePiece tokenizes words and retaining whitespaces with a special token '_'
+- SentencePiece tokenizes words and retaining whitespaces with a special token `_`
 
 Github: [Code](https://github.com/google/sentencepiece)
 Paper: [SentencePiece](https://arxiv.org/abs/1808.06226) & [WordPiece](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/37842.pdf) (???
 
 ---
 
-## seq2seq
+## Word Embeddings
+
+### Word2Vec
+input: corpus
+framework: 2-layer (shallow) NN
+[Example](https://github.com/tensorflow/tensorflow/blob/r1.1/tensorflow/examples/tutorials/word2vec/word2vec_basic.py) (Tensorflow)
+Features = the number of neurons in the projection(hidden) layer
+Other implementations: [CBOW](https://hackmd.io/bdlAIXpKS7-J1FZot2DFyQ?both#CBOW), [Skip-gram](https://hackmd.io/bdlAIXpKS7-J1FZot2DFyQ?both#Skip-gram)
+
+[Word Embedding Visual Inspector](https://ronxin.github.io/wevi/)
+[Word2Vec](https://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html)
+
+![](https://i.imgur.com/veeC83b.png)
+
+#### CBOW
+Goal: Predict center word based on context words
+![](https://i.imgur.com/0n4bJpZ.png)
+
+$Q = (N \times D) + (D \times log_2(V))$
+$Q$ is the model complexity
+$(N \times D)$ is the complexity of the hidden layer
+$(D \times log_2(V))$ is the output layer
+
+Better syntactic performance
+
+#### Skip-gram
+Goal: Predict context words based on center word
+![](https://i.imgur.com/9rbBGmp.png)
+The input would be a one-hot vector of the center word. Since it is predicting the possibility of the next word, the output vector would be a probability distribution (Problem: High dimension output)
+![](https://i.imgur.com/FWCkspb.png)
+
+$Q = C \times D + (D \times log_2(V))$
+$Q$ is the model complexity
+$C$ is the size of the context window
+$D$ is the complexity of the hidden layer
+$(D \times log_2(V))$ is the output layer
+
+Better overall performance
+
+#### Hierarchical Softmax
+- A Huffman binary tree, where the root node is the hidden layer activations (or context vector $C$ ), and the leaves are the probabilities of each word.
+- The goal of this method in word2vec is to reduce the amount of updates required for each learning step in the word vector learning algorithm.
+- Rather than update all words in the vocabulary during training, only $log(W)$ words are updated (where $W$ is the size of the vocabulary).
+$$
+\displaystyle p(w|w_I) = \prod_{j=1}^{L(w)-1}\sigma\bigg(\big[n(w,j+1) = ch(n(w,j))\big] \cdot v'_{n(w,j)} v_{w_I}^{\intercal} \bigg)
+$$
+
+![](https://i.imgur.com/JlTkpC1.png)
+
+#### Negative Sampling
+- Solves time complexity of Skip-gram.
+- Sample part of vocabulary for negative values, rather than whole vocab. (for $k$ negative examples, we have 1 positive example)
+- Determine is this word from context? or sampled randomly
+- E.g. "the" "bird" might have high co-occurence values, but they might not mean anything useful.
+
+$$
+log\ \sigma(v'_{w_O} \top v_{w_I}) + \sum^{k}_{i=1} \mathbb{E}_{w_i \sim P_n(w)} \big[log\ \sigma (-v'_{w_i} \top v_{w_I} \big]
+$$
+
+$$
+\text{Softmax} = p(t|c) = \frac{e^{\theta^{T}_{t} e_c}}{\sum^{10000}_{j=1} e^{\theta^{T}_{t} e_c}}
+$$
+
+Where $\theta_t$ is the target word, and $e_c$ is context word. If the target word is true has probabillity of 1. By reducing the context words from 10000 to $k$ we could reduce the model complexity and runtime.
+
+$$
+\begin{align*}
+P(w_i) &= \bigg(\sqrt{\frac{z(w_i)}{0.001}}+1\bigg)⋅\frac{0.001}{z(wi)} \\
+P(w_i) &= 1 - \sqrt{\frac{t}{f(w_i)}} \\
+\end{align*}
+$$
+
+How to sample negative examples?
+- according to empirical frequency
+- $\frac{1}{|Vocabulary|}$
+- $\frac {f(w_i)^{3/4}}{\sum^{10000}_{j=1}f(w_j)^{3/4}}$
+
+### GloVe
+Global Vectors for Word Representations
+: Capture global statistics directly through model
+
+2 main models for learning word vectors:
+- latent semantic analysis (Good use of statistics, bad anology)
+    - e.g. TF-IDF, HAL, COALS
+- local context window (Good anology, bad use of statistics)
+    - e.g. CBOW, vLBL, PPMI
+
+$X$ is a word-word co-occurence matrix
+
+$X_{ij}$ is the number of times word $j$ occurs in the context of word $i$
+
+$X_i = \sum_k X_{ik}$ is the number of times any word appears in the context of word $i$
+
+$P_{ij} = P(i|j) = \frac{X_{ij}}{X_i}$ be the probability that the word $j$ appear in the context of word $i$
+
+Error Function
+$$
+J = \sum^{V}_{i,j=1} f(X_{ij})(w^T_i \tilde{w}_j + b_i + \tilde{b_j} - logX_{ij})^2
+$$
+
+![](https://i.imgur.com/l2PN1lJ.png)
+
+Although $i$ and $j$ is highly related (e.g. ice, steam), they might not frequently appear together $P_{ij}$. But, through observing neighbouring context words $k$, we could identify the similarity between them through $P_{ik}$ and $P_{ij}$. If $i$ and $j$ is similar, when $P_{ik}$ is small $P_{jk}$ would also be small, and vice versa. Thus, $\frac{P_{ik}}{P_{jk}} \approx 1$.
+
+---
+## Language Models
+
+### n-gram: Probabilistic Language Model
+> Bengio et. al (2003)
+> Journal of Machine Learning Research
+> Paper: [Link](http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)
+
+Derived from Markov Model
+A sequence of N words
+- unigram: "this" "that"
+- bigram: "this word" "that boy"
+- 3-gram: "this is tom" "he is gay"
+- e.g. 3-gram model
+>I would **not like them** here or there.
+>I would **not like them** anywhere.
+>I do not like green eggs and ham.
+>I do **not like them**, Sam-I-Am.
+
+$P(w|h)$
+- Given context $h$, calculate the probability of the next word being $w$
+
+$$
+\begin{align*}
+P(w_i|w_{i-1}w_{i-2}) &= P(them|not \ like) \\
+&= \frac{C(w_{i-2}w_{i-1}w_{i})}{C(w_{i-2}w_{i-1})}\\
+&= 3/4
+\end{align*}
+$$
+
+Where $C(w_i)$ is the occurence count of word(or words) $w_i$ in corpus
+
+Objective Function: Maximize Log-Likelihood
+
+---
+
+## RNN Based Language Model
+> Paper
+> [ACL](https://www.aclweb.org/anthology/N13-1090/)
+> [INTERSPEECH](https://www.isca-speech.org/archive/interspeech_2010/i10_1045.html)
+
+![](https://i.imgur.com/8LBdgID.png)
+
+$w(t)$ is the vector of word at time $t$ (one-hot)
+$U$ is a word matrix where each column represents a word
+$s(t-1)$ is the history input, passed from the last $s(t)$
+
+$$\begin{align*}
+w(t) &= v \times 1 \\
+s(t) &= s(t-1) = d \times 1 \\
+U &= d \times v \\
+W &= d \times d \\
+V &= V \times d \\
+y(t) &= V \times 1 \\
+\end{align*}
+$$
+
+---
+
+## Sequence to Sequence Learning with Neural Networks
+> Paper: [Link](https://arxiv.org/abs/1409.3215)
+> GitHub: [Link](https://github.com/google/seq2seq)
+
 Higly used in translations.
 Source Language $\to$ **encode** $\to$ compressed state (vector) $\to$ **decode** $\to$ Target Language
 $V_{src} \text{: \{I love apple\} } \to V_{tgt} \text{: \{我喜歡蘋果\} }$
 
 ![](https://i.imgur.com/2JsnR5F.png)
 
-## Encoder-Decoder Attention (with RNN)
-[Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/abs/1409.0473)
+## Google's Neural Machine Translation System
+> Paper: [Link](https://arxiv.org/pdf/1609.08144.pdf)
+> GitHub:
+> - [OpenNMT](https://github.com/OpenNMT/OpenNMT-py)
+> - [TensorFlow](https://github.com/tensorflow/nmt)
 
 - Human translation: Translating part by part (memorization)
 - Attention weight (α parameters) in each hidden state. How much information should we pay attention to in each word in vocab.
