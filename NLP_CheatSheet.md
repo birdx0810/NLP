@@ -8,17 +8,18 @@
 - The Chinese Room Argument (John Searle, 1980)
 
 ## Conferences
-[AAAI]()
-[ICLR]()
-[PAKDD]()
+[AAAI](https://www.aaai.org/Conferences/conferences.php)
+[ICLR](https://iclr.cc)
+[PAKDD](https://pakdd.org)
 [ACL](https://www.aclweb.org/anthology/)
-[IJCAI]()
-[KDD]()
-[COLING]()
-[CIKM]()
-[NIPS]()
-[ACM]()
-[TREC]()
+[IJCAI](https://www.ijcai.org)
+[KDD](https://www.kdd.org)
+[COLING](https://www.aclweb.org/anthology/venues/colin)
+[CIKM](www.cikmconference.org)
+[NIPS](https://nips.cc)
+[ACM](https://www.acm.org)
+[TREC](https://trec.nist.gov)
+[ICML](https://icml.cc)
 
 ## NLP Levels
 
