@@ -88,12 +88,14 @@ def w2v_embeddings(sentences):
 
 #########################
 # GloVe
+# Install: `pip install glove_python`
 # Method: Capturing word embeddings through word-frequency and co-occurrence counts with a matrix.
 #########################
 
 def glove_embeddings(sentences):
     from glove import Corpus, Glove
 
+    tokenized = [sentence.split() for sentence in sentences]
     corpus = Corpus()
     corpus.fit(tokenized, window=10)
     glove = Glove(no_components=512, learning_rate=0.05)
@@ -116,12 +118,29 @@ def fasttext_embeddings(sentences):
 
     tokenized = [sentence.split() for sentence in sentences]
     ft = fasttext.FastText(tokenized, min_count=1)
+    ft.build_vocab(sentences=tokenized, update=True)
+    ft.train(sentences=tokenized, total_examples=len(tokenized), epochs=10)
     vocabulary = ft.wv.vocab
     vectors = ft.wv.vectors
     return vocabulary, vectors
-    # TODO: Using fasttext
+    
+
+    # Using fasttext
+    '''
+    import fasttext
+
+    model = fasttext.train_unsupervised(sentences, model='skipgram')
+    vocabulary = model.get_words()
+    vectors = model.get_output_matrix()
+    print(type(vectors))
+    return vectors
+    '''
 
 
 if __name__ == '__main__':
-    voc, vec = tfidf_embeddings(sentences)
-    print(voc)
+    voc, vec = fasttext_embeddings(sentences)
+    with open('path.txt', 'w') as f:
+        for word, obj in voc.items():
+            # print(f'{word}: {str(vec[obj.index].tolist()).strip("[").strip("]")}')
+            f.write(f'{word}: {str(vec[obj.index].tolist()).strip("[").strip("]")}\n')
+

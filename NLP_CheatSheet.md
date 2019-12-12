@@ -8,18 +8,18 @@
 - The Chinese Room Argument (John Searle, 1980)
 
 ## Conferences
-[AAAI](https://www.aaai.org/Conferences/conferences.php)
-[ICLR](https://iclr.cc)
-[PAKDD](https://pakdd.org)
-[ACL](https://www.aclweb.org/anthology/)
-[IJCAI](https://www.ijcai.org)
-[KDD](https://www.kdd.org)
-[COLING](https://www.aclweb.org/anthology/venues/colin)
-[CIKM](www.cikmconference.org)
-[NIPS](https://nips.cc)
-[ACM](https://www.acm.org)
-[TREC](https://trec.nist.gov)
-[ICML](https://icml.cc)
+[AAAI](https://www.aaai.org/Conferences/conferences.php)  
+[ICLR](https://iclr.cc)  
+[PAKDD](https://pakdd.org)  
+[ACL](https://www.aclweb.org/anthology/)  
+[IJCAI](https://www.ijcai.org)  
+[KDD](https://www.kdd.org)  
+[COLING](https://www.aclweb.org/anthology/venues/colin)  
+[CIKM](www.cikmconference.org)  
+[NIPS](https://nips.cc)  
+[ACM](https://www.acm.org)  
+[TREC](https://trec.nist.gov)  
+[ICML](https://icml.cc)  
 
 ## NLP Levels
 
@@ -105,19 +105,19 @@
 
 ## Modules (API)
 
-nltk
-gensim
-spacy
-stanfordnlp
-google-cloud-language
+- nltk
+- gensim
+- spacy
+- stanfordnlp
+- google-cloud-language
 
 ### Chinese
 
-[ckiptagger](https://github.com/ckiplab/ckiptagger)
-[thulac](https://github.com/thunlp/THULAC-Python)
-[snownlp](https://github.com/isnowfy/snownlp)
-[jieba](https://github.com/fxsjy/jieba)
-[opencc](https://github.com/BYVoid/OpenCC)
+- [ckiptagger](https://github.com/ckiplab/ckiptagger)
+- [thulac](https://github.com/thunlp/THULAC-Python)
+- [snownlp](https://github.com/isnowfy/snownlp)
+- [jieba](https://github.com/fxsjy/jieba)
+- [opencc](https://github.com/BYVoid/OpenCC) (Translator)
 
 ## Datasets
 
@@ -186,3 +186,6 @@ Accuracy/Precision/Recall
 - General Language Understanding Evaluation benchmark
 - A collection of tasks for multitask evaluation for **natural language understanding**
 - Introduced new benchmark [SuperGLUE](super.gluebenchmark.com)
+- ChineseGLUE benchmark [CLUE](https://github.com/ChineseGLUE/ChineseGLUE)
+
+

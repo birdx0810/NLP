@@ -35,10 +35,9 @@ Semantics(Sentiment): Meaning of vocabulary
 - remove whitespace, lowercasing, spelling/grammar corrections etc.
 - [Example Code](https://github.com/dipanjanS/practical-machine-learning-with-python/blob/master/notebooks/Ch07_Analyzing_Movie_Reviews_Sentiment/Text%20Normalization%20Demo.ipynb)
 
-### Tokenizers
+## Tokenizers
 
-## Byte Pair Encoding (BPE)
-###### Tokenizer (2016)
+### Byte Pair Encoding (BPE)
 [Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/abs/1508.07909)
 - replaces the most frequent pair of characters in a sequence with a single (unused) character ngrams
 - add frequent n-gram character pairs in to vocabulary (something like association rule)
@@ -95,13 +94,12 @@ for i in range(num_merges):
 
 ```
 
-## SentencePiece(WordPiece)
-###### Tokenizer (2018/2012)
+### SentencePiece(WordPiece)
+> Paper: [SentencePiece](https://arxiv.org/abs/1808.06226) & [WordPiece](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/37842.pdf)
+> Github: [Code](https://github.com/google/sentencepiece)
+
 - WordPiece tokenizes characters within words (BERT uses a variant of WP)
 - SentencePiece tokenizes words and retaining whitespaces with a special token `_`
-
-Github: [Code](https://github.com/google/sentencepiece)
-Paper: [SentencePiece](https://arxiv.org/abs/1808.06226) & [WordPiece](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/37842.pdf) (???
 
 ---
 
@@ -208,6 +206,8 @@ $$
 ![](https://i.imgur.com/l2PN1lJ.png)
 
 Although $i$ and $j$ is highly related (e.g. ice, steam), they might not frequently appear together $P_{ij}$. But, through observing neighbouring context words $k$, we could identify the similarity between them through $P_{ik}$ and $P_{ij}$. If $i$ and $j$ is similar, when $P_{ik}$ is small $P_{jk}$ would also be small, and vice versa. Thus, $\frac{P_{ik}}{P_{jk}} \approx 1$.
+
+## FastText
 
 ---
 ## Language Models
@@ -404,9 +404,6 @@ Paper: [Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.o
 
 ## XLNet
 
-## fastText
-###### Pre-trained
-
 
 ## Metrics and Evaluations
 ### Distance Metrics for Word Similarity
@@ -422,6 +419,8 @@ Paper: [Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.o
     - Similarity & paraphrase
     - Inference tasks
     - Variants: SuperGLUE
+
+---
 
 ## Glossary
 #### Word Embedding:
