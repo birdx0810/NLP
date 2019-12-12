@@ -1,8 +1,6 @@
 # NLP Papers
 ###### tags: `NLP`
 
-[toc]
-
 ## Introduction
 
 ![](https://www.tensorflow.org/images/audio-image-text.png)
@@ -22,17 +20,6 @@ Semantics(Sentiment): Meaning of vocabulary
 [Neural Language Modeling](https://ofir.io/Neural-Language-Modeling-From-Scratch/)
 [Embed, Encode, Attend, Predict](https://explosion.ai/blog/deep-learning-formula-nlp)
 [What can we cram into a vector](https://arxiv.org/abs/1805.01070)
-
-#### Goals of NLP:
-- Classification/Prediction
-- Generation
-
-#### Process
-0. Define goal
-1. Text pre-processing
-2. Tokenize
-3. Build dictionary
-    - {ID: WORD/SENT}
 
 ---
 

@@ -90,6 +90,18 @@
     - Retrieval-based
     - Generative
 
+## Process
+0. Define goal
+1. Crawl/Prepare Data
+2. Pre-process text
+3. Stemming, Lemmatize, Tokenize
+4. Build dictionary
+    - {ID: WORD/SENT}
+5. Embed words to vectors
+6. Encode using Biderectional RNNs
+7. Attend to compress
+8. Predict/Decode
+
 ## Modules (API)
 
 nltk
@@ -110,6 +122,7 @@ google-cloud-language
 
 ### Natural Language Inference
 [SNLI](https://nlp.stanford.edu/projects/snli/)
+[MultiNLI](https://www.nyu.edu/projects/bowman/multinli/)
 
 ### Social Networks
 - Twitter
@@ -132,6 +145,9 @@ google-cloud-language
 [GigaWord](https://drive.google.com/open?id=1eNUzf015MhbjOZBpRQOfEqjdPwNz9iiS): Dataset for Pointer-Generator by Abigail See
 
 ## Evaluation & Benchmarks
+
+### Perplexity
+Accuracy/Precision/Recall
 
 ### BLEU (Scoring)
 
@@ -169,7 +185,3 @@ google-cloud-language
 - General Language Understanding Evaluation benchmark
 - A collection of tasks for multitask evaluation for **natural language understanding**
 - Introduced new benchmark [SuperGLUE](super.gluebenchmark.com)
-
-
-視覺化
-病人分層（好/不好）
