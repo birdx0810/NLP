@@ -1,9 +1,8 @@
 # Neural Turing Machine
 
-> Graves et. al, 2014 #Google
->
-> Original Paper: [Link](https://arxiv.org/abs/1410.5401)
->
+> Graves et. al, 2014  
+> Affiliation: Google  
+> Original Paper: [Link](https://arxiv.org/abs/1410.5401)  
 > GitHub: [Link](https://github.com/MarkPKCollier/NeuralTuringMachine)
 
 - Computers are mainly composed of memory, control flow and arithmetic/logical operations
