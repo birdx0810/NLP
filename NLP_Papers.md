@@ -17,6 +17,7 @@ Key properties for Embeddings:
 Syntax(syntactic): Grammatical structure
 Semantics(Sentiment): Meaning of vocabulary
 
+<!-- TODO: Read -->
 [Neural Language Modeling](https://ofir.io/Neural-Language-Modeling-From-Scratch/)
 [Embed, Encode, Attend, Predict](https://explosion.ai/blog/deep-learning-formula-nlp)
 [What can we cram into a vector](https://arxiv.org/abs/1805.01070)
@@ -38,7 +39,11 @@ Semantics(Sentiment): Meaning of vocabulary
 ## Tokenizers
 
 ### Byte Pair Encoding (BPE)
-[Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/abs/1508.07909)
+> Neural Machine Translation of Rare Words with Subword Units
+> Sennrich et. al (2015)
+> Paper: [Link](https://arxiv.org/abs/1508.07909)
+> GitHub: [Link](https://github.com/rsennrich/subword-nmt)
+
 - replaces the most frequent pair of characters in a sequence with a single (unused) character ngrams
 - add frequent n-gram character pairs in to vocabulary (something like association rule)
 - stop when vocabulary size has reached target
@@ -79,22 +84,10 @@ for i in range(num_merges):
     best = max(pairs, key=pairs.get)
     vocab = merge_vocab(best, vocab)
     print(best)
-
-# Output:
-# ('e', 's')
-# ('es', 't')
-# ('est', '</w>')
-# ('l', 'o')
-# ('lo', 'w')
-# ('w', 'est</w>')
-# ('e', 'west</w>')
-# ('n', 'ewest</w>')
-# ('low', '</w>')
-# ('d', 'est</w>')
-
 ```
 
 ### SentencePiece(WordPiece)
+> Sentence Piece ()
 > Paper: [SentencePiece](https://arxiv.org/abs/1808.06226) & [WordPiece](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/37842.pdf)
 > Github: [Code](https://github.com/google/sentencepiece)
 
@@ -106,11 +99,18 @@ for i in range(num_merges):
 ## Word Embeddings
 
 ### Word2Vec
-input: corpus
-framework: 2-layer (shallow) NN
-[Example](https://github.com/tensorflow/tensorflow/blob/r1.1/tensorflow/examples/tutorials/word2vec/word2vec_basic.py) (Tensorflow)
+> Distributed Representations of Words and Phrasesand their Compositionality
+> Mikolov et. al (2013)
+> Google
+> Paper: [Link](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf)
+> GitHub: 
+> - [Code](https://github.com/tensorflow/tensorflow/blob/r1.1/tensorflow/examples/tutorials/word2vec/word2vec_basic.py) (Tensorflow)
+> - [Original Project](https://code.google.com/archive/p/word2vec/)
+
+Input: corpus
+Framework: 2-layer (shallow) NN
 Features = the number of neurons in the projection(hidden) layer
-Other implementations: [CBOW](https://hackmd.io/bdlAIXpKS7-J1FZot2DFyQ?both#CBOW), [Skip-gram](https://hackmd.io/bdlAIXpKS7-J1FZot2DFyQ?both#Skip-gram)
+<!-- Other implementations: [CBOW](https://hackmd.io/bdlAIXpKS7-J1FZot2DFyQ?both#CBOW), [Skip-gram](https://hackmd.io/bdlAIXpKS7-J1FZot2DFyQ?both#Skip-gram) -->
 
 [Word Embedding Visual Inspector](https://ronxin.github.io/wevi/)
 [Word2Vec](https://p.migdal.pl/2017/01/06/king-man-woman-queen-why.html)
