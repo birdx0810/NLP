@@ -108,7 +108,7 @@ def glove_embeddings(sentences):
 # FastText
 # Method: Takes into account the subword features and adds them to the final vector.
 # Note: 
-# - This is a follow-up approach on w2v. Thus, the `sg`, `hs` parameters are also applicable for the gensim version.
+# - The gensim version of the model is a follow-up approach on w2v. Thus, the `sg`, `hs` parameters are also applicable for the gensim version.
 # - Another method used is the bag of tricks supervised method available using Facebook's original module.
 #########################
 
@@ -139,9 +139,8 @@ def fasttext_embeddings(sentences):
 #########################
 # ELMo
 # Method: bi-directional LSTM and multiple vectors for single token for learning different contexts.
+# https://github.com/allenai/allennlp/blob/master/tutorials/how_to/elmo.md
 # Note: 
-# - This is a follow-up approach on w2v. Thus, the `sg`, `hs` parameters are also applicable for the gensim version.
-# - Another method used is the bag of tricks supervised method available using Facebook's original module.
 #########################
 
 def elmo(sentences):
