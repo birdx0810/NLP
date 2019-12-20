@@ -136,11 +136,23 @@ def fasttext_embeddings(sentences):
     return vectors
     '''
 
+#########################
+# ELMo
+# Method: bi-directional LSTM and multiple vectors for single token for learning different contexts.
+# Note: 
+# - This is a follow-up approach on w2v. Thus, the `sg`, `hs` parameters are also applicable for the gensim version.
+# - Another method used is the bag of tricks supervised method available using Facebook's original module.
+#########################
+
+def elmo(sentences):
+    #TODO: ELMo wrapper
+    pass
+
 
 if __name__ == '__main__':
     voc, vec = fasttext_embeddings(sentences)
     with open('path.txt', 'w') as f:
         for word, obj in voc.items():
-            # print(f'{word}: {str(vec[obj.index].tolist()).strip("[").strip("]")}')
-            f.write(f'{word}: {str(vec[obj.index].tolist()).strip("[").strip("]")}\n')
+            # print(f'{word} {str(vec[obj.index].tolist()).strip("[").strip("]")}')
+            f.write(f'{word} {str(vec[obj.index].tolist()).strip("[").strip("]")}\n')
 
