@@ -8,14 +8,13 @@
 Word Vectors <=> Word Embeddings
 - a set of language modeling techniques for mapping words to a vector of numbers (turns a text into numbers)
 - a numeric vector represents a word
-- more words == higher dimension
+- comparitively sparse: more words == higher dimension
 
 Key properties for Embeddings:
 - Dimensionality Reduction: a more efficient representation
 - Contextual Similarity: a more expressive representation
-
-Syntax(syntactic): Grammatical structure
-Semantics(Sentiment): Meaning of vocabulary
+  - Syntax(syntactic): Grammatical structure
+  - Semantics(Sentiment): Meaning of vocabulary
 
 <!-- TODO: Read -->
 [Neural Language Modeling](https://ofir.io/Neural-Language-Modeling-From-Scratch/)
@@ -34,6 +33,7 @@ Semantics(Sentiment): Meaning of vocabulary
     - root word/stem
 - removing stopwords (a, an, the, and)
 - remove whitespace, lowercasing, spelling/grammar corrections etc.
+- replace special tokens (digits to `[NUM]` token)
 - [Example Code](https://github.com/dipanjanS/practical-machine-learning-with-python/blob/master/notebooks/Ch07_Analyzing_Movie_Reviews_Sentiment/Text%20Normalization%20Demo.ipynb)
 
 ## Tokenizers
@@ -98,11 +98,12 @@ for i in range(num_merges):
 
 ## Word Embeddings
 
-### Word2Vec
-> Distributed Representations of Words and Phrasesand their Compositionality
+### Word2Vec: 
 > Mikolov et. al (2013)
-> Google
-> Paper: [Link](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf)
+> Affiliates: Google
+> Paper:
+> - [Efficient Estimation of Word Representations in Vector Space]() 
+> - [Distributed Representations of Words and Phrasesand their Compositionality](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf)
 > GitHub: 
 > - [Code](https://github.com/tensorflow/tensorflow/blob/r1.1/tensorflow/examples/tutorials/word2vec/word2vec_basic.py) (Tensorflow)
 > - [Original Project](https://code.google.com/archive/p/word2vec/)
@@ -180,8 +181,13 @@ How to sample negative examples?
 - $\frac{1}{|Vocabulary|}$
 - $\frac {f(w_i)^{3/4}}{\sum^{10000}_{j=1}f(w_j)^{3/4}}$
 
-### GloVe
-Global Vectors for Word Representations
+### GloVe: Global Vectors for Word Representations
+> Jeffrey Pennington, Richard Socher, Christopher Manning (2014) #ACL
+> Affiliates: Stanford University
+> Paper: [Link](https://nlp.stanford.edu/pubs/glove.pdf)
+> GitHub: [Link](https://github.com/stanfordnlp/GloVe)
+> Official Site: [Link](https://nlp.stanford.edu/projects/glove/)
+
 : Capture global statistics directly through model
 
 2 main models for learning word vectors:
@@ -207,14 +213,20 @@ $$
 
 Although $i$ and $j$ is highly related (e.g. ice, steam), they might not frequently appear together $P_{ij}$. But, through observing neighbouring context words $k$, we could identify the similarity between them through $P_{ik}$ and $P_{ij}$. If $i$ and $j$ is similar, when $P_{ik}$ is small $P_{jk}$ would also be small, and vice versa. Thus, $\frac{P_{ik}}{P_{jk}} \approx 1$.
 
-## FastText
+### FastText
+
+### ELMo (Embedding from Language Models)
+
+Looks at entire sentence before assigning each word in it an embedding
+Bi-directional LSTM
 
 ---
+
 ## Language Models
 
 ### n-gram: Probabilistic Language Model
-> Bengio et. al (2003)
-> Journal of Machine Learning Research
+> Bengio et. al (2003) #JMLR  
+> Affiliates: University of Montreal
 > Paper: [Link](http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)
 
 Derived from Markov Model
@@ -245,10 +257,12 @@ Objective Function: Maximize Log-Likelihood
 
 ---
 
-## RNN Based Language Model
-> Paper
-> [ACL](https://www.aclweb.org/anthology/N13-1090/)
-> [INTERSPEECH](https://www.isca-speech.org/archive/interspeech_2010/i10_1045.html)
+### RNN Based Language Model
+> Mikolov et. al (2013) #ACL
+> Affiliates: Microsoft
+> Paper:  
+> [ACL](https://www.aclweb.org/anthology/N13-1090/)  
+> [INTERSPEECH](https://www.isca-speech.org/archive/interspeech_2010/i10_1045.html)  
 
 ![](https://i.imgur.com/8LBdgID.png)
 
@@ -256,7 +270,8 @@ $w(t)$ is the vector of word at time $t$ (one-hot)
 $U$ is a word matrix where each column represents a word
 $s(t-1)$ is the history input, passed from the last $s(t)$
 
-$$\begin{align*}
+$$
+\begin{align*}
 w(t) &= v \times 1 \\
 s(t) &= s(t-1) = d \times 1 \\
 U &= d \times v \\
@@ -266,9 +281,15 @@ y(t) &= V \times 1 \\
 \end{align*}
 $$
 
+### LSTM
+
+### GRU
+
 ---
 
-## Sequence to Sequence Learning with Neural Networks
+## Seq2Seq
+
+### Sequence to Sequence Learning with Neural Networks
 > Paper: [Link](https://arxiv.org/abs/1409.3215)
 > GitHub: [Link](https://github.com/google/seq2seq)
 
@@ -276,12 +297,9 @@ Higly used in translations.
 Source Language $\to$ **encode** $\to$ compressed state (vector) $\to$ **decode** $\to$ Target Language
 $V_{src} \text{: \{I love apple\} } \to V_{tgt} \text{: \{我喜歡蘋果\} }$
 
-![](https://i.imgur.com/2JsnR5F.png)
-
-## Google's Neural Machine Translation System
-> Paper: [Link](https://arxiv.org/pdf/1609.08144.pdf)
-> GitHub:
-> - [OpenNMT](https://github.com/OpenNMT/OpenNMT-py)
+### Google's Neural Machine Translation System
+> Paper: [Link](https://arxiv.org/pdf/1609.08144.pdf)  
+> GitHub:  
 > - [TensorFlow](https://github.com/tensorflow/nmt)
 
 - Human translation: Translating part by part (memorization)
@@ -291,17 +309,15 @@ $V_{src} \text{: \{I love apple\} } \to V_{tgt} \text{: \{我喜歡蘋果\} }$
 
 ![](https://i.imgur.com/IuaKvVQ.png)
 
-The Problem with Machine Translation
-1. 要不要翻譯 $\to V_t +1$
-2. 翻譯哪個字(src) $\to$ Classifier
-3. 翻譯成什麼(tgt) $\to$ Attention
+The Problem with Machine Translation:
+1. Do we need to translate $\to V_t +1$
+2. Which word to translate (src) $\to$ Classifier
+3. What should it be translated to (tgt) $\to$ Attention
 
 $$
-\begin{align*}
-&a^{<t'>} = \Big( \overrightarrow{a}^{<t'>}, \overleftarrow{a}^{<t'>} \Big) \\ \\
-&\sum_{t'} \alpha^{<1, t'>} = 1 \\ \\
-&C^{<1>} = \sum_{t'} \alpha^{<1, t'>} a^{<t'>} \\ \\
-\end{align*}
+a^{<t'>} = \Big( \overrightarrow{a}^{<t'>}, \overleftarrow{a}^{<t'>} \Big) \\
+\sum_{t'} \alpha^{<1, t'>} = 1 \\
+C^{<1>} = \sum_{t'} \alpha^{<1, t'>} a^{<t'>} \\
 $$
 
 $C$ is the context weighted attention sum.
@@ -309,40 +325,46 @@ $\alpha^{<t,t'>}$ is the amount of attention $y^{<t>}$ should pay to $a^{<t'>}$.
 
 A larger the scalar (dot) product ($\approx 1$) means higher similarity. Thus, leads to "more attention".
 
-Problem: Slow and still limited by size of context vector of RNN
+Problem: Slow and still limited by size of context vector of RNN; could we remove the continuous RNN states?
 
-## the Transformer model (Encoder-Decoder GAN)
-Could we remove the continuous RNN states?
-[Attention is all we need](https://arxiv.org/abs/1706.03762)
+### Attention is all you need
+> a.k.a Transformers  
+> Vaswani et al. (2017)  
+> Affiliates: Google  
+> Paper: [Link](https://arxiv.org/abs/1706.03762)  
+> Code:  
+> - [Havard: The Annotated Transformer](https://nlp.seas.harvard.edu/2018/04/03/attention.html)  
+> - [Huggingface](https://github.com/huggingface/transformers)
+
+
+
+![](https://i.imgur.com/w5XmS2C.png)
 
 Consists of an Encoder and Decoder
 - Encoder (self attention)
     1. Self attention layer
     2. Feed-forward network
 
-![](https://i.imgur.com/M7DwjOl.png)
-
 - Decoder
     1. Self attention layer
     2. Encoder-Decoder attention
     3. Feed-forward network
+
 How does the model know the word sequence/order (without RNN)?
 - Positional encoding
     - add a (one-hot) vector representing the sequence of each input word
 
-![](https://i.imgur.com/WdSClBb.png)
-
 Reference:
 [Transformer - Heo Min-suk](https://www.youtube.com/watch?v=z1xs9jdZnuY)
 
-### Scaled Dot-Product Attention
+#### Scaled Dot-Product Attention
 $\text{Attention}(Q, K, V) = \text{softmax} (\frac{QK^T}{\sqrt{d_k}}) \times V$
 
 - $QK^T$ is the attention score where $Q$ (m $\times$ 1)
 - $d_k$ is keys of dimension
 - The output is the attention layer output (vector)
 
-### Multi-Head Attention
+#### Multi-Head Attention
 - Parallelization (8 attention layers)
 $$
 \begin{align*}
@@ -371,16 +393,10 @@ Linear: Generate logit
 Softmax: Probability of word
 Label smoothing (regularization for noisy labels)
 
-### Variational Autoencoder
-
 ---
 
-## ELMo (Embedding from Language Models)
-###### Pre-trained (2018)
-Looks at entire sentence before assigning each word in it an embedding
-Bi-directional LSTM
-
-## BERT (Biderectional Encoder Representation from Transformers)
+## Transformers
+### BERT (Biderectional Encoder Representation from Transformers)
 ###### Pre-trained (2018)
 Reads entire sequence at once (non-directional)
 - Pre-train
@@ -391,18 +407,18 @@ Reads entire sequence at once (non-directional)
 GitHub: [Code](https://github.com/google-research/bert)
 Paper: [BERT](https://arxiv.org/abs/1810.04805)
 
-## GPT-II
+### GPT-II
 ###### Pre-trained (2019)
 GitHub: [Code](https://github.com/openai/gpt-2)
 Paper: [Language Models are Unsupervised Multitask Learners](https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf)
 
-## TransformerXL
+### TransformerXL
 ###### Pre-trained (2019)
 
 GitHub: [Code](https://github.com/kimiyoung/transformer-xl)
 Paper: [Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.org/abs/1901.02860)
 
-## XLNet
+### XLNet
 
 
 ## Metrics and Evaluations
@@ -419,8 +435,6 @@ Paper: [Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.o
     - Similarity & paraphrase
     - Inference tasks
     - Variants: SuperGLUE
-
----
 
 ## Glossary
 #### Word Embedding:
