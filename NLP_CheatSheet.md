@@ -1,9 +1,11 @@
-# Natural Language Processing
+# NLP Cheat Sheet
 ###### tags: `NLP`
 > "You shall know a word by the company it keeps" -- Firth (1957)
+> ![](https://imgs.xkcd.com/comics/machine_learning.png)  
+> "I deeply believe that we do need more structure and modularity for language, memory, knowledge, and planning; it’ll just take some time..." -- Manning (2017)
 
 ## Concepts
-![](https://i.imgur.com/iGMDwwC.png)
+<!-- ![](https://i.imgur.com/iGMDwwC.png) -->
 - The Imitation Game (Alan Turing, 1950)
 - The Chinese Room Argument (John Searle, 1980)
 
@@ -22,6 +24,7 @@
 [ICML](https://icml.cc)  
 
 ## NLP Levels
+![](https://www.tensorflow.org/images/audio-image-text.png)
 
 - Speech (Phonetics & Phonological Analysis)
 - Text (Optical Character Recognition & Tokenization)
@@ -30,6 +33,10 @@
 - Discourse Processing
 
 ## NLP Goal
+
+- Voice & Speech
+  - Automated Speech Recognition
+  - Text-To-Speech
 
 - Text Mining
   - POS Tagging (Dependency Parsing)
@@ -54,20 +61,22 @@
   - Attention
     - BERT
     - RoBERTa
-    - BERT-WWM
-    - NEZHA
+    - SpanBERT/WWM
+    - DistilBERT
     - ALBERT
     - T5
-  - ERNIE
-    - THUxHUAWEI
-    - Baidu
+    - NEZHA
+    - ERNIE
+      - THUxHUAWEI
+      - Baidu
 
 - Next Word/Sentence Prediction (Language Models)
   - n-gram model
   - RNN
     - LSTM
     - GRU
-  - GAN
+  - AutoEncoder (Seq2seq)
+    - GAN
 
 - Topic Classification
   - Grover (Fake News Detection)
@@ -109,6 +118,7 @@
 - gensim
 - spacy
 - stanfordnlp
+- allennlp
 - google-cloud-language
 
 ### Chinese

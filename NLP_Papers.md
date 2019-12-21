@@ -3,7 +3,7 @@
 
 ## Introduction
 
-![](https://www.tensorflow.org/images/audio-image-text.png)
+![](https://raw.githubusercontent.com/thunlp/PLMpapers/master/PLMfamily.jpg)
 
 Word Vectors <=> Word Embeddings
 - a set of language modeling techniques for mapping words to a vector of numbers (turns a text into numbers)
@@ -287,7 +287,7 @@ $$
 
 ---
 
-## Seq2Seq
+## Seq2Seq (AutoEncoders)
 
 ### Sequence to Sequence Learning with Neural Networks
 > Paper: [Link](https://arxiv.org/abs/1409.3215)
