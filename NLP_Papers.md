@@ -17,9 +17,9 @@ Key properties for Embeddings:
   - Semantics(Sentiment): Meaning of vocabulary
 
 <!-- TODO: Read -->
-[Neural Language Modeling](https://ofir.io/Neural-Language-Modeling-From-Scratch/)
-[Embed, Encode, Attend, Predict](https://explosion.ai/blog/deep-learning-formula-nlp)
-[What can we cram into a vector](https://arxiv.org/abs/1805.01070)
+[Neural Language Modeling](https://ofir.io/Neural-Language-Modeling-From-Scratch/)  
+[Embed, Encode, Attend, Predict](https://explosion.ai/blog/deep-learning-formula-nlp)  
+[What can we cram into a vector](https://arxiv.org/abs/1805.01070)  
 
 ---
 
