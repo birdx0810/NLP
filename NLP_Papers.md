@@ -407,6 +407,18 @@ Reads entire sequence at once (non-directional)
 GitHub: [Code](https://github.com/google-research/bert)
 Paper: [BERT](https://arxiv.org/abs/1810.04805)
 
+### RoBERTa
+
+### SpanBERT
+
+### ALBERT
+
+### TransformerXL
+
+### XLNet
+
+### GPT
+
 ### GPT-II
 ###### Pre-trained (2019)
 GitHub: [Code](https://github.com/openai/gpt-2)
