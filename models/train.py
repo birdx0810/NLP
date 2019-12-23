@@ -7,7 +7,3 @@ import pytorch.rnn as rnn
 
 model = rnn.RNN()
 
-
-
-
-

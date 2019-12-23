@@ -53,7 +53,7 @@ class RNN(nn.Module):
 
 class LSTM(RNN):
     def __init__(self, rnn_layers, linear_layers, input_dim, hidden_dim, output_dim):
-    super(RNN, self).__init__()
+        super(RNN, self).__init__()
 
     # Overload RNN layer
     self.rnn_layer = nn.LSTM(input_size=input_dim,
@@ -63,7 +63,7 @@ class LSTM(RNN):
 
 class GRU(RNN):
     def __init__(self, rnn_layers, linear_layers, input_dim, hidden_dim, output_dim):
-    super(RNN, self).__init__()
+        super(RNN, self).__init__()
 
     # Overload RNN layer
     self.rnn_layer = nn.GRU(input_size=input_dim,
