@@ -316,11 +316,10 @@ Neural Machine Translation Hub:
 - [OpenNMT](http://opennmt.net/)  
 
 ### Sequence to Sequence Learning with Neural Networks
-> Affiliation: Google
+> Affiliation: Google  
 > Paper: [Link](https://arxiv.org/abs/1409.3215)  
 > Code: [Link](https://github.com/google/seq2seq)  
 
-Higly used in translations.
 Source Language $\to$ **encode** $\to$ compressed state (vector) $\to$ **decode** $\to$ Target Language
 $V_{src} \text{: \{I love apple\} } \to V_{tgt} \text{: \{我喜歡蘋果\} }$
 
@@ -330,7 +329,7 @@ $V_{src} \text{: \{I love apple\} } \to V_{tgt} \text{: \{我喜歡蘋果\} }$
 
 ### Google's Neural Machine Translation System
 > Affiliation: Google
-> Paper: [Link](https://arxiv.org/pdf/1609.08144.pdf)  
+> Paper: [Bridging the Gap between Human and Machine Translation](https://arxiv.org/pdf/1609.08144.pdf), [Enabling Zero-Shot Translation](https://arxiv.org/abs/1611.04558)
 
 - Human translation: Translating part by part (memorization)
 - Attention weight (α parameters) in each hidden state. How much information should we pay attention to in each word in vocab.
