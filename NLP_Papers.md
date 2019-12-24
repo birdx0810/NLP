@@ -104,8 +104,8 @@ for i in range(num_merges):
 > Paper:
 > - [Efficient Estimation of Word Representations in Vector Space]() 
 > - [Distributed Representations of Words and Phrasesand their Compositionality](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf)
-> GitHub: 
-> - [Code](https://github.com/tensorflow/tensorflow/blob/r1.1/tensorflow/examples/tutorials/word2vec/word2vec_basic.py) (Tensorflow)
+> Code: 
+> - [GitHub](https://github.com/tensorflow/tensorflow/blob/r1.1/tensorflow/examples/tutorials/word2vec/word2vec_basic.py) (Tensorflow)
 > - [Original Project](https://code.google.com/archive/p/word2vec/)
 
 Input: corpus
@@ -185,7 +185,7 @@ How to sample negative examples?
 > Jeffrey Pennington, Richard Socher, Christopher Manning (2014) #ACL
 > Affiliates: Stanford University
 > Paper: [Link](https://nlp.stanford.edu/pubs/glove.pdf)
-> GitHub: [Link](https://github.com/stanfordnlp/GloVe)
+> Code: [Link](https://github.com/stanfordnlp/GloVe)
 > Official Site: [Link](https://nlp.stanford.edu/projects/glove/)
 
 : Capture global statistics directly through model
@@ -213,9 +213,18 @@ $$
 
 Although $i$ and $j$ is highly related (e.g. ice, steam), they might not frequently appear together $P_{ij}$. But, through observing neighbouring context words $k$, we could identify the similarity between them through $P_{ik}$ and $P_{ij}$. If $i$ and $j$ is similar, when $P_{ik}$ is small $P_{jk}$ would also be small, and vice versa. Thus, $\frac{P_{ik}}{P_{jk}} \approx 1$.
 
-### FastText
+### fastText: Enriching Word Vectors with Subword Information
+> Piotr Bojanowski, Edouard Grave, Armand Joulin, Tomas Mikolov (2016) #TACL
+> Affiliation: facebook
+> Paper: [Link](https://arxiv.org/abs/1607.04606)
+> Code: [Link](https://github.com/facebookresearch/fastText)
 
-### ELMo (Embedding from Language Models)
+### ELMo: Embedding from Language Models
+> Matthew E. Peters, Mark Neumann, Mohit Iyyer, Matt Gardner, Christopher Clark, Kenton Lee, Luke Zettlemoyer (2018) #NAACL
+> Affiliation: AllenNLP
+> Paper: [Link](https://arxiv.org/abs/1802.05365)
+> Code: [Link](https://github.com/allenai/allennlp)
+> Official Site: [Link](https://allennlp.org/elmo)
 
 Looks at entire sentence before assigning each word in it an embedding
 Bi-directional LSTM
@@ -332,10 +341,9 @@ Problem: Slow and still limited by size of context vector of RNN; could we remov
 > Vaswani et al. (2017)  
 > Affiliates: Google  
 > Paper: [Link](https://arxiv.org/abs/1706.03762)  
-> Code:  
-> - [Havard: The Annotated Transformer](https://nlp.seas.harvard.edu/2018/04/03/attention.html)  
-> - [Huggingface](https://github.com/huggingface/transformers)
+> Code: [Havard: The Annotated Transformer](https://nlp.seas.harvard.edu/2018/04/03/attention.html)  
 
+Loss Function: Cross Entropy
 
 
 ![](https://i.imgur.com/w5XmS2C.png)
@@ -396,42 +404,89 @@ Label smoothing (regularization for noisy labels)
 ---
 
 ## Transformers
+Code: [Huggingface](https://github.com/huggingface/transformers)
+
 ### BERT (Biderectional Encoder Representation from Transformers)
-###### Pre-trained (2018)
+###### Encoder
+> Devlin et. al (2018) #NAACL
+> Code: [Link](https://github.com/google-research/bert)
+> Paper: [Link](https://arxiv.org/abs/1810.04805)
+
 Reads entire sequence at once (non-directional)
-- Pre-train
-    - Masked Language Model (MLM)
+
+$$
+\text{Input: [CLS] } s_1 \text{ [SEP] } s_2 \text{ [SEP] }
+$$
+
+- Objective function
+    - Masked Language Model (MLM): Cross Entropy
     - Next Sentence Prediction (NSP)
-- Fine-Tuning
+- Pre-train
+- Fine-tune
+  - GLUE: [CLS] for prediction
+  - SQuAD: [CLS] Document [SEP] Question [SEP]
+  - CNN-DM: BERT(Word Representation) + Downstream
 
-GitHub: [Code](https://github.com/google-research/bert)
-Paper: [BERT](https://arxiv.org/abs/1810.04805)
-
-### RoBERTa
+#### Dataset
+Wikipedia
+BookCorpus
 
 ### SpanBERT
+###### Encoder
+> Joshi et al. (2019 July 24)
+> Affiliation: facebook
+> Paper: [Link](https://arxiv.org/abs/1907.10529)
+> Code: [Link](https://github.com/facebookresearch/SpanBERT)
+
+Span Masking (WWM)
+Span Boundary Objective (SBO): Predict current words using front and back words
+~~NSP~~
+
+### RoBERTa
+###### Encoder
+> Liu et al. (2019 July 26)
+> Paper: [Link](https://arxiv.org/abs/1907.11692)
+> Code: [Link]
+
+Dataset Size: 40GB
+Batch Size: 2048, 4096
+Dynamic Masking (BERT always mask same > overfit)
+No NSP
+Add sentences until fit sequence length 512
+
 
 ### ALBERT
+###### Encoder
+> Lan et al. (2019 Sept)
+> Paper: [Link](https://arxiv.org/abs/1909.11942)
+> Code: 
+
+Weight Sharing
+Sentence Order Prediction (SOP)
 
 ### TransformerXL
 
 ### XLNet
 
 ### GPT
+###### Decoder
 
 ### GPT-II
-###### Pre-trained (2019)
+###### Decoder
 GitHub: [Code](https://github.com/openai/gpt-2)
 Paper: [Language Models are Unsupervised Multitask Learners](https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf)
 
 ### TransformerXL
-###### Pre-trained (2019)
+###### AutoEncoder
 
 GitHub: [Code](https://github.com/kimiyoung/transformer-xl)
 Paper: [Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.org/abs/1901.02860)
 
 ### XLNet
+###### AutoEncoder
 
+### T5
+###### AutoEncoders
 
 ## Metrics and Evaluations
 ### Distance Metrics for Word Similarity
