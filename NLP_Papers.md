@@ -36,13 +36,15 @@ Key properties for Embeddings:
 - replace special tokens (digits to `[NUM]` token)
 - [Example Code](https://github.com/dipanjanS/practical-machine-learning-with-python/blob/master/notebooks/Ch07_Analyzing_Movie_Reviews_Sentiment/Text%20Normalization%20Demo.ipynb)
 
+## Text Mining
+
 ## Tokenizers
 
 ### Byte Pair Encoding (BPE)
 > Neural Machine Translation of Rare Words with Subword Units
 > Sennrich et. al (2015)
 > Paper: [Link](https://arxiv.org/abs/1508.07909)
-> GitHub: [Link](https://github.com/rsennrich/subword-nmt)
+> Code: [Link](https://github.com/rsennrich/subword-nmt)
 
 - replaces the most frequent pair of characters in a sequence with a single (unused) character ngrams
 - add frequent n-gram character pairs in to vocabulary (something like association rule)
@@ -89,7 +91,7 @@ for i in range(num_merges):
 ### SentencePiece(WordPiece)
 > Sentence Piece ()
 > Paper: [SentencePiece](https://arxiv.org/abs/1808.06226) & [WordPiece](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/37842.pdf)
-> Github: [Code](https://github.com/google/sentencepiece)
+> Code: [Code](https://github.com/google/sentencepiece)
 
 - WordPiece tokenizes characters within words (BERT uses a variant of WP)
 - SentencePiece tokenizes words and retaining whitespaces with a special token `_`
@@ -102,8 +104,8 @@ for i in range(num_merges):
 > Mikolov et. al (2013)
 > Affiliates: Google
 > Paper:
-> - [Efficient Estimation of Word Representations in Vector Space]() 
-> - [Distributed Representations of Words and Phrasesand their Compositionality](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf)
+> - [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/abs/1301.3781): CBOW & SkipGram
+> - [Distributed Representations of Words and Phrases and their Compositionality](https://arxiv.org/abs/1310.4546): Hierarchical Softmax & Negative Sampling 
 > Code: 
 > - [GitHub](https://github.com/tensorflow/tensorflow/blob/r1.1/tensorflow/examples/tutorials/word2vec/word2vec_basic.py) (Tensorflow)
 > - [Original Project](https://code.google.com/archive/p/word2vec/)
@@ -216,7 +218,7 @@ Although $i$ and $j$ is highly related (e.g. ice, steam), they might not frequen
 ### fastText: Enriching Word Vectors with Subword Information
 > Piotr Bojanowski, Edouard Grave, Armand Joulin, Tomas Mikolov (2016) #TACL
 > Affiliation: facebook
-> Paper: [Link](https://arxiv.org/abs/1607.04606)
+> Paper: [Link](https://arxiv.org/abs/1607.04606) & [A bag of tricks](https://arxiv.org/abs/1607.01759)
 > Code: [Link](https://github.com/facebookresearch/fastText)
 
 ### ELMo: Embedding from Language Models
@@ -293,6 +295,9 @@ $$
 ### LSTM
 
 ### GRU
+
+### ULMFiT
+> Paper: [Link](https://arxiv.org/abs/1801.06146)
 
 ---
 
@@ -464,26 +469,25 @@ Add sentences until fit sequence length 512
 Weight Sharing
 Sentence Order Prediction (SOP)
 
-### TransformerXL
-
-### XLNet
-
-### GPT
+### GPT: Improving Language Understanding by Generative Pre-training
 ###### Decoder
+> Paper: [Link](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf)
+> Code: [Link](https://github.com/openai/finetune-transformer-lm)
 
-### GPT-II
+### GPT-II: Language Models are Unsupervised Multitask Learners
 ###### Decoder
-GitHub: [Code](https://github.com/openai/gpt-2)
-Paper: [Language Models are Unsupervised Multitask Learners](https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf)
+> Paper: [Link](https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf)
+> Code: [Link](https://github.com/openai/gpt-2)
 
-### TransformerXL
+### TransformerXL: Attentive Language Models Beyond a Fixed-Length Context
 ###### AutoEncoder
+> Paper: [Link](https://arxiv.org/abs/1901.02860)
+> Code: [Link](https://github.com/kimiyoung/transformer-xl)
 
-GitHub: [Code](https://github.com/kimiyoung/transformer-xl)
-Paper: [Attentive Language Models Beyond a Fixed-Length Context](https://arxiv.org/abs/1901.02860)
-
-### XLNet
+### XLNet: Generalized Autoregressive Pretraining for Language Understanding
 ###### AutoEncoder
+> Paper: [Link](https://arxiv.org/abs/1906.08237)
+> Code: [Link](https://github.com/zihangdai/xlnet)
 
 ### T5
 ###### AutoEncoders
