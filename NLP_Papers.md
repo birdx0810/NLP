@@ -89,12 +89,16 @@ for i in range(num_merges):
 ```
 
 ### SentencePiece(WordPiece)
-> Sentence Piece ()
+> Affiliation: Google
 > Paper: [SentencePiece](https://arxiv.org/abs/1808.06226) & [WordPiece](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/37842.pdf)
 > Code: [Code](https://github.com/google/sentencepiece)
 
 - WordPiece tokenizes characters within words (BERT uses a variant of WP)
 - SentencePiece tokenizes words and retaining whitespaces with a special token `_`
+
+### Byte-to-Span
+> Paper: [Link](https://arxiv.org/abs/1512.00103)
+> Code: [Link]
 
 ---
 
@@ -266,8 +270,6 @@ Where $C(w_i)$ is the occurence count of word(or words) $w_i$ in corpus
 
 Objective Function: Maximize Log-Likelihood
 
----
-
 ### RNN Based Language Model
 > Mikolov et. al (2013) #ACL
 > Affiliates: Microsoft
@@ -296,32 +298,46 @@ $$
 
 ### GRU
 
-### ULMFiT
+### ULMFiT: Universal Language Model Fine-tuning for Text Classification
 > Paper: [Link](https://arxiv.org/abs/1801.06146)
+> Code: [Link](https://github.com/fastai/fastai/blob/master/examples/ULMFit.ipynb)
+> Official Site: [Link](http://nlp.fast.ai/ulmfit)
+
+### UNILM: Unified Language Model Pre-training for Natural Language Understanding and Generation
+> Paper: [Link](https://arxiv.org/abs/1905.03197)
+> Code: [Link](https://github.com/microsoft/unilm)
 
 ---
 
 ## Seq2Seq (AutoEncoders)
+Neural Machine Translation Hub:
+- [Tensorflow](https://github.com/tensorflow/nmt)  
+- [Google](https://google.github.io/seq2seq/nmt/)  
+- [OpenNMT](http://opennmt.net/)  
 
 ### Sequence to Sequence Learning with Neural Networks
-> Paper: [Link](https://arxiv.org/abs/1409.3215)
-> GitHub: [Link](https://github.com/google/seq2seq)
+> Affiliation: Google
+> Paper: [Link](https://arxiv.org/abs/1409.3215)  
+> Code: [Link](https://github.com/google/seq2seq)  
 
 Higly used in translations.
 Source Language $\to$ **encode** $\to$ compressed state (vector) $\to$ **decode** $\to$ Target Language
 $V_{src} \text{: \{I love apple\} } \to V_{tgt} \text{: \{我喜歡蘋果\} }$
 
+### Neural Machine Translation by Jointly Learning to Align and Translate
+> Paper: [Link](https://arxiv.org/abs/1409.0473)  
+
+
 ### Google's Neural Machine Translation System
+> Affiliation: Google
 > Paper: [Link](https://arxiv.org/pdf/1609.08144.pdf)  
-> GitHub:  
-> - [TensorFlow](https://github.com/tensorflow/nmt)
 
 - Human translation: Translating part by part (memorization)
 - Attention weight (α parameters) in each hidden state. How much information should we pay attention to in each word in vocab.
 - Mapping a query and a set of key-value pairs to an output.
 - Reduced sequence computation with parallelization.
 
-![](https://i.imgur.com/IuaKvVQ.png)
+![](https://i.imgur.com/KmzSHjm.png)
 
 The Problem with Machine Translation:
 1. Do we need to translate $\to V_t +1$
@@ -341,6 +357,9 @@ A larger the scalar (dot) product ($\approx 1$) means higher similarity. Thus, l
 
 Problem: Slow and still limited by size of context vector of RNN; could we remove the continuous RNN states?
 
+### NMT & Seq2Seq Models: A tutorial...
+> Paper: [Link](https://arxiv.org/abs/1703.01619)
+
 ### Attention is all you need
 > a.k.a Transformers  
 > Vaswani et al. (2017)  
@@ -349,7 +368,6 @@ Problem: Slow and still limited by size of context vector of RNN; could we remov
 > Code: [Havard: The Annotated Transformer](https://nlp.seas.harvard.edu/2018/04/03/attention.html)  
 
 Loss Function: Cross Entropy
-
 
 ![](https://i.imgur.com/w5XmS2C.png)
 
@@ -491,6 +509,8 @@ Sentence Order Prediction (SOP)
 
 ### T5
 ###### AutoEncoders
+> Paper: [Link](https://arxiv.org/abs/1910.10683)
+> Code: [Link](https://github.com/google-research/text-to-text-transfer-transformer)
 
 ## Metrics and Evaluations
 ### Distance Metrics for Word Similarity
