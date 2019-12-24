@@ -324,6 +324,7 @@ Source Language $\to$ **encode** $\to$ compressed state (vector) $\to$ **decode*
 $V_{src} \text{: \{I love apple\} } \to V_{tgt} \text{: \{我喜歡蘋果\} }$
 
 ### Neural Machine Translation by Jointly Learning to Align and Translate
+> A.k.a RNNencdec & RNNsearch  
 > Paper: [Link](https://arxiv.org/abs/1409.0473)  
 
 
