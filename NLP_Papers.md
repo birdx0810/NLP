@@ -319,6 +319,11 @@ $$
 > - [Google](https://google.github.io/seq2seq/nmt/)  
 > - [OpenNMT](http://opennmt.net/)  
 
+### On the properties of Neural Machine Translation: Encoder-Decoder Approaches
+> Cho et al. (2014)
+> Affiliation: University of Montreal
+> Paper: [Link](https://arxiv.org/pdf/1409.1259.pdf)
+
 ### Sequence to Sequence Learning with Neural Networks
 > Affiliation: Google  
 > Paper: [Link](https://arxiv.org/abs/1409.3215)  
@@ -330,7 +335,6 @@ $V_{src} \text{: \{I love apple\} } \to V_{tgt} \text{: \{我喜歡蘋果\} }$
 ### Neural Machine Translation by Jointly Learning to Align and Translate
 > A.k.a RNNencdec & RNNsearch  
 > Paper: [Link](https://arxiv.org/abs/1409.0473)  
-
 
 ### Google's Neural Machine Translation System
 > Affiliation: Google  
