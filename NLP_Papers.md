@@ -299,21 +299,25 @@ $$
 ### GRU
 
 ### ULMFiT: Universal Language Model Fine-tuning for Text Classification
-> Paper: [Link](https://arxiv.org/abs/1801.06146)
-> Code: [Link](https://github.com/fastai/fastai/blob/master/examples/ULMFit.ipynb)
-> Official Site: [Link](http://nlp.fast.ai/ulmfit)
+> Paper: [Link](https://arxiv.org/abs/1801.06146)  
+> Code: [Link](https://github.com/fastai/fastai/blob/master/examples/ULMFit.ipynb)  
+> Official Site: [Link](http://nlp.fast.ai/ulmfit)  
 
 ### UNILM: Unified Language Model Pre-training for Natural Language Understanding and Generation
-> Paper: [Link](https://arxiv.org/abs/1905.03197)
-> Code: [Link](https://github.com/microsoft/unilm)
+> Paper: [Link](https://arxiv.org/abs/1905.03197)  
+> Code: [Link](https://github.com/microsoft/unilm)  
 
 ---
 
 ## Seq2Seq (AutoEncoders)
-Neural Machine Translation Hub:
-- [Tensorflow](https://github.com/tensorflow/nmt)  
-- [Google](https://google.github.io/seq2seq/nmt/)  
-- [OpenNMT](http://opennmt.net/)  
+
+### NMT & Seq2Seq Models: A tutorial...
+> Paper: [Link](https://arxiv.org/abs/1703.01619)
+> 
+> Neural Machine Translation Code:
+> - [Tensorflow](https://github.com/tensorflow/nmt)  
+> - [Google](https://google.github.io/seq2seq/nmt/)  
+> - [OpenNMT](http://opennmt.net/)  
 
 ### Sequence to Sequence Learning with Neural Networks
 > Affiliation: Google  
@@ -329,8 +333,10 @@ $V_{src} \text{: \{I love apple\} } \to V_{tgt} \text{: \{我喜歡蘋果\} }$
 
 
 ### Google's Neural Machine Translation System
-> Affiliation: Google
-> Paper: [Bridging the Gap between Human and Machine Translation](https://arxiv.org/pdf/1609.08144.pdf), [Enabling Zero-Shot Translation](https://arxiv.org/abs/1611.04558)
+> Affiliation: Google  
+> Paper:  
+> [Bridging the Gap between Human and Machine Translation](https://arxiv.org/pdf/1609.08144.pdf)  
+> [Enabling Zero-Shot Translation](https://arxiv.org/abs/1611.04558)
 
 - Human translation: Translating part by part (memorization)
 - Attention weight (α parameters) in each hidden state. How much information should we pay attention to in each word in vocab.
@@ -356,9 +362,6 @@ $\alpha^{<t,t'>}$ is the amount of attention $y^{<t>}$ should pay to $a^{<t'>}$.
 A larger the scalar (dot) product ($\approx 1$) means higher similarity. Thus, leads to "more attention".
 
 Problem: Slow and still limited by size of context vector of RNN; could we remove the continuous RNN states?
-
-### NMT & Seq2Seq Models: A tutorial...
-> Paper: [Link](https://arxiv.org/abs/1703.01619)
 
 ### Attention is all you need
 > a.k.a Transformers  
