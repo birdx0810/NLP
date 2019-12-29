@@ -1,17 +1,83 @@
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 '''
-This is an example for implementating of some NLP models.
+This is an example for implementating of some NLP models. 
+Our dataset would be Romeo and Juliet from the shakespeare corpus from nltk.
+```
+import nltk; nltk.download('shakespeare')
+```
 '''
+# Import required modules
+import numpy as np
+
+# Import PyTorch module
 import torch
-import pytorch.rnn as rnn
+import torch.nn as nn
+import torch.functional as F
+
+# Import PyTorch Ignite modules
+from ignite.engine import Engine, Events
+from ignite.metrics import Accuracy, Loss, RunningAverage
+from ignite.handlers import ModelCheckpoint, EarlyStopping
+from ignite.contrib.handlers import ProgressBar
+
+# Import TensorboardX modules
+from tensorboardX import SummaryWriter
+
+# Import local modules
+import models.rnn as rnn
+
+##################################################
+# Initialization
+##################################################
+
+# Configure random seed
+np.random.seed(config.seed)
+torch.manual_seed(config.seed)
+
+# Configure device
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+# Parameters
+batch_size = 32
+epoch = 10
+
+embedding_dim = 512
+hidden_dim = 256
+
+grad_clip_value = 1
+
+dropout = 0
+learning_rate = 10e-4
+
+min_count = 0
+
+num_rnn_layers = 2
+num_linear_layers = 1
+
+##################################################
+# Load Data
+##################################################
+
+
+
+##################################################
+# Build Model
+##################################################
+
+
+
+##################################################
+# Train
+##################################################
 
 model = rnn.RNN()
 
-optimizer = 
+optimizer = torch.optim.Adam()
+criterion = torch.nn.CrossEntropyLoss()
 
 def fit(self, data, epochs, batch_size, optimizer, learning_rate, criterion):
 
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    
 
     # TODO: fit model like Keras
     self.train() # Set model mode to training
