@@ -236,6 +236,11 @@ Although $i$ and $j$ is highly related (e.g. ice, steam), they might not frequen
 Looks at entire sentence before assigning each word in it an embedding
 Bi-directional LSTM
 
+### Google's Universal Sentence Encoder
+> Paper: [USE](https://arxiv.org/abs/1803.11175) [MultiUSE](https://arxiv.org/abs/1907.04307)
+> Code: [Link](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/semantic_similarity_with_tf_hub_universal_encoder.ipynb)
+> Official Site: [Link](https://tfhub.dev/google/universal-sentence-encoder/4)
+
 ---
 
 ## Language Models
@@ -300,6 +305,7 @@ $$
 ### GRU
 
 ### ULMFiT: Universal Language Model Fine-tuning for Text Classification
+> Affiliates: Fast.ai
 > Paper: [Link](https://arxiv.org/abs/1801.06146)  
 > Code: [Link](https://github.com/fastai/fastai/blob/master/examples/ULMFit.ipynb)  
 > Official Site: [Link](http://nlp.fast.ai/ulmfit)  
@@ -310,7 +316,7 @@ $$
 
 ---
 
-## Seq2Seq (AutoEncoders)
+## Seq2Seq
 
 ### NMT & Seq2Seq Models: A tutorial...
 > Paper: [Link](https://arxiv.org/abs/1703.01619)
@@ -449,7 +455,7 @@ $$
 \text{Input: [CLS] } s_1 \text{ [SEP] } s_2 \text{ [SEP] }
 $$
 
-- Objective function
+- Objective functions (Optional)
     - Masked Language Model (MLM): Cross Entropy
     - Next Sentence Prediction (NSP)
 - Pre-train
@@ -541,14 +547,29 @@ Sentence Order Prediction (SOP)
 - same goes to character embedding and sentence embedding
 - character embedding works better for bigger models/languages with with morphology
 
-#### Corpus:
+#### Corpus (p. Corpora):
 - a collection of text documents
 
-#### Counting:
-- occurrences of tokens in each document
+#### Fine-tuning (Transfer Learning):
+- tune the weights of a pretrained model by continuing back-propagation
+- general rule of thumb:
+  - truncate last softmax layer (replace output layer that is more relevant to our problem)
+  - use smaller learning rate (pre-trained weights tend to be better)
+  - freeze first few layers (tend to capture universal features)
+- [CS231n on Transfer Learning](https://cs231n.github.io/transfer-learning/)
+
+### Language Model
+- A machine/deep learning model that learns to predict the probability of the next (or sequence) of words.
+    - Statistical Language Models
+        - N-grams, Hidden Markov Models (HMM)
+    - Neural Language Models
 
 #### Normalizing (Pre-processing)
 - [removing irrelevant noise](https://hackmd.io/bdlAIXpKS7-J1FZot2DFyQ?both#Text-Pre-processing) from the corpus
+
+#### Pre-train:
+- **To pre-train** is to train a model from scratch using a large dataset 
+- A pre-trained model is a model that has been trained (e.g. Pre-trained BERT)
 
 #### Stop Words:
 - commonly used words, such as, 'the', 'a', 'this', 'in' etc.
@@ -566,6 +587,7 @@ Sentence Order Prediction (SOP)
 
 ## Appendix
 ### Word Mover's Distance
+The distance between two text documents A and B is calculated by the minimum cumulative distance that words from the text document A needs to travel to match exactly the point cloud of text document B.
 
 ### Named Entity Relation (NER)
 - Classifying named entities mentioned in unstructured text into pre-defined categories
@@ -578,16 +600,18 @@ Sentence Order Prediction (SOP)
 - E.g. extract **chemical** in biomedical corpus -> **chemical** is regarded as an entity
 
 ### IOB Tagging
-- **Inside**: token inside of chunk
-- **Outside**: token outside of chunk
-- **Beginning**: beginning of chunk
-- **End**: end of chunk
-- **Single**: represent a chunk containing a single token
+- Usually used in NER for identifying words within entity phrase
+- Tags:
+  - **Inside**: token inside of chunk
+  - **Outside**: token outside of chunk
+  - **Beginning**: beginning of chunk
+  - **End**: end of chunk
+  - **Single**: represent a chunk containing a single token
 
 [Reference](http://cs229.stanford.edu/proj2005/KrishnanGanapathy-NamedEntityRecognition.pdf)
 
 ### Part-of-speech Tagging (POS)
-parts of speech: noun, verb, pronoun, preposition, adverb, conjunction, participle, and article
+- Parts of speech: noun, verb, pronoun, preposition, adverb, conjunction, participle, and article
 |Symbol| Meaning     | Example   |
 |------|-------------|-----------|
 | S    | sentence    | the man walked |
@@ -604,12 +628,7 @@ Dependency tree parses two words in a sentence by dependency arc to express thei
 
 ![](https://www.nltk.org/images/depgraph0.png)
 
-### Language Model
-- A machine/deep learning model that learns to predict the probability of the next (or sequence) of words.
-    - Statistical Language Models
-        - N-grams, Hidden Markov Models (HMM)
-    - Neural Language Models
-
 ### Subword Modeling
 - Turn words into subwords. E.g. subwords $\to$ sub, words
+- Used in Language Models (e.g. fastText) and Tokenization (e.g. Byte-Pair Encoding)
 ![](https://i.imgur.com/udjUH6F.png =360x)
