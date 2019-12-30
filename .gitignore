@@ -1,2 +1,3 @@
 /.vscode
 /venv/
+/code/models/__pycache__
