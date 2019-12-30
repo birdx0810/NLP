@@ -4,7 +4,7 @@ import torch.nn as nn
 import tqdm
 
 class RNN(nn.Module):
-    def __init__(self, rnn_layers, linear_layers, input_dim, hidden_dim, output_dim):
+    def __init__(self, input_dim, hidden_dim, output_dim, rnn_layers, linear_layers):
         super(RNN, self).__init__()
         
         # RNN layer

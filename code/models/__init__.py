@@ -1,1 +1,1 @@
-import pytorch.rnn
+import models.rnn

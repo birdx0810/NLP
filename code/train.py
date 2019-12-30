@@ -31,8 +31,10 @@ import models.rnn as rnn
 ##################################################
 
 # Configure random seed
-np.random.seed(config.seed)
-torch.manual_seed(config.seed)
+seed = 34
+ramdom.random.seed(seed)
+np.random.seed(seed)
+torch.manual_seed(seed)
 
 # Configure device
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -58,7 +60,7 @@ num_linear_layers = 1
 # Load Data
 ##################################################
 
-
+from torch.utils.data import DataLoader
 
 ##################################################
 # Build Model
@@ -70,7 +72,7 @@ num_linear_layers = 1
 # Train
 ##################################################
 
-model = rnn.RNN()
+model = rnn.RNN(input_dim=vocab_size, hidden_dim=hidden_dim, output_dim=, rnn_layers=, linear_layers=)
 
 optimizer = torch.optim.Adam()
 criterion = torch.nn.CrossEntropyLoss()
