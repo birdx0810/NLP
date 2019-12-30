@@ -4,13 +4,14 @@ import torch.nn as nn
 import tqdm
 
 class RNN(nn.Module):
-    def __init__(self, input_dim, hidden_dim, output_dim, rnn_layers, linear_layers):
+    def __init__(self, input_dim, hidden_dim, output_dim, rnn_layers, linear_layers, bidirectional):
         super(RNN, self).__init__()
         
         # RNN layer
         self.rnn_layer = nn.RNN(input_size=input_dim,
                                 hidden_size=hidden_dim,
                                 num_layers=rnn_layers,
+                                bidirectional=bidirectional
                                 batch_first=True)
 
         # Linear layer
@@ -54,3 +55,4 @@ class GRU(RNN):
                             hidden_size=hidden_dim,
                             num_layers=num_layers,
                             batch_first=True)
+                            

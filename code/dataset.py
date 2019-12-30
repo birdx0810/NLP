@@ -23,4 +23,4 @@ def ShakespeareDataset(Dataset):
         '''
         Get an example from data
         '''
-        return self.data[index][]
+        return self.data[index][:1]
