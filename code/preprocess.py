@@ -8,7 +8,7 @@ nltk requirements:
 ```
 import nltk
 nltk.download('shakespeare')
-nltk.download()
+nltk.download('punkt')
 ```
 '''
 
