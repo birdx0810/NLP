@@ -1,7 +1,7 @@
-# NLP - PyTorch
+# NLP Models
 
 This is a repository that introduces some fundamental neural network models and tools for NLP. 
-The code in this repo would be written in PyTorch and PyTorch-Ignite.
+The code in this repo would be written in PyTorch-Ignite and configurations are saved with the aid of TensorboardX.
 
 ## Prerequisites
 
