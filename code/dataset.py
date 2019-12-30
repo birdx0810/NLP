@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 '''
 This is an example for creating a dataset for PyTorch from the torch.utils.data.Dataset class.
-Note that the `__len__()` function and `__getitem__()` function should be overwritten.
+Note:
+- the Dataset class represents a map-style dataset, we will be using this for language modeling where our loss is cross-entropy (i.e. Vocab * Vocab mapping).
+- the `__len__()` function and `__getitem__()` function should be overwritten.
+
 '''
 
 from torch.utils.data import Dataset
