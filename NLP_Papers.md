@@ -558,11 +558,23 @@ Sentence Order Prediction (SOP)
   - freeze first few layers (tend to capture universal features)
 - [CS231n on Transfer Learning](https://cs231n.github.io/transfer-learning/)
 
-### Language Model
+#### Language Model
 - A machine/deep learning model that learns to predict the probability of the next (or sequence) of words.
     - Statistical Language Models
         - N-grams, Hidden Markov Models (HMM)
     - Neural Language Models
+
+#### Morphology
+- The study of formation of words
+- Prefix/Suffix
+- Lemmatization/Stemming
+- Spelling Check
+
+#### Phonology
+- The study of sounds in language
+
+#### Pragmatics
+- The study of idiomatic phrases
 
 #### Normalizing (Pre-processing)
 - [removing irrelevant noise](https://hackmd.io/bdlAIXpKS7-J1FZot2DFyQ?both#Text-Pre-processing) from the corpus

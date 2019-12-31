@@ -39,12 +39,17 @@
   - Text-To-Speech
 
 - Text Mining
-  - POS Tagging (Dependency Parsing)
-  - NER Tagging
-  - Text Classification
-  - Semantic Analysis
-  - Similarity Prediction
-  - Word Ranking
+  - Syntactic
+    - POS Tagging
+    - Syntax Trees
+    - Dependency Parsing
+  - Semantic
+    - NER Tagging
+    - Relational Analysis
+    - Similarity Prediction
+    - Word Ranking
+  - Pragmatics
+    - Text/Topical Classification
   - Natural Language Inference
   - Abstract Meaning Representation
 
