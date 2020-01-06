@@ -241,6 +241,9 @@ Bi-directional LSTM
 > Code: [Link](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/semantic_similarity_with_tf_hub_universal_encoder.ipynb)
 > Official Site: [Link](https://tfhub.dev/google/universal-sentence-encoder/4)
 
+### Skip-Thought
+> Paper: [Link](https://arxiv.org/abs/1506.06726)
+
 ---
 
 ## Language Models
@@ -525,6 +528,16 @@ Sentence Order Prediction (SOP)
 ###### AutoEncoders
 > Paper: [Link](https://arxiv.org/abs/1910.10683)
 > Code: [Link](https://github.com/google-research/text-to-text-transfer-transformer)
+
+---
+
+## Graph Embeddings
+
+### TransE
+> Paper: [Link](https://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data)
+
+### TransW
+> Paper: [Link](https://arxiv.org/abs/1909.03794)
 
 ## Metrics and Evaluations
 ### Distance Metrics for Word Similarity

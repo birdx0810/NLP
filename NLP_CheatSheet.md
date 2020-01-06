@@ -39,28 +39,30 @@
   - Text-To-Speech
 
 - Text Mining
-  - Syntactic
+  - Morphology
+    - Prefix/Suffix
+    - Lemmatization/Stemming
+    - Spell Check
+  - Syntactic (Parsing)
     - POS Tagging
     - Syntax Trees
     - Dependency Parsing
   - Semantic
     - NER Tagging
-    - Relational Analysis
-    - Similarity Prediction
+    - Relational Extraction
+    - Similarity Analysis
     - Word Ranking
-  - Pragmatics
-    - Text/Topical Classification
-  - Natural Language Inference
-  - Abstract Meaning Representation
+  
+- Abstract Meaning Representation
 
 - Tokenization
   - BPE
   - WordPiece
+  - Byte-to-Span
 
 - Word Representations (Embeddings)
   - word2vec
   - GloVe
-  - Seq2Seq
   - FastText
   - ELMo
   - Attention
@@ -75,32 +77,35 @@
       - THUxHUAWEI
       - Baidu
 
-- Next Word/Sentence Prediction (Language Models)
-  - n-gram model
-  - RNN
+- Language Models
+  - n-gram models
+  - RNN models
     - LSTM
     - GRU
-  - AutoEncoder (Seq2seq)
-    - GAN
 
-- Topic Classification
-  - Grover (Fake News Detection)
-  - Stance Detection
+- Topical Classification
   - Spam Detection
+  - Fake News Detection
+  - Stance Detection
 
 - Machine Translation
+  - Seq2seq
   - Neural Machine Translation
   - Transformers
+
+- Natural Language Inference
+  - Shallow Approach: Based on lexical overlap, pattern matching, distributional similarity etc.
+  - Deep Approach: semantic analysis, lexical and world knowledge, logical inference
 
 - Summarization
   - Extractive: Generates the summarization through extracting important information of the original document
   - Abstractive: Generates summarization after understanding the semantic meaning of document
 
-- Chatbots
-  - Question Answering
+- Question Answering
     - Open Domain: Deals with questions about nearly anything
     - Closed Domain: Deals with questions under a specific domain
-  - Conversational Agents
+
+- Conversational Agents
     - Rule-based
     - Retrieval-based
     - Generative
@@ -135,10 +140,6 @@
 - [opencc](https://github.com/BYVoid/OpenCC) (Translator)
 
 ## Datasets
-
-### Natural Language Inference
-[SNLI](https://nlp.stanford.edu/projects/snli/)
-[MultiNLI](https://www.nyu.edu/projects/bowman/multinli/)
 
 ### Social Networks
 - Twitter
@@ -203,4 +204,7 @@ Accuracy/Precision/Recall
 - Introduced new benchmark [SuperGLUE](super.gluebenchmark.com)
 - ChineseGLUE benchmark [CLUE](https://github.com/ChineseGLUE/ChineseGLUE)
 
-
+### NLI
+[SNLI](https://nlp.stanford.edu/projects/snli/)
+[MultiNLI](https://www.nyu.edu/projects/bowman/multinli/)
+[Breaking_NLI](https://github.com/BIU-NLP/Breaking_NLI)
