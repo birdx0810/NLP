@@ -23,6 +23,7 @@ with open(path, 'r') as f:
     start = False
     for line in f:
         if start == True and line != '\n':
+            # Rules to ignore some lines
             if line.isupper() or line.strip('\n').isnumeric() or line.startswith(' ') or line.startswith('Scene') or line.startswith('Contents') or line.startswith('SCENE') or line.startswith('ACT'):
                 continue
             else: corpus.append(line.strip('\n').strip())
@@ -30,14 +31,12 @@ with open(path, 'r') as f:
             # Ignore text until title is found (fully matches string)
             start = True
 
-'''
-# Tokenize sentences to words
-text = []
-for sentence in corpus:
-    words = word_tokenize(sentence)
-    for word in words:
-        text.append(word)
-'''
+# # Tokenize sentences to words
+# text = []
+# for sentence in corpus:
+#     words = word_tokenize(sentence)
+#     for word in words:
+#         text.append(word)
 
 # Export to pickle file
 path = 'data/sentences.pickle'
@@ -47,12 +46,10 @@ with open(path, 'wb') as f:
 
 print(f'Tokens: {len(corpus)}')
 
-'''
-from nltk.corpus import shakespeare
+# from nltk.corpus import shakespeare
 
-text = shakespeare.words('r_and_j.xml')
-# Since there are forewords included, we need to remove them
-text = text[50:]
+# text = shakespeare.words('r_and_j.xml')
+# # Since there are forewords included, we need to remove them
+# text = text[50:]
 
-print(f'Tokens: {len(text)}')
-'''
+# print(f'Tokens: {len(text)}')

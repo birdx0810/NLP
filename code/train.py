@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
-This is an example for implementating of some NLP models. 
+This is an example for implementating of some NLP models using PyTorch and TensorboardX
 Our dataset would be Romeo and Juliet from the shakespeare corpus from nltk.
 ```
 import nltk; nltk.download('shakespeare')
@@ -78,8 +78,6 @@ optimizer = torch.optim.Adam()
 criterion = torch.nn.CrossEntropyLoss()
 
 def fit(self, data, epochs, batch_size, optimizer, learning_rate, criterion):
-
-    
 
     # TODO: fit model like Keras
     self.train() # Set model mode to training
