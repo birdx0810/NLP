@@ -2,7 +2,7 @@
 
 ## Recurrent Networks
 
-![](https://i.imgur.com/1ZW9CyS.png)
+![](https://i.imgur.com/ydKpjpR.jpg)
 
 ### Pseudocode
 ```
