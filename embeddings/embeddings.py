@@ -6,6 +6,8 @@ This is a walkthrough that introduces different types of word embeddings:
 - word2vec
 - GloVe
 - FastText
+- ELMo
+- BERT
 The code below shows the methods for obtaining the word vectors and vocabulary dictionary.
 Please take note that the inputs are raw text from the `sentences` variable below. Thus, it has not been preprocessed/cleaned.
 Author: birdx0810
@@ -138,15 +140,37 @@ def fasttext_embeddings(sentences):
 
 #########################
 # ELMo
-# Method: bi-directional LSTM and multiple vectors for single token for learning different contexts.
+# Method: Character level bi-directional LSTM and multiple vectors for single token for learning different contexts.
 # https://github.com/allenai/allennlp/blob/master/tutorials/how_to/elmo.md
 # Note: 
 #########################
 
-def elmo(sentences):
-    #TODO: ELMo wrapper
+def elmo_pretrained():
+    # TODO: Wrapper for Pre-trained ELMo
+    from allennlp.modules.text_field_embedders import BasicTextFieldEmbedder
+    from allennlp.modules.token_embedders import ElmoTokenEmbedder
+    
+    options_file = 'https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x1024_128_2048cnn_1xhighway/elmo_2x1024_128_2048cnn_1xhighway_options.json'
+    weight_file = 'https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x1024_128_2048cnn_1xhighway/elmo_2x1024_128_2048cnn_1xhighway_weights.hdf5'
+    
+    elmo_embedder = ElmoTokenEmbedder(options_file, weight_file)
+    word_embeddings = BasicTextFieldEmbedder({"tokens": elmo_embedder})
     pass
 
+#########################
+# BERT (pretrained) 
+# (bert-as-service)
+# Models: https://tfhub.dev/s?q=BERT
+#########################
+
+def bert_pretrained(sentences):
+    #TODO: Wrapper for Pre-trained BERT
+    '''
+    Run BERT server: bert-serving-start -model_dir /model/bert -num_worker=4 
+    '''
+    from bert_serving.client import BertClient
+    bc = BertClient(ip='127.0.0.1')
+    pass
 
 if __name__ == '__main__':
     voc, vec = fasttext_embeddings(sentences)
