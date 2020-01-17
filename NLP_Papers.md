@@ -177,10 +177,10 @@ $$
 Where $\theta_t$ is the target word, and $e_c$ is context word. If the target word is true has probabillity of 1. By reducing the context words from 10000 to $k$ we could reduce the model complexity and runtime.
 
 $$
-\begin{align*}
+\begin{aligned}
 P(w_i) &= \bigg(\sqrt{\frac{z(w_i)}{0.001}}+1\bigg)⋅\frac{0.001}{z(wi)} \\
 P(w_i) &= 1 - \sqrt{\frac{t}{f(w_i)}} \\
-\end{align*}
+\end{aligned}
 $$
 
 How to sample negative examples?
@@ -249,10 +249,11 @@ Bi-directional LSTM
 ## Language Models
 
 ### Class-Based $n$-gram Models of Natural Language
-> n-gram Language Model (Statistical Language Model)
-> Brown et al. (1992)
-> Affiliates: IBM
-> Paper: [Link](https://www.aclweb.org/anthology/J92-4003.pdf)
+> n-gram Language Model  
+> Statistical Language Model  
+> Brown et al. (1992)  
+> Affiliates: IBM  
+> Paper: [Link](https://www.aclweb.org/anthology/J92-4003.pdf)  
 
 Language Models have been long used in:
 - speech recognition (Bahl et al., 1983)
@@ -294,17 +295,25 @@ Where...
 - As $n$ increases, the model **accuracy** *increases*, but **reliability** of parameter estimate *decreases*
 
 
-Besides predicting the probability of next word, we could also predict word classes (syntactic similarity)
+Besides predicting the probability of next word, this paper suggests that we could also predict word classes (syntactic similarity)
 $$
 \begin{aligned}
 P(w|c) &= \frac{C(w)}{C(c)} \\
 P(c) &= \frac{C(c)}{V}     
 \end{aligned}
 $$
+This could be "merged" with our 3-gram model into
+$$
+c = \text{argmax}_c P(c) \prod_{i=1}^k P(w_i|w_{i-2}^{i-1}, c)
+$$
+
+Reference:
+- [Artificial Intelligence: A Modern Approach](http://aima.cs.berkeley.edu/)
+- [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 ### A Neural Probabilistic Language Model
 > Bengio et. al (2003) #JMLR  
-> Affiliates: University of Montreal
+> Affiliates: University of Montreal  
 > Paper: [Link](http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)
 
 Curse of Dimensionality: a word or sequence on which the model will be tested is likely to be different from all the word sequences seen during training
@@ -337,14 +346,14 @@ $U$ is a word matrix where each column represents a word
 $s(t-1)$ is the history input, passed from the last $s(t)$
 
 $$
-\begin{align*}
+\begin{aligned}
 w(t) &= v \times 1 \\
 s(t) &= s(t-1) = d \times 1 \\
 U &= d \times v \\
 W &= d \times d \\
 V &= V \times d \\
 y(t) &= V \times 1 \\
-\end{align*}
+\end{aligned}
 $$
 
 ### LSTM
@@ -459,10 +468,10 @@ $\text{Attention}(Q, K, V) = \text{softmax} (\frac{QK^T}{\sqrt{d_k}}) \times V$
 #### Multi-Head Attention
 - Parallelization (8 attention layers)
 $$
-\begin{align*}
+\begin{aligned}
 Multihead(Q,K,V) &= \text{concat}(head_1, ...,head_h)W^O \\
 \text{where } head_i &= \text{Attention}(QW^Q_i,KW^K_i,VW^V_i)
-\end{align*}
+\end{aligned}
 $$
 References:
 
