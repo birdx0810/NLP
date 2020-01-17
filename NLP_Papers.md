@@ -248,34 +248,78 @@ Bi-directional LSTM
 
 ## Language Models
 
-### n-gram: Probabilistic Language Model
+### Class-Based $n$-gram Models of Natural Language
+> n-gram Language Model (Statistical Language Model)
+> Brown et al. (1992)
+> Affiliates: IBM
+> Paper: [Link](https://www.aclweb.org/anthology/J92-4003.pdf)
+
+Language Models have been long used in:
+- speech recognition (Bahl et al., 1983)
+- machine translation (Brown et al, 1990)
+- spelling correction (Mays et al, 1990)
+
+Language models assign probabilities to sequence of words.
+$P(w|h)$
+- Given context $h$, calculate the probability of the next word being $w$
+- An $n$-gram model is a model of the probability distribution of $n$-word (or character) sequences
+
+We assume that production of English text can be characterized by a set of conditional probabilities:
+$$
+\begin{aligned}
+P(w_1^k) &= P(w_1)P(w_2|w_1)...P(w_k|w_{1}^{k-1}) \\    
+&\approx \prod_{i=1}^k P(w_i|w_{i-1})
+\end{aligned}
+$$
+Where...
+- $P(w_k|w_{1}^{k-1})$ is the conditional probability of predicted word $w_k$ given history $w_{1}^{k-1}$
+- $w_{1}^{k-1}$ represents the string $w_1w_2...w_{k-1}$
+
+A **trigram** model could be defined as:
+$$
+P(w_{1:n}) = \prod_{i=1}^k P(w_i|w_{i-2}^{i-1})
+$$
+Where...
+- $w_{k-2}^{k-1}$ is the history taken into context (i.e. the two words before $w_k$)
+- In practice, it's more common to use trigram models
+
+Parameter estimation: sequential maximum likelihood estimation
+$$
+P(w_n|w_1^{n-1}) \approx \frac{C(w_1^{n-1}w_n)}{\sum_w C(w_1^{n-1}w)}
+$$
+Where...
+- $C(w)$ is the occurrence of string $w$ in $t_1^T$
+- Maximise $P(t_n^T|t_1^{n-1})$
+- Could be thought of as the transition matrix of a Markov model from state $n-1$ to state $n$
+- As $n$ increases, the model **accuracy** *increases*, but **reliability** of parameter estimate *decreases*
+
+
+Besides predicting the probability of next word, we could also predict word classes (syntactic similarity)
+$$
+\begin{aligned}
+P(w|c) &= \frac{C(w)}{C(c)} \\
+P(c) &= \frac{C(c)}{V}     
+\end{aligned}
+$$
+
+### A Neural Probabilistic Language Model
 > Bengio et. al (2003) #JMLR  
 > Affiliates: University of Montreal
 > Paper: [Link](http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)
 
-Derived from Markov Model
-A sequence of N words
-- unigram: "this" "that"
-- bigram: "this word" "that boy"
-- 3-gram: "this is tom" "he is gay"
-- e.g. 3-gram model
->I would **not like them** here or there.
->I would **not like them** anywhere.
->I do not like green eggs and ham.
->I do **not like them**, Sam-I-Am.
+Curse of Dimensionality: a word or sequence on which the model will be tested is likely to be different from all the word sequences seen during training
 
-$P(w|h)$
-- Given context $h$, calculate the probability of the next word being $w$
+- Associate with each word in the vocabulary a distributed word feature vector
+- Express the joint probability function of word sequences in terms of the feature word vectors of these words in the sequence
+- Learn simultaneously the word feature vectors and the parameters of the probability function
 
 $$
-\begin{align*}
-P(w_i|w_{i-1}w_{i-2}) &= P(them|not \ like) \\
-&= \frac{C(w_{i-2}w_{i-1}w_{i})}{C(w_{i-2}w_{i-1})}\\
-&= 3/4
-\end{align*}
+\hat{P}(W^T_1) = \prod_{t=1}^{T} \hat{P}(w_t|w_{1}^{t-1})
 $$
+Where...
+- $w_t$ is the $t$-th word
+- $w_i^j$ is the sequence $(w_i, w_{i+1},..., w_{j-1}, w_j)
 
-Where $C(w_i)$ is the occurence count of word(or words) $w_i$ in corpus
 
 Objective Function: Maximize Log-Likelihood
 
