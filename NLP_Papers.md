@@ -585,12 +585,61 @@ Sentence Order Prediction (SOP)
 ---
 
 ## Graph Embeddings
+> Code: [THUNLP TensorFlow](https://github.com/thunlp/TensorFlow-TransX)
 
-### TransE
+### TransE: Translating Embeddings for Modeling Multi-relational Data
+> 2013  
 > Paper: [Link](https://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data)
 
+**TL;DR:**
+- Sum of head vector $h$ and relation vector $r$ should be as close as possible to tail vector $t$
+- Loss function: Max-margin with negative sampling
+  - $L(h,r,t) = max(0, d_{pos} - d_{neg} + margin)$
+  - $d = || h + r - t ||$
+- Only practical for one-to-one relationships
+
+### TransH: Knowledge Graph Embedding by Translating on Hyperplanes
+> 2014  
+> Paper: [Link](https://www.aaai.org/ocs/index.php/AAAI/AAAI14/paper/view/8531/8546)
+
+**TL;DR:**
+- Project $h$ and $t$ to hyperplane, creating a new vector $h_\perp$ and $t_\perp$ which has a relation vector $d_r$
+- $h_\perp + d_r \approx t_\perp$
+- The loss function and training method are similar to TransE, only projected into a new hyperplane
+- Do not take into account different aspects of entities
+
+### TransR: Learning Entity and Relation Embeddings for Knowledge Graph Completion
+> 2015  
+> Paper: [Link](https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/view/9571/9523)
+
+**TL;DR:**
+- Model entities into **entity space** and **multiple relation spaces**
+- Entities are projected into $r$-relation space as $h_r$ and $t_r$ via operation $M_r$
+- $h_r + r \approx t_r$
+- The loss function and training method are similar to TransE, only projected to a new $r$-relation space
+- Doesn't take into context that different types of entities need to be projected differently. Requires more parameters.
+
+**Note**:
+- CTransR is a variant of TransR
+  - cluster diverse head-tail entity pairs into groups and learn distinct relation vectors for each group
+
+### TransD: Knowledge Graph Embedding via Dynamic Mapping Matrix
+> 2015  
+> Paper: [Link](https://www.aclweb.org/anthology/P15-1067/)
+
+**TL:DR:**
+- Uses two vectors to represent entity and relation:
+  - Meaning representation of entity and relation
+  - Projection vector for constructing mapping matrices
+- Mapping matrices are defined as $M_{rn} = r_p n_p^T +I$, where $n$ could be head or tail node and $I$ is the identity matrix.
+- The projection and training are similar to TransR
+- TransE is a special case of TransD when $m=n$ and all projection vectors are set $0$
+
 ### TransW
+> 2019
 > Paper: [Link](https://arxiv.org/abs/1909.03794)
+
+
 
 ## Metrics and Evaluations
 ### Distance Metrics for Word Similarity
