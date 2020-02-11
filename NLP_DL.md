@@ -1,7 +1,7 @@
 # NLP Deep Learning
 
-## Recurrent Networks
-> 
+## Recurrent Neural Networks
+> RNN Based Language Model (Mikolov et. al, 2013)
 
 Could be thought of as multiple copies of the same network connected to each other, which output is based on the input of the previous state (context). This network could show dynamic temporal behavior for a time sequence.
 
@@ -33,8 +33,9 @@ prediction = fnn(output) # final output should have data from all past hidden st
     - Memory Networks
 
 ### Bi-directional
+Could be thought of as two independant RNNs, one starting from the first word of the sentence, the other from the back of the sentence, and the outputs of both forward and backward RNNs would be concatenated. 
 
-![](https://i.imgur.com/SxudGs4.png)
+It is considered that by doing so, we are obtaining information from the past, and also from the future, taking into context of a paragraph as a whole.
 
 ## LSTM
 
@@ -70,6 +71,8 @@ for word in sentence:
     h_state, c_state = LSTM(c_state, h_state, word)
 ```
 
+![](https://i.imgur.com/SxudGs4.png)
+
 ## GRU
 
 - Reset Gate: Decides past information to forget
@@ -100,29 +103,39 @@ h_state = [0,0,0]
 h_state = GRU(h_state, x_t)
 ```
 
-
-
 ## Convolution Networks
+> Convolutional Neural Networks for Sentence Classification (Yoon Kim, 2014)
 
 ![](https://i.imgur.com/YdWcjGO.png)
 
-### Pseudocode
-```
+Hyperparameters to consider
+- Padding (Narrow vs. Wide convolution)
+![](https://i.imgur.com/ZYoGlzN.png)
+- Stride
+![](https://i.imgur.com/TZ6rqby.png)
 
-```
+**Notes:**
+- Convolutions view a sentence as a bag-of-words, therefore tends to lose information of local order of words.
 
 ## Pooling Layer
+
+Used for dimensionality reduction.
 
 ![](https://i.imgur.com/4XAPyVB.png)
 
 ### Pooling over filter
+> Character-Aware Neural Language Models (Kim et. al, 2013)
+
+Useful for classifiers as it could be directly fed into a feed-forward network (FCL/MLP).
 
 ### Pooling over timesteps
+> Fully Character-Level Neural Machine Translation without Explicit Segmentation (Lee et. al, 2016)
 
-### Pseudocode
-```
+**Note:**
+Pooling loses information about local order of words as it is meant for dimensionality reduction.
 
-```
+## Seq2seq
+
 
 ## Attention
 
@@ -133,19 +146,6 @@ h_state = GRU(h_state, x_t)
 
 ```
 
-## AutoEncoders
-### Seq2seq
-
-
-
-### Variational AE
-
-### Denoising AE
-
-### Pointer Networks
+## Pointer Networks
 
 ![](https://i.imgur.com/ORoovhQ.png)
-
-## Memory Networks
-
-![](https://i.imgur.com/EJIAwK4.png)
