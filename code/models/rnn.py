@@ -17,7 +17,7 @@ class RNN(nn.Module):
         self.rnn_layer = nn.RNN(input_size=input_dim,
                                 hidden_size=hidden_dim,
                                 num_layers=rnn_layers,
-                                bidirectional=bidirectional
+                                bidirectional=bidirectional,
                                 batch_first=True)
 
         # Linear layer
