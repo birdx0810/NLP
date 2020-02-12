@@ -130,6 +130,7 @@
 - stanfordnlp
 - allennlp
 - google-cloud-language
+- nlp-architect
 
 ### Chinese
 
