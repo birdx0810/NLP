@@ -1,7 +1,7 @@
 # NLP Deep Learning
 
 ## Recurrent Neural Networks
-> RNN Based Language Model (Mikolov et. al, 2013)
+> RNN Based Language Model (Mikolov et al., 2013)
 
 Could be thought of as multiple copies of the same network connected to each other, which output is based on the input of the previous state (context). This network could show dynamic temporal behavior for a time sequence.
 
@@ -38,6 +38,9 @@ Could be thought of as two independant RNNs, one starting from the first word of
 It is considered that by doing so, we are obtaining information from the past, and also from the future, taking into context of a paragraph as a whole.
 
 ## LSTM
+> Long Short-Term Memory Recurrent Neural Network Architectures for Large Scale Acoustic Modeling (Sak et al., 2014)
+
+Was first proposed in 1997 by Sepp Hochreiter and Jürgen Schmidhuber for dealing the vanishing gradient problem.
 
 - Forget Gate: Defines which information to forget
 - Input Gate: Updates cell state
@@ -74,6 +77,7 @@ for word in sentence:
 ![](https://i.imgur.com/SxudGs4.png)
 
 ## GRU
+> Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation (Cho et al., 2014)
 
 - Reset Gate: Decides past information to forget
 - Update Gate: Updates information of hidden state (forget + input)
@@ -119,25 +123,40 @@ Hyperparameters to consider
 
 ## Pooling Layer
 
-Used for dimensionality reduction.
+Used for dimensionality reduction. Could be thought of as extracting the most relavent information (timestamp, word, pixel) from its input. 
 
 ![](https://i.imgur.com/4XAPyVB.png)
 
 ### Pooling over filter
-> Character-Aware Neural Language Models (Kim et. al, 2013)
+> Character-Aware Neural Language Models (Kim et al., 2013)
 
 Useful for classifiers as it could be directly fed into a feed-forward network (FCL/MLP).
 
 ### Pooling over timesteps
-> Fully Character-Level Neural Machine Translation without Explicit Segmentation (Lee et. al, 2016)
+> Fully Character-Level Neural Machine Translation without Explicit Segmentation (Lee et al., 2016)
 
 **Note:**
 Pooling loses information about local order of words as it is meant for dimensionality reduction.
 
-## Seq2seq
+## Memory Networks
+> End-to-end Memory Networks (Sukhbaatar et al., 2014)
 
+![](https://i.imgur.com/TcFWgnJ.png)
+
+Was first proposed as a network for that has a long-term external memory that could be read and written. It was redesigned as an extention of RNNsearch which has more flexibility and requires less supervision.
+
+### Pseudocode
+```
+
+```
+
+## Seq2seq
+> Sequence-to-Sequence Learning With Neural Networks (Sutskever et al., 2014)
+
+Encodes a sentence/image into a thought/percept
 
 ## Attention
+> Attention Is All You Need (Vaswani et al, 2017)
 
 ![](https://i.imgur.com/V0y4S2A.png)
 
@@ -149,3 +168,5 @@ Pooling loses information about local order of words as it is meant for dimensio
 ## Pointer Networks
 
 ![](https://i.imgur.com/ORoovhQ.png)
+
+
