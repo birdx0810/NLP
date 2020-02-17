@@ -24,7 +24,10 @@ class RNN(nn.Module):
         self.linear = nn.ModuleList()
 
         for _ in range(linear_layers):
-            self.linear.append(torch.nn.Linear(hidden_dim, hidden_dim))
+            if bidirectional and _ == 0:
+                self.linear.append(torch.nn.Linear(hidden_dim*2, hidden_dim))
+            else:
+                self.linear.append(torch.nn.Linear(hidden_dim, hidden_dim))
             self.linear.append(torch.nn.ReLU())
         
         self.linear.append(torch.nn.Linear(hidden_dim, output_dim))
