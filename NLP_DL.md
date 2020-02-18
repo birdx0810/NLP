@@ -20,7 +20,7 @@ fnn = FNN() # feed-forward neural-network
 hidden_state = np.array(len(sentence)) # length of words in input
 
 for words in sentence:    # loop through words until fin
-    output, hidden_state = rnn(word, hidden_state)
+    output, hidden_state = RNN(word, hidden_state)
     
 prediction = fnn(output) # final output should have data from all past hidden states
 ```
@@ -104,7 +104,8 @@ def GRU(prev_hs, x_t):
     
 h_state = [0,0,0]
 
-h_state = GRU(h_state, x_t)
+for word in sentence:
+    h_state = GRU(h_state, word)
 ```
 
 ## Convolution Networks
@@ -143,25 +144,96 @@ Pooling loses information about local order of words as it is meant for dimensio
 
 ![](https://i.imgur.com/TcFWgnJ.png)
 
-Was first proposed as a network for that has a long-term external memory that could be read and written. It was redesigned as an extention of RNNsearch which has more flexibility and requires less supervision.
+MemNN was first proposed as a network for that has a long-term external memory that could be read and written. Consists of a $G(\cdot)$, which is used to update the memory; and $O(\cdot)$ which produces the output weights from the memory.
+
+It was redesigned into (MemN2N) as an extention of RNNsearch which has more flexibility and requires less supervision. 
+
+![](https://i.imgur.com/bwWOaIj.png)
+
+There are two types of weighting:
+1. Adjacent: $A^{k+1} = C^{k}$
+2. Layer-wise: $A^1 = ... = A^k, C^1 = ... = C^k$
+
+The pseudocode is the implementation of the Adjacent weighting model. 
 
 ### Pseudocode
-```
+```python
+def MemN2N(prev_C, memory, x_t):
+    # Adjacent Weighting
+    next_A = [0,0,0]
+    
+    # Get probability vectors over inputs (Addressing)
+    m_i = x_t * prev_C(memory)
+    p_weight = softmax(m_i)
 
+    # Generate weighted output vector (Read)
+    c_i = next_A(sentences)
+    output = p_weight * c_i
+
+    return next_A, output
+
+memory = []
+
+h_state = [0,0,0]
+
+for sentence in sentences:
+    # sentence = [w_1, w_2, ..., w_n]
+    question = check_if_question(sentence)
+    
+    if not question:
+        # Write to memory `G()`, could be EMR
+        memory.append(sentence)
+    elif question:
+        # Hops to iterate (RNN cells) 
+        for hop in hops:
+            # Generates output `O()`
+            h_state, sentence = MemN2N(h_state, memory, sentence)
+        
+        # Flush memory
+        memory = []
+
+pred = Softmax(h_state(o+u))
 ```
 
 ## Seq2seq
 > Sequence-to-Sequence Learning With Neural Networks (Sutskever et al., 2014)
 
-Encodes a sentence/image into a thought/percept
+![](https://i.imgur.com/SJXP9lB.png)
+
+Encodes/extract a sentence/image into a thought/percept from a sequence via an bi-LSTM; and decodes it into a different sequence (img -> sent, en -> fr)
+
+### Pseudocode
+```python
+def Seq2Seq():
+    # TODO: Encoder & Decoder
+```
 
 ## Attention
 > Attention Is All You Need (Vaswani et al, 2017)
 
-![](https://i.imgur.com/V0y4S2A.png)
+Using an attention mechanism to train the model to focus on certain words in the sentence at different timesteps. The attention mechanism could be additive or multiplicative. In this paper,the author uses the dot-product (multiplicative) attention for self-attention.
+
+![](https://3.bp.blogspot.com/-aZ3zvPiCoXM/WaiKQO7KRnI/AAAAAAAAB_8/7a1CYjp40nUg4lKpW7covGZJQAySxlg8QCLcBGAs/s640/transform20fps.gif)
+
+Query, Key and Value for all words should be the same size (vocab_size, emb_size).
 
 ### Pseudocode
-```
+```python
+def Attention(query, key, value):
+    # Scale to prevent gradient exploding
+    d_k = query.size(-1)
+
+    # Calculate Attention Score
+    att_score = (query @ key.transpose()) / d_k
+    att_score = softmax(att_score)
+
+    # Value
+    x = att_score @ value
+    return x, att_score
+
+def MultiHeadAttention():
+    # TODO
+
 
 ```
 
