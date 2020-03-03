@@ -1,4 +1,4 @@
-# Knowledge Graph and Text Jointly Embeddings
+# pTransE: Knowledge Graph and Text Jointly Embeddings
 ###### tags: `GroupMeeting`
 
 > Zhen Wang, Jianwen Zhang, Jianlin Feng, Zheng Chen
@@ -6,7 +6,7 @@
 
 ## TL;DR
 
-Embed Entities and Words into same continuous vector space
+Embed Entities (KG) and Words (Pre-trained Word Representations) into same continuous vector space
 Goal: Score any candidate relational facts between entity and words
 
 ## Knowledge Graph Embeddings

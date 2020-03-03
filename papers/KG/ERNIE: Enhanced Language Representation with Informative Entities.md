@@ -1,4 +1,4 @@
-# ERNIE - Enhanced Language Representation with Informative Entities
+# ERNIE: Enhanced Language Representation with Informative Entities
 
 > Zhang et al., 2019 March
 > Affiliation: Tsinghua University, Huawei Noah's Ark
