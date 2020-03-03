@@ -219,22 +219,29 @@ Query, Key and Value for all words should be the same size (vocab_size, emb_size
 
 ### Pseudocode
 ```python
-def Attention(query, key, value):
-    # Scale to prevent gradient exploding
-    d_k = query.size(-1)
+def SelfAttention(hidden_size, no_att_heads, att_mask):
+    # Initialize Q, K, V with shape (BatchSize * SeqLen * NoAttHeads * AttHeadSize)
+    att_head_size = hidden_size / no_att_heads
+    query = key = value = linear(hidden_size, no_att_heads * att_head_size)
+    d_k = sqrt(att_head_size)
 
     # Calculate Attention Score
-    att_score = (query @ key.transpose()) / d_k
+    att_score = (query @ key.transpose())
+
+    # Scale to prevent gradient exploding (d_k = query.size(-1))
+    att_score = att_score / d_k
+
+    # Apply Attention Mask
+    att_score = att_score + att_mask
+
+    # Normalize attention scores to probability
     att_score = softmax(att_score)
 
-    # Value
-    x = att_score @ value
-    return x, att_score
+    # Calculate Context Layer (Value)
+    context_layer = att_score @ value
+    context_layer.reshape()
 
-def MultiHeadAttention():
-    # TODO
-
-
+    return context_layer, att_score
 ```
 
 ## Pointer Networks
