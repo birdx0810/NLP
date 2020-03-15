@@ -16,13 +16,13 @@ def RNN(prev_hs, x_t):
     hidden_state = tanh(combine)
     return hidden_state
 
-fnn = FNN() # feed-forward neural-network
+linear = Linear()
 hidden_state = np.array(len(sentence)) # length of words in input
 
 for words in sentence:    # loop through words until fin
     output, hidden_state = RNN(word, hidden_state)
     
-prediction = fnn(output) # final output should have data from all past hidden states
+prediction = linear(output) # final output should have data from all past hidden states
 ```
 
 ### Review
@@ -241,4 +241,30 @@ def MultiHeadAttention():
 
 ![](https://i.imgur.com/ORoovhQ.png)
 
+## Siamese Networks
+> Siamese Recurrent Architectures for Learning Sentence Similarity (Mueller and Thyagarajan, 2016)
 
+Siamese Networks was first used for signature recognition. These networks are built with two encoders that share the same weights. The input of the encoders are two different images (or sentences), and the similarity (cosine or L2) between the representations is computed (ranking loss/contrastive loss).
+
+### Pseudocode
+```python
+
+def Siamese(x_1, x_2):
+
+    # Initialize encoder and initial weights
+    encoder = LSTM()
+    h_1, c_1 = encoder.init_weights()
+    h_2, c_2 = encoder.init_weights()
+
+    for word in x_1:
+        h_1, c_1 = encoder_a(word, h1)
+    for word in x_2:
+        h_2, c_2 = encoder_b(word, h1)
+
+    features = [ cosine_similarity(h_1, h_2), euclidean_distance(h_1, h_2) ]
+    
+    prediction = linear(features)
+
+    return prediction
+
+```

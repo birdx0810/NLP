@@ -641,8 +641,15 @@ Sentence Order Prediction (SOP)
 
 
 ### Adversarial Learning for Neural Dialogue Generation
+> ACL 2017
 > Paper: [Link](https://arxiv.org/abs/1701.06547)
 > Code: [GitHub](https://github.com/jiweil/Neural-Dialogue-Generation)
+
+
+### ELECTRA: 
+> Paper: [Link](https://openreview.net/forum?id=r1xMH1BtvB)
+> Code: [GitHub]()
+
 
 ---
 

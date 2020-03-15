@@ -131,6 +131,7 @@
 - allennlp
 - google-cloud-language
 - nlp-architect
+- flair
 
 ### Chinese
 
