@@ -209,9 +209,16 @@ def Seq2Seq():
 ```
 
 ## Attention
+> Neural Machine Translation by Jointly Learning to Align and Translate (Bahdanau et al, 2014)
+
+Attention mechanisms was first introduced into a seq2seq model for machine translation.
+1. Do we need to translate word $\to V_t +1$
+2. Which word do we need to translate (src) $\to$ Classifier
+3. What does it need to be translated to (tgt) $\to$ Attention
+
 > Attention Is All You Need (Vaswani et al, 2017)
 
-Using an attention mechanism to train the model to focus on certain words in the sentence at different timesteps. The attention mechanism could be additive or multiplicative. In this paper,the author uses the dot-product (multiplicative) attention for self-attention.
+Using an attention mechanism to train the model to focus on certain words in the sentence at different timesteps. The attention mechanism could be additive or multiplicative. In this paper, the author uses the dot-product (multiplicative) attention for self-attention. The larger the dot-product (1), the higher similarity.
 
 ![](https://3.bp.blogspot.com/-aZ3zvPiCoXM/WaiKQO7KRnI/AAAAAAAAB_8/7a1CYjp40nUg4lKpW7covGZJQAySxlg8QCLcBGAs/s640/transform20fps.gif)
 
@@ -244,6 +251,18 @@ def SelfAttention(hidden_size, no_att_heads, att_mask):
     return context_layer, att_score
 ```
 
+### Different Attentions
+> Effective Approaches to Attention-based Neural Machine Translation (Luong et al., 2015)
+![](https://i.imgur.com/i5bCXau.png)
+- Global Attention
+    - Global attention uses **ALL encoder hidden states** to define the attention based context vector for each decoder step
+- Local Attention
+    - Local attention attends to only a few hidden states that fall within a smaller window
+- Hard Attention
+    - Hard attention uses attention scores to select the $i$-th location (argmax)
+- Soft Attention
+    - Soft attention uses attention scores as the weighted average context vector calculation
+
 ## Pointer Networks
 
 ![](https://i.imgur.com/ORoovhQ.png)
@@ -255,7 +274,6 @@ Siamese Networks was first used for signature recognition. These networks are bu
 
 ### Pseudocode
 ```python
-
 def Siamese(x_1, x_2):
 
     # Initialize encoder and initial weights
@@ -273,5 +291,4 @@ def Siamese(x_1, x_2):
     prediction = linear(features)
 
     return prediction
-
 ```
