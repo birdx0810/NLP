@@ -143,6 +143,9 @@
 
 ## Datasets
 
+### bABI
+[bAbI](https://research.fb.com/downloads/babi/)(ICLR 2015): A set of prerequisite toy tasks
+
 ### Social Networks
 - Twitter
   - Official API: [Documentation](https://developer.twitter.com/en/docs)
@@ -157,15 +160,23 @@
 ### Conversational Models
 #### English
 - [A Survey of Available Corpora for Building Data-Driven Dialogue Systems](https://breakend.github.io/DialogDatasets/)([Serban et al., 2015](https://breakend.github.io/DialogDatasets/))
+- Multi-relation Question Answering Dataset (COLING 2018) [Download](http://coai.cs.tsinghua.edu.cn/hml/media/files/PathQuestion.zip)
+- Commonsense Conversation (IJCAI 2018) [Download](http://coai.cs.tsinghua.edu.cn/file/commonsense_conversation_dataset.tar.gz)
 - [DailyDialog](http://yanran.li/dailydialog)(2017): Human-written and less noisy that reflects daily communication of humans
 - [Twitter](https://www.kaggle.com/thoughtvector/customer-support-on-twitter)(Kaggle 2017): A large corpus of modern English (mostly) conversations between consumers and customer support agents on Twitter
 - [OpenSubtitles](http://opus.nlpl.eu/OpenSubtitles-v2016.php)(2016): A new collection of translated movie subtitles from http://www.opensubtitles.org/
 - [Ubuntu Dialogue Corpus](https://github.com/rkadlec/ubuntu-ranking-dataset-creator)(SIGDIAL 2015): Unstructured Multi-turn Dialogue System
-- [bAbI](https://research.fb.com/downloads/babi/)(ICLR 2015): A set of prerequisite toy tasks
 - [Cornell Movie Dialogs Corpus](http://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html)(2011): Contains a large collection of fictional conversations from raw movie scripts
 
 #### Chinese
+- CrossWOZ (TACL 2020): A Large-Scale Chinese Cross-Domain Task-Oriented Dialogue Dataset [Download](https://coai.cs.tsinghua.edu.cn/file/CrossWOZ_data.zip)
 - [KdConv](https://github.com/thu-coai/KdConv)(ACM 2020)
+- Grayscale Dataset for Dialogue (2020) [Download]
+- Retrieval Generation Chat (EMNLP 2019) [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/Retrieval_Generation_Chat.zip)
+- Restoration-200K Datasets (EMNLP 2019) [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/Restoration-200K.zip)
+- Chinese Dialogue Sentence Function Dataset (ACL 2019) [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/dialog-acts.tar.gz)
+- Weibo Conversation Dataset (AAAI 2019) [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/weibo_utf8.zip)
+- Dialogue Question Generation Dataset (ACL 2018) [Download](http://coai.cs.tsinghua.edu.cn/file/QGdata.zip)
 - [Douban Corpus](https://github.com/MarkWuNLP/MultiTurnResponseSelection)(ACL 2017)
 
 ### Summarization
