@@ -154,16 +154,26 @@
   - 3rd Party Python Wrappers:
     - [PRAW](https://praw.readthedocs.io/en/latest/)
 
-### Chatbots
-[Ubuntu Dialogue Corpus](https://github.com/rkadlec/ubuntu-ranking-dataset-creator): Unstructured Multi-turn Dialogue System
-[bAbI](https://research.fb.com/downloads/babi/): A set of prerequisite toy tasks
+### Conversational Models
+#### English
+- [A Survey of Available Corpora for Building Data-Driven Dialogue Systems](https://breakend.github.io/DialogDatasets/)([Serban et al., 2015](https://breakend.github.io/DialogDatasets/))
+- [DailyDialog](http://yanran.li/dailydialog)(2017): Human-written and less noisy that reflects daily communication of humans
+- [Twitter](https://www.kaggle.com/thoughtvector/customer-support-on-twitter)(Kaggle 2017): A large corpus of modern English (mostly) conversations between consumers and customer support agents on Twitter
+- [OpenSubtitles](http://opus.nlpl.eu/OpenSubtitles-v2016.php)(2016): A new collection of translated movie subtitles from http://www.opensubtitles.org/
+- [Ubuntu Dialogue Corpus](https://github.com/rkadlec/ubuntu-ranking-dataset-creator)(SIGDIAL 2015): Unstructured Multi-turn Dialogue System
+- [bAbI](https://research.fb.com/downloads/babi/)(ICLR 2015): A set of prerequisite toy tasks
+- [Cornell Movie Dialogs Corpus](http://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html)(2011): Contains a large collection of fictional conversations from raw movie scripts
+
+#### Chinese
+- [KdConv](https://github.com/thu-coai/KdConv)(ACM 2020)
+- [Douban Corpus](https://github.com/MarkWuNLP/MultiTurnResponseSelection)(ACL 2017)
 
 ### Summarization
 [Multi-News](https://github.com/Alex-Fabbri/Multi-News): Large-Scale Multi-Document Summarization Dataset
 [CNN-DailyMail](https://github.com/abisee/cnn-dailymail): Dataset for Pointer-Generator by Abigail See
 [GigaWord](https://drive.google.com/open?id=1eNUzf015MhbjOZBpRQOfEqjdPwNz9iiS): Dataset for Pointer-Generator by Abigail See
 
-## Evaluation & Benchmarks
+## Evaluation
 
 ### Perplexity
 Accuracy/Precision/Recall
@@ -189,8 +199,26 @@ Accuracy/Precision/Recall
   - ROUGE-S: Measures skip-gram coocurrence
 - [Reference](https://rxnlp.com/how-rouge-works-for-evaluation-of-summarization-tasks)
 
-### [SQuAD 2.0](rajpurkar.github.io)
+## Leaderboards & Benchmarks
 
+### [GLUE](gluebenchmark.com)
+- General Language Understanding Evaluation benchmark
+- A collection of tasks for multitask evaluation for **natural language understanding**
+  - CoLA
+  - SST
+  - MRPC: Paraphrasing
+  - STS
+  - QQP: Sentence Similarity
+  - NLI: 
+    - ([MultiNLI](https://www.nyu.edu/projects/bowman/multinli/))
+    - QNLI
+    - WNLI
+  - RTE
+  - DM
+- Introduced new benchmark [SuperGLUE](super.gluebenchmark.com)
+- ChineseGLUE benchmark [CLUE](https://github.com/ChineseGLUE/ChineseGLUE)
+
+### [SQuAD 2.0](rajpurkar.github.io)
 - Stanford Question Answering Dataset
 - Reading comprehension dataset where answer to every question is a span of text from the corresponding passage.
 - 2.0 has 100,000 questions from SQuAD 1.1 with 50,000 unanswerable questions
@@ -199,14 +227,5 @@ Accuracy/Precision/Recall
 - Evaluation Metric: Exact Match score & F_1 Score
 - [Reference](https://rajpurkar.github.io/mlx/qa-and-squad/)
 
-### [GLUE](gluebenchmark.com)
-
-- General Language Understanding Evaluation benchmark
-- A collection of tasks for multitask evaluation for **natural language understanding**
-- Introduced new benchmark [SuperGLUE](super.gluebenchmark.com)
-- ChineseGLUE benchmark [CLUE](https://github.com/ChineseGLUE/ChineseGLUE)
-
-### NLI
+### SNLI
 [SNLI](https://nlp.stanford.edu/projects/snli/)
-[MultiNLI](https://www.nyu.edu/projects/bowman/multinli/)
-[Breaking_NLI](https://github.com/BIU-NLP/Breaking_NLI)
