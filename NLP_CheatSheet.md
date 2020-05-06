@@ -33,11 +33,9 @@
 - Discourse Processing
 
 ## NLP Goal
-
 - Voice & Speech
   - Automated Speech Recognition
   - Text-To-Speech
-
 - Text Mining
   - Morphology
     - Prefix/Suffix
@@ -52,14 +50,11 @@
     - Relational Extraction
     - Similarity Analysis
     - Word Ranking
-  
 - Abstract Meaning Representation
-
 - Tokenization
   - BPE
   - WordPiece
   - Byte-to-Span
-
 - Word Representations (Embeddings)
   - word2vec
   - GloVe
@@ -76,35 +71,28 @@
     - ERNIE
       - THUxHUAWEI
       - Baidu
-
 - Language Models
   - n-gram models
   - RNN models
     - LSTM
     - GRU
-
 - Topical Classification
   - Spam Detection
   - Fake News Detection
   - Stance Detection
-
 - Machine Translation
   - Seq2seq
   - Neural Machine Translation
   - Transformers
-
 - Natural Language Inference
   - Shallow Approach: Based on lexical overlap, pattern matching, distributional similarity etc.
   - Deep Approach: semantic analysis, lexical and world knowledge, logical inference
-
 - Summarization
   - Extractive: Generates the summarization through extracting important information of the original document
   - Abstractive: Generates summarization after understanding the semantic meaning of document
-
 - Question Answering
     - Open Domain: Deals with questions about nearly anything
     - Closed Domain: Deals with questions under a specific domain
-
 - Conversational Agents
     - Rule-based
     - Retrieval-based
@@ -122,8 +110,10 @@
 7. Attend to compress
 8. Predict/Decode
 
-## Modules (API)
+[Text Classification Flow Chart](https://developers.google.com/machine-learning/guides/text-classification/images/TextClassificationFlowchart.png) by Google Developers
+[Language Processing Pipeline](https://spacy.io/usage/processing-pipelines)
 
+## Modules (API)
 - nltk
 - gensim
 - spacy
@@ -134,7 +124,6 @@
 - flair
 
 ### Chinese
-
 - [ckiptagger](https://github.com/ckiplab/ckiptagger)
 - [thulac](https://github.com/thunlp/THULAC-Python)
 - [snownlp](https://github.com/isnowfy/snownlp)
