@@ -10,9 +10,17 @@ import torch.nn as nn
 import tqdm
 
 class RNN(nn.Module):
-    def __init__(self, input_dim, hidden_dim, output_dim, rnn_layers, linear_layers, bidirectional):
+    def __init__(self, input_dim, hidden_dim, output_dim, rnn_layers, linear_layers, bidirectional, vocab_size, embedding_weight=None):
         super(RNN, self).__init__()
-        
+
+        # Embedding layer
+        self.embedding_layer = nn.Embedding(num_embeddings=vocab_size,
+                                            embedding_dim=input_dim,
+                                            padding_idx=pad_token_id)
+
+        if embedding_weight is not None:
+            self.embedding_layer.weight = nn.Parameter(embedding_weight)
+
         # RNN layer
         self.rnn_layer = nn.RNN(input_size=input_dim,
                                 hidden_size=hidden_dim,
@@ -29,10 +37,13 @@ class RNN(nn.Module):
             else:
                 self.linear.append(torch.nn.Linear(hidden_dim, hidden_dim))
             self.linear.append(torch.nn.ReLU())
-        
+
         self.linear.append(torch.nn.Linear(hidden_dim, output_dim))
 
     def forward(self, x):
+
+        # Embedding layer
+        x = self.embedding_layer(x)
 
         # RNN layer
         hidden_tensor, _ = self.rnn_layer(x)
