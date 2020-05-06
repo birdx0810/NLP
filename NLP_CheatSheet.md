@@ -144,7 +144,7 @@
 ## Datasets
 
 ### bABI
-[bAbI](https://research.fb.com/downloads/babi/)(ICLR 2015): A set of prerequisite toy tasks
+- [bAbI](https://research.fb.com/downloads/babi/)(ICLR 2015): A set of prerequisite toy tasks for NLP
 
 ### Social Networks
 - Twitter
@@ -180,16 +180,28 @@
 - [Douban Corpus](https://github.com/MarkWuNLP/MultiTurnResponseSelection)(ACL 2017)
 
 ### Summarization
-[Multi-News](https://github.com/Alex-Fabbri/Multi-News): Large-Scale Multi-Document Summarization Dataset
-[CNN-DailyMail](https://github.com/abisee/cnn-dailymail): Dataset for Pointer-Generator by Abigail See
-[GigaWord](https://drive.google.com/open?id=1eNUzf015MhbjOZBpRQOfEqjdPwNz9iiS): Dataset for Pointer-Generator by Abigail See
+- [Multi-News](https://github.com/Alex-Fabbri/Multi-News): Large-Scale Multi-Document Summarization Dataset
+- [CNN-DailyMail](https://github.com/abisee/cnn-dailymail): Dataset for Pointer-Generator by Abigail See
+- [GigaWord](https://drive.google.com/open?id=1eNUzf015MhbjOZBpRQOfEqjdPwNz9iiS): Dataset for Pointer-Generator by Abigail See
 
-## Evaluation
+## Evaluation Metrics
+
+Accuracy
+Precision
+Recall
+F1-score
 
 ### Perplexity
-Accuracy/Precision/Recall
+- Perplexity evaluates the probability distribution (language model) over entire sentences or text (lower is better)
 
-### BLEU (Scoring)
+$$
+\begin{align}
+\text{PPL}(W) &= P(w_1 w_2 ... w_N)^{-\frac{1}{N}}
+&= \sqrt[N]{\frac{1}{\Pr(w_1 w_2 ... w_N)}}
+\end{align}
+$$
+
+### [BLEU](https://www.aclweb.org/anthology/P02-1040/)
 
 - Bilingual Evaluation Understudy
 - A method for Automatic Evaluation of **Machine Translation**
@@ -200,7 +212,7 @@ Accuracy/Precision/Recall
   - BLEU-3 (0.33, 0.33, 0.33, 0)
   - BLEU-4 (0.25, 0.25, 0.25, 0.25)
 
-### ROUGE
+### [ROUGE](https://www.aclweb.org/anthology/W04-1013/)
 
 - Recall-Oriented Understudy for Gisting Evaluation
 - Used for Machine Translation
@@ -209,6 +221,8 @@ Accuracy/Precision/Recall
   - ROUGE-L: Measures longest matching sequence of words using longest common subsequence
   - ROUGE-S: Measures skip-gram coocurrence
 - [Reference](https://rxnlp.com/how-rouge-works-for-evaluation-of-summarization-tasks)
+
+### [METEOR](https://www.aclweb.org/anthology/W05-0909/)
 
 ## Leaderboards & Benchmarks
 
