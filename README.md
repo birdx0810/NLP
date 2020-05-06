@@ -11,6 +11,7 @@ The following is a list of resources from this repository:
     - [Tokenizers](https://github.com/birdx0810/NLP/tree/master/code/tokenizers): Python code for tokenizing text
     - [Embeddings](https://github.com/birdx0810/NLP/tree/master/code/embeddings): Python code for training word embeddings
     - [Models](https://github.com/birdx0810/NLP/tree/master/code/models): Python code for deep learning models implemented with PyTorch
+- Papers: An in depth review on different NLP papers.
 
 ## Disclaimer
 This repository is for reference only and used for the sake of convenience. Please kindly report if there are any errors or if there are any infringements.
