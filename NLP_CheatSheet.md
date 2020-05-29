@@ -148,7 +148,7 @@
 
 ### Conversational Models
 #### English
-- [A Survey of Available Corpora for Building Data-Driven Dialogue Systems](https://breakend.github.io/DialogDatasets/)([Serban et al., 2015](https://breakend.github.io/DialogDatasets/))
+- A Survey of Available Corpora for Building Data-Driven Dialogue Systems]([Serban et al., 2015](https://breakend.github.io/DialogDatasets/))
 - Multi-relation Question Answering Dataset (COLING 2018) [Download](http://coai.cs.tsinghua.edu.cn/hml/media/files/PathQuestion.zip)
 - Commonsense Conversation (IJCAI 2018) [Download](http://coai.cs.tsinghua.edu.cn/file/commonsense_conversation_dataset.tar.gz)
 - [DailyDialog](http://yanran.li/dailydialog)(2017): Human-written and less noisy that reflects daily communication of humans
@@ -160,7 +160,7 @@
 #### Chinese
 - CrossWOZ (TACL 2020): A Large-Scale Chinese Cross-Domain Task-Oriented Dialogue Dataset [Download](https://coai.cs.tsinghua.edu.cn/file/CrossWOZ_data.zip)
 - [KdConv](https://github.com/thu-coai/KdConv)(ACM 2020)
-- Grayscale Dataset for Dialogue (2020) [Download]
+- Grayscale Dataset for Dialogue (2020) [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/grayscale_data_release.zip)
 - Retrieval Generation Chat (EMNLP 2019) [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/Retrieval_Generation_Chat.zip)
 - Restoration-200K Datasets (EMNLP 2019) [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/Restoration-200K.zip)
 - Chinese Dialogue Sentence Function Dataset (ACL 2019) [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/dialog-acts.tar.gz)
