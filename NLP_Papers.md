@@ -596,7 +596,7 @@ Add sentences until fit sequence length 512
 ###### Encoder
 > Lan et al. (2019 Sept)
 > Paper: [Link](https://arxiv.org/abs/1909.11942)
-> Code: 
+> Code: [Link](https://github.com/google-research/ALBERT)
 
 Weight Sharing
 Sentence Order Prediction (SOP)
@@ -606,10 +606,15 @@ Sentence Order Prediction (SOP)
 > Paper: [Link](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf)
 > Code: [Link](https://github.com/openai/finetune-transformer-lm)
 
-### GPT-II: Language Models are Unsupervised Multitask Learners
+### GPT-2: Language Models are Unsupervised Multitask Learners
 ###### Decoder
 > Paper: [Link](https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf)
 > Code: [Link](https://github.com/openai/gpt-2)
+
+### GPT-3: Language Models are Few-Shot Learners
+###### Decoder
+> Paper: [Link](https://arxiv.org/abs/2005.14165)
+> Code: [Link](https://github.com/openai/gpt-3)
 
 ### TransformerXL: Attentive Language Models Beyond a Fixed-Length Context
 ###### AutoEncoder
