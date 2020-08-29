@@ -1,8 +1,8 @@
 # NLP Cheat Sheet
 ###### tags: `NLP`
-> "You shall know a word by the company it keeps" -- Firth (1957)
+> "You shall know a word by the company it keeps" -- Firth (1957)  
 > ![](https://imgs.xkcd.com/comics/machine_learning.png)  
-> "I deeply believe that we do need more structure and modularity for language, memory, knowledge, and planning; it’ll just take some time..." -- Manning (2017)
+> "I deeply believe that we do need more structure and modularity for language, memory, knowledge, and planning; it’ll just take some time..." -- Manning (2017)  
 
 ## Concepts
 <!-- ![](https://i.imgur.com/iGMDwwC.png) -->
@@ -32,7 +32,7 @@
 - Syntax & Semantics
 - Discourse Processing
 
-## NLP Goal
+## NLP Tasks/Goals
 - Voice & Speech
   - Automated Speech Recognition
   - Text-To-Speech
@@ -50,7 +50,6 @@
     - Relational Extraction
     - Similarity Analysis
     - Word Ranking
-- Abstract Meaning Representation
 - Tokenization
   - BPE
   - WordPiece
@@ -68,9 +67,6 @@
     - ALBERT
     - T5
     - NEZHA
-    - ERNIE
-      - THUxHUAWEI
-      - Baidu
 - Language Models
   - n-gram models
   - RNN models
@@ -81,9 +77,6 @@
   - Fake News Detection
   - Stance Detection
 - Machine Translation
-  - Seq2seq
-  - Neural Machine Translation
-  - Transformers
 - Natural Language Inference
   - Shallow Approach: Based on lexical overlap, pattern matching, distributional similarity etc.
   - Deep Approach: semantic analysis, lexical and world knowledge, logical inference
@@ -96,7 +89,7 @@
 - Conversational Agents
     - Rule-based
     - Retrieval-based
-    - Generative
+    - Generative-based
 
 ## Process
 0. Define goal
@@ -108,7 +101,7 @@
 5. Embed words to vectors
 6. Encode using Biderectional RNNs
 7. Attend to compress
-8. Predict/Decode
+8. Inference: (Predict/Decode)
 
 [Text Classification Flow Chart](https://developers.google.com/machine-learning/guides/text-classification/images/TextClassificationFlowchart.png) by Google Developers
 [Language Processing Pipeline](https://spacy.io/usage/processing-pipelines)
@@ -117,92 +110,62 @@
 - nltk
 - gensim
 - spacy
-- stanfordnlp
+- stanza
 - allennlp
 - google-cloud-language
 - nlp-architect
 - flair
 
-### Chinese
-- [ckiptagger](https://github.com/ckiplab/ckiptagger)
-- [thulac](https://github.com/thunlp/THULAC-Python)
-- [snownlp](https://github.com/isnowfy/snownlp)
-- [jieba](https://github.com/fxsjy/jieba)
-- [opencc](https://github.com/BYVoid/OpenCC) (Translator)
+## Decoding
 
-## Datasets
+### Likelihood-maximizing decoding
 
-### bABI
-- [bAbI](https://research.fb.com/downloads/babi/)(ICLR 2015): A set of prerequisite toy tasks for NLP
+- Greedy search: Take the most probable word at each step and feed it as input into the next step until the `EOS` token is produced
+  - Usually ungrammatical, unnatural, or nonsensical
+- Beam search: On each step, keep track of the top-$k$ most probable sequences (hypothesis) and choose the sequence with the highest probability
+  - Higher beam size ($k$) is more computationally expensive, and leads to more genric or less relevant responses
 
-<!-- ### Social Networks
-- Twitter
-  - Official API: [Documentation](https://developer.twitter.com/en/docs)
-  - 3rd Party Python Wrappers:
-    - [Tweepy](https://tweepy.readthedocs.io/en/latest/)
-    - [Python-Twitter](https://github.com/bear/python-twitter)
-- Reddit
-  - Official API: [Documentation](https://www.reddit.com/dev/api)
-  - 3rd Party Python Wrappers:
-    - [PRAW](https://praw.readthedocs.io/en/latest/) -->
+### Sampling-based decoding
 
-### Conversational Models
-#### English
-<!-- - A Survey of Available Corpora for Building Data-Driven Dialogue Systems]([Serban et al., 2015](https://breakend.github.io/DialogDatasets/)) -->
-- Restoration-200K Dataset (EMNLP 2019): 200K Multi-turn Open-domain conversations with six utterances each. [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/Restoration-200K.zip)
-- Multi-relation Question Answering Dataset (COLING 2018): Multi-relation question answering over knowledge bases. [Download](http://coai.cs.tsinghua.edu.cn/hml/media/files/PathQuestion.zip)
-- Commonsense Conversation (IJCAI 2018): One-turn post-response pair with corresponding commonsense knowledge graph [Download](http://coai.cs.tsinghua.edu.cn/file/commonsense_conversation_dataset.tar.gz)
-- [ConvAI2](http://convai.io/data/) Competition (NIPS 2018)
-- [DailyDialog](http://yanran.li/dailydialog) (IJCNLP 2017): Human-written and less noisy that reflects daily communication of humans
-- [Twitter](https://www.kaggle.com/thoughtvector/customer-support-on-twitter)(Kaggle 2017): A large corpus of modern English (mostly) conversations between consumers and customer support agents on Twitter
-- [OpenSubtitles](http://opus.nlpl.eu/OpenSubtitles-v2018.php) (LREC 2016): A new collection of translated movie subtitles from http://www.opensubtitles.org/
-- [Ubuntu Dialogue Corpus](https://github.com/rkadlec/ubuntu-ranking-dataset-creator) (SIGDIAL 2015): Unstructured Multi-turn Dialogue System
-- [Cornell Movie Dialogs Corpus](http://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html) (2011): Contains a large collection of fictional conversations from raw movie scripts
-
-#### Chinese
-- [CrossWOZ](https://github.com/thu-coai/CrossWOZ) (TACL 2020): A Large-Scale Chinese Cross-Domain Task-Oriented Dialogue Dataset
-- [KdConv](https://github.com/thu-coai/KdConv) (ACM 2020): A Chinese Multi-domain Dialogue Dataset Towards Multi-turn Knowledge-driven Conversation
-- Grayscale Dataset for Dialogue (2020): [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/grayscale_data_release.zip)
-- Retrieval Generation Chat (EMNLP 2019): [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/Retrieval_Generation_Chat.zip)
-- Restoration-200K Datasets (EMNLP 2019): [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/Restoration-200K.zip)
-- Chinese Dialogue Sentence Function Dataset (ACL 2019): [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/dialog-acts.tar.gz)
-- Weibo Conversation Dataset (AAAI 2019): [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/weibo_utf8.zip)
-- Dialogue Question Generation Dataset (ACL 2018): [Download](http://coai.cs.tsinghua.edu.cn/file/QGdata.zip)
-- Emotional Conversation Dataset (AAAI 2018): [Link](http://coai.cs.tsinghua.edu.cn/hml/challenge2017/)
-- [Douban Corpus](https://github.com/MarkWuNLP/MultiTurnResponseSelection) (ACL 2017)
-- [Insurance QA](https://github.com/chatopera/insuranceqa-corpus-zh) (chatopera)
-
-#### Style
-- Gender-Specific Chat Dataset (2020): [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/Stylistic_Dataset.zip)
-- Chinese Literal Style Dataset (EMNLP 2019): [Download](https://ai.tencent.com/ailab/nlp/dialogue/datasets/poem_corpus.zip)
-- Personality Assignment Dataset (IJCAI 2018): [Download](http://coai.cs.tsinghua.edu.cn/file/ijcai_data.zip)
-
-### Summarization
-- [Multi-News](https://github.com/Alex-Fabbri/Multi-News): Large-Scale Multi-Document Summarization Dataset
-- [CNN-DailyMail](https://github.com/abisee/cnn-dailymail): Dataset for Pointer-Generator by Abigail See
-- [GigaWord](https://drive.google.com/open?id=1eNUzf015MhbjOZBpRQOfEqjdPwNz9iiS): Dataset for Pointer-Generator by Abigail See
+- Pure sampling: Randomly sample the next word from the probability distribution $P$ of the whole vocabulary at time $t$
+  - $k = v$
+- Top-k sampling: Randomly sample from $P_t$ with restriction of the top-$k$ most probable words
+  - $k = 1$ is greedy search
+  - Large $k$ is more diverse/risky, smaller $k$ is more generic/safe
 
 ## Evaluation Metrics
+Goal: Assign higher probability to "real"/"frequent" sentences
 
-Accuracy
-Precision
-Recall
-F1-score
+- Extrinsic Methods
+  - Accuracy
+  - Precision
+  - Recall
+  - F1-score
+- Intrinsic Methods
+  - Perplexity
 
 ### Perplexity
-- Perplexity evaluates the probability distribution (language model) over entire sentences or text (lower is better)
+- Perplexity evaluates the probability distribution of a word normalized over entire sentences or text (language model)
+- Is the weighted equivalent branching factor
+- Minimizing perplexity is the same as maximizing probability (lower is better), could be also thought of as entropy. The corpus that we fit is deemed as the gold truth. Thus, we would try to minimize the perplexity(entropy) of the corpus.
+- Bad approximation, only used in pilot test
 
 $$
 \begin{align}
-\text{PPL}(W) &= P(w_1 w_2 ... w_N)^{-\frac{1}{N}}
-&= \sqrt[N]{\frac{1}{\Pr(w_1 w_2 ... w_N)}}
+\text{PPL}(W) &= P(w_1 w_2 ... w_N)^{-\frac{1}{N}} \\
+&= \sqrt[N]{\frac{1}{\Pr(w_1 w_2 ... w_N)}} \\
+&= \sqrt[N]{\prod_{i=1}^N\frac{1}{\Pr(w_i| w_1 ... w_{i-1})}}
 \end{align}
 $$
+
+Where
+- $i-1$ is the $n$-gram the model takes into context.
 
 ### [BLEU](https://www.aclweb.org/anthology/P02-1040/)
 
 - Bilingual Evaluation Understudy
 - A method for Automatic Evaluation of **Machine Translation**
+- Precision-based
 - Range from 0.0 (perfect mismatch) to 1.0 (perfect match)
 - Weighted cumulative n-grams
   - BLEU-1 (1,0,0,0)
@@ -210,36 +173,72 @@ $$
   - BLEU-3 (0.33, 0.33, 0.33, 0)
   - BLEU-4 (0.25, 0.25, 0.25, 0.25)
 
+$$
+\log \text{BLEU} = \min(1 = \frac{r}{c}, 0) + \sum_{n=1}^N w_n \log p_n
+$$
+
+Where,
+- $N$ or $n$ is the number of $n$-grams (default = 4)
+- $w_n$ is the positive weights (1/n = 0.25)
+- $p_n$ is the $n$-gram precisions (modified precision)
+- $c$ is the length of the candidate translation
+- $r$ is the reference corpus length
+
+$$
+p_n = \frac{\sum_{S \in C} \sum_{\text{gram}_n \in S} \text{count}_\text{clip}(\text{gram}_n)}
+{\sum_{S \in C} \sum_{\text{gram}_n \in S} \text{count}(\text{gram}_n)}
+$$
+
+Where,
+- $\text{count}_\text{clip} = \min(\text{count}, \text{max_ref_count})$ is the maximum number of $n$-gram occuring on each reference
+
+$Count_\text{clip} = \min(Count;MaxRefCount)$. In other words,one truncates each word’s count, if necessary, to not exceed the largest count observed in any single reference for that word.
+
+Where $Count$ is the number of times the n-gram occurs in candidate sentence; and $Count_\text{clip}$ is the maximum number of n-grams occurrences in any reference sentence
+
 ### [ROUGE](https://www.aclweb.org/anthology/W04-1013/)
 
 - Recall-Oriented Understudy for Gisting Evaluation
-- Used for Machine Translation
+- A method for Automatic Evaluation of **Summarization**
+- Recall-based
 - Measures:
   - ROUGE-N: Measures n-gram overlap
   - ROUGE-L: Measures longest matching sequence of words using longest common subsequence
   - ROUGE-S: Measures skip-gram coocurrence
-- [Reference](https://rxnlp.com/how-rouge-works-for-evaluation-of-summarization-tasks)
+  - ROUGE-W: Weighted longest common subsequence
 
-### [METEOR](https://www.aclweb.org/anthology/W05-0909/)
+$$
+\text{ROUGE}_N =
+\frac{\sum_{S \in R} \sum_{\text{gram}_n \in S} \text{count}_\text{match}(\text{gram}_n)}
+{\sum_{S \in R} \sum_{\text{gram}_n \in S} \text{count}(\text{gram}_n)}
+$$
+
+Where,
+- the numerator is the number of matched $n$-grams between the generated sentence and gold sentence
+- the denominator is the total number of $n$-grams for each sentence
+- $R$ is the set of referenced summaries (generated and gold)
+- $S$ is the sentences within $R$
+- $\text{count}_\text{match}$ is the maximum number of $n$-grams cooccuring in a candidate summary and reference summaries
 
 ## Leaderboards & Benchmarks
 
 ### [GLUE](gluebenchmark.com)
 - General Language Understanding Evaluation benchmark
-- A collection of tasks for multitask evaluation for **natural language understanding**
+- A collection of tasks for multitask evaluation for **NLU**
   - CoLA
   - SST
   - MRPC: Paraphrasing
   - STS
   - QQP: Sentence Similarity
   - NLI: 
-    - ([MultiNLI](https://www.nyu.edu/projects/bowman/multinli/))
+    - [MultiNLI](https://www.nyu.edu/projects/bowman/multinli/)
     - QNLI
-    - WNLI
+    - [WNLI](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
   - RTE
   - DM
 - Introduced new benchmark [SuperGLUE](super.gluebenchmark.com)
 - ChineseGLUE benchmark [CLUE](https://github.com/ChineseGLUE/ChineseGLUE)
+- Bio-medical Language Understanding [BLUE](https://github.com/ncbi-nlp/BLUE_Benchmark)
 
 ### [SQuAD 2.0](rajpurkar.github.io)
 - Stanford Question Answering Dataset
@@ -252,3 +251,30 @@ $$
 
 ### SNLI
 [SNLI](https://nlp.stanford.edu/projects/snli/)
+
+## Glossary
+
+### Softmax Temperature
+The temperature $\tau$ is used to alter the distribution weights of the Softmax layer.
+- Larger $\tau$ leads to a more uniform $P_t$ and more diverse output
+- Smaller $\tau$ leads to a more skewed $P_t$ and less diverse output
+$$
+P_t(w) = \frac{\exp(s_w/\tau)}{\sum_{w' \in V} \exp S_{w'}/\tau}
+$$
+
+
+<!-- ### [METEOR](https://www.aclweb.org/anthology/W05-0909/)
+
+- Metric for Evaluation of Translation with Explicit ORdering
+- The metric is based on the harmonic mean of unigram precision and recall
+- Includes stemming and synonymy matching
+
+### [NIST](https://dl.acm.org/doi/10.5555/1289189.1289273)
+
+- NIST also calculates how informative a particular n-gram is
+
+### [WER](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.89.424)
+
+- Word Error Rate
+- A common metric of the performance of a speech recognition or machine translation system
+- WER is derived from the Levenshtein distance, working at the word level instead of the phoneme level -->

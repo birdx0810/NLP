@@ -37,6 +37,40 @@ Could be thought of as two independant RNNs, one starting from the first word of
 
 It is considered that by doing so, we are obtaining information from the past, and also from the future, taking into context of a paragraph as a whole.
 
+### Gradient Explosion/Vanishing: The problem with RNNs
+RNNs can learn long dependencies but inpractice they tend to be biased towards their most recent inputs in the sequence.
+
+$$
+\begin{aligned}
+h_t &= \tanh(W_Ix_t + W_Rh_{t-1} + b_h) \\
+y_t &= W_Oh_t + b_y
+\end{aligned}
+$$
+
+To backpropagate, we need to compute the gradient of the cost function $C$ w.r.t the recurrent weights $W_R$. For step $t$, the using the chain rule, we could derive:
+
+$$
+\begin{aligned}\partial
+\frac{\partial C_t}{\partial W_R} &= \sum_{i=0}^t
+\frac{\partial C_t}{\partial y_t}
+\frac{\partial y_t}{\partial h_t}
+\frac{\partial h_t}{\partial h_i}
+\frac{\partial h_i}{\partial W_R} \\
+\frac{\partial h_t}{\partial h_i} &= \prod_{k=i}^{t-1}
+\frac{\partial h_{k-1}}{\partial h_k} \\
+\frac{\partial h_k}{\partial h_1} &= \prod_{i}^{k} \text{diag}(f'(W_Ix_i + W_Rh+{i-1}))W_R
+\end{aligned}
+$$
+
+The derivative $\frac{\partial h_{k+1}}{\partial h_k}$ is essentially telling us how much our hidden state at $k+1$ will change if we change the hidden state at time $k$. If $W_R$ is too small the derivative would be 0, and $\infty$ if $W_R$ is too big.
+
+This is known as the vanishing gradient ($W_R>1$) or exploding gradient ($W_R<1$). LSTMs uses gated operations to combat the Exploding/Vanishing Gradient problem.
+
+#### Reference
+- [Why LSTMs Stop Your Gradients From Vanishing](https://weberna.github.io/blog/2017/11/15/LSTM-Vanishing-Gradients.html)
+- [Understanding, Deriving and Extending the LSTM ](https://r2rt.com/written-memories-understanding-deriving-and-extending-the-lstm.html)
+- [On the difficulty of training Recurrent Neural Networks](https://arxiv.org/pdf/1211.5063.pdf)
+
 ## LSTM
 > Long Short-Term Memory Recurrent Neural Network Architectures for Large Scale Acoustic Modeling (Sak et al., 2014)
 
