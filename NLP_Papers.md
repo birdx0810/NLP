@@ -555,11 +555,10 @@ $$
 \text{Input: [CLS] } s_1 \text{ [SEP] } s_2 \text{ [SEP] }
 $$
 
-- Objective functions (Optional)
-    - Masked Language Model (MLM): Cross Entropy
-    - Next Sentence Prediction (NSP)
-- Pre-train
-- Fine-tune
+- Pre-train Objective (Optional)
+    - Masked Language Model (MLM): Predicts masked tokens over vocabulary
+    - Next Sentence Prediction (NSP): Binary Classification of whether both sentences are taken from the same context/reference
+- Fine-tune Inference
   - GLUE: [CLS] for prediction
   - SQuAD: [CLS] Document [SEP] Question [SEP]
   - CNN-DM: BERT(Word Representation) + Downstream
@@ -591,7 +590,6 @@ Dynamic Masking (BERT always mask same > overfit)
 No NSP
 Add sentences until fit sequence length 512
 
-
 ### ALBERT
 ###### Encoder
 > Lan et al. (2019 Sept)
@@ -621,10 +619,34 @@ Sentence Order Prediction (SOP)
 > Paper: [Link](https://arxiv.org/abs/1901.02860)
 > Code: [Link](https://github.com/kimiyoung/transformer-xl)
 
-### XLNet: Generalized Autoregressive Pretraining for Language Understanding
+The vanilla transformer faces a couple of limitations:
+- fixed maximum sequence length
+- segments do not respect the sentence boundaries
+
+To address this issue, two techniques were introduced:
+- Segment-level Recurrence
+![](https://2.bp.blogspot.com/--MRVzjIXx5I/XFCm-nmEDcI/AAAAAAAADuM/HoS7BQOmvrQyk833pMVHlEbdq_s_mXT2QCLcBGAs/s640/GIF2.gif)
+- Relative Positional Encodings
+![](https://4.bp.blogspot.com/-Do42uKiMvKg/XFCns7oXi5I/AAAAAAAADuc/ZS-p1XHZUNo3K9wv6nRG5AmdEK7mJsrugCLcBGAs/s640/xl-eval.gif)
+
+### XLM: Cross-lingual Language Model Pretraining
 ###### AutoEncoder
+> Paper: [Link](https://arxiv.org/abs/1901.07291)
+> Code: [Link](https://github.com/facebookresearch/XLM/)
+
+A transformer pre-trained using **one of the following** objectives, where each objective is selected w.r.t the downstream task:
+- Masked Language Modeling
+- Causal Language Modeling (next token prediction)
+- Translation Language Modeling
+
+### XLNet: Generalized Autoregressive Pretraining for Language Understanding
+###### AutoRegressive
 > Paper: [Link](https://arxiv.org/abs/1906.08237)
 > Code: [Link](https://github.com/zihangdai/xlnet)
+
+Denoising autoencoders aim to denoise/reconstruct the corrupted (masked) input data into the original data. They have the advantage of learning from forward-backward context. But the disadvantage lies in the `[MASK]` token being absent in finetuning and they are being assumed to be independent from other tokens.
+
+Auto-regressive LMs are good for decoding tasks, but has loses forward-backward context.
 
 ### T5
 ###### AutoEncoders
@@ -656,123 +678,3 @@ Sentence Order Prediction (SOP)
 > Code: [GitHub]()
 
 
----
-
-## Metrics and Evaluations
-### Distance Metrics for Word Similarity
-- symbol equivalency or semantic equality
-
-### Objective Based Metrics
-- Bilingual Evaluation Understudy Score (BLEU)
-    - a score for comparing a candidate translation of text to one or more reference translations
-- Recall-Oriented Understudy for Gisting Evaluation (ROUGE)
-    - used for evaluating automatic summarization and machine translation software
-- General Language Understanding Evaluation (GLUE)
-    - Single-sentence tasks
-    - Similarity & paraphrase
-    - Inference tasks
-    - Variants: SuperGLUE
-
-## Glossary
-#### Word Embedding:
-- word/phrases are represented as vectors of real numbers in an n-dimensional space, where n is the number of words in the corpus(vocabulary)
-- same goes to character embedding and sentence embedding
-- character embedding works better for bigger models/languages with with morphology
-
-#### Corpus (p. Corpora):
-- a collection of text documents
-
-#### Fine-tuning (Transfer Learning):
-- tune the weights of a pretrained model by continuing back-propagation
-- general rule of thumb:
-  - truncate last softmax layer (replace output layer that is more relevant to our problem)
-  - use smaller learning rate (pre-trained weights tend to be better)
-  - freeze first few layers (tend to capture universal features)
-- [CS231n on Transfer Learning](https://cs231n.github.io/transfer-learning/)
-
-#### Language Model
-- A machine/deep learning model that learns to predict the probability of the next (or sequence) of words.
-    - Statistical Language Models
-        - N-grams, Hidden Markov Models (HMM)
-    - Neural Language Models
-
-#### Morphology
-- The study of formation of words
-- Prefix/Suffix
-- Lemmatization/Stemming
-- Spelling Check
-
-#### Phonology
-- The study of sounds in language
-
-#### Pragmatics
-- The study of idiomatic phrases
-
-#### Normalizing (Pre-processing)
-- [removing irrelevant noise](https://hackmd.io/bdlAIXpKS7-J1FZot2DFyQ?both#Text-Pre-processing) from the corpus
-
-#### Pre-train:
-- **To pre-train** is to train a model from scratch using a large dataset 
-- A pre-trained model is a model that has been trained (e.g. Pre-trained BERT)
-
-#### Stop Words:
-- commonly used words, such as, 'the', 'a', 'this', 'in' etc.
-
-#### Smoothing:
-- prevents computational errors in n-gram models
-- e.g. $n$ is the number of times a word appears in a corpus. The importance of the word is denoted by $\frac{1}{n}$, it the word doesn't appear, it would be a mathematical error. Hence, smoothing techniques are used to solve this problem.
-
-#### Tokenizing:
-- a.k.a lexical analysis, lexing
-- separating sentences into words (or words to characters) and giving an integer id for each possible token
-
-#### Vocabulary:
-- unique words within learning corpus
-
-## Appendix
-### Word Mover's Distance
-The distance between two text documents A and B is calculated by the minimum cumulative distance that words from the text document A needs to travel to match exactly the point cloud of text document B.
-
-### Named Entity Relation (NER)
-- Classifying named entities mentioned in unstructured text into pre-defined categories
-	- Because mapping the whole vocabulary is too time consuming
-	- Stress on certain keywords/entities
-	- Extract boundaries of words
-	- E.g. chemical, protein, drug, gene etc.
-	- E.g. person, location, event etc.
-- recoginze the entity the corpus needs
-- E.g. extract **chemical** in biomedical corpus -> **chemical** is regarded as an entity
-
-### IOB Tagging
-- Usually used in NER for identifying words within entity phrase
-- Tags:
-  - **Inside**: token inside of chunk
-  - **Outside**: token outside of chunk
-  - **Beginning**: beginning of chunk
-  - **End**: end of chunk
-  - **Single**: represent a chunk containing a single token
-
-[Reference](http://cs229.stanford.edu/proj2005/KrishnanGanapathy-NamedEntityRecognition.pdf)
-
-### Part-of-speech Tagging (POS)
-- Parts of speech: noun, verb, pronoun, preposition, adverb, conjunction, participle, and article
-|Symbol| Meaning     | Example   |
-|------|-------------|-----------|
-| S    | sentence    | the man walked |
-| NP   | noun phrase | a dog |
-| VP   | verb phrase | saw a park |
-| PP   | prepositional phrase |	with a telescope |
-| Det  | determiner  | the |
-| N    | noun        | dog  |
-| V    | verb        | walked |
-| P    | preposition | in |
-
-### Dependency Tree
-Dependency tree parses two words in a sentence by dependency arc to express their syntactic(grammatical) relationship
-
-![](https://www.nltk.org/images/depgraph0.png)
-
-### Subword Modeling
-- Turn words into subwords. E.g. subwords $\to$ sub, words
-- Used in Language Models (e.g. fastText) and Tokenization (e.g. Byte-Pair Encoding)
-![](https://i.imgur.com/udjUH6F.png =360x)

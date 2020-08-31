@@ -278,3 +278,106 @@ $$
 - Word Error Rate
 - A common metric of the performance of a speech recognition or machine translation system
 - WER is derived from the Levenshtein distance, working at the word level instead of the phoneme level -->
+
+#### Word Embeddings
+- word/phrases are represented as vectors of real numbers in an n-dimensional space, where n is the number of words in the corpus(vocabulary)
+- same goes to character embedding and sentence embedding
+- character embedding works better for bigger models/languages with with morphology
+
+#### Corpus (p. Corpora)
+- a collection of text documents
+
+#### Fine-tuning (Transfer Learning)
+- tune the weights of a pretrained model by continuing back-propagation
+- general rule of thumb:
+  - truncate last softmax layer (replace output layer that is more relevant to our problem)
+  - use smaller learning rate (pre-trained weights tend to be better)
+  - freeze first few layers (tend to capture universal features)
+- [CS231n on Transfer Learning](https://cs231n.github.io/transfer-learning/)
+
+#### Language Model
+- A machine/deep learning model that learns to predict the probability of the next (or sequence) of words.
+    - Statistical Language Models
+        - N-grams, Hidden Markov Models (HMM)
+    - Neural Language Models
+
+#### Morphology
+- The study of formation of words
+- Prefix/Suffix
+- Lemmatization/Stemming
+- Spelling Check
+
+#### Phonology
+- The study of sounds in language
+
+#### Pragmatics
+- The study of idiomatic phrases
+
+#### Normalizing (Pre-processing)
+- [removing irrelevant noise](https://hackmd.io/bdlAIXpKS7-J1FZot2DFyQ?both#Text-Pre-processing) from the corpus
+
+#### Pre-train:
+- **To pre-train** is to train a model from scratch using a large dataset 
+- A pre-trained model is a model that has been trained (e.g. Pre-trained BERT)
+
+#### Stop Words:
+- commonly used words, such as, 'the', 'a', 'this', 'in' etc.
+
+#### Smoothing:
+- prevents computational errors in n-gram models
+- e.g. $n$ is the number of times a word appears in a corpus. The importance of the word is denoted by $\frac{1}{n}$, it the word doesn't appear, it would be a mathematical error. Hence, smoothing techniques are used to solve this problem.
+
+#### Tokenizing:
+- a.k.a lexical analysis, lexing
+- separating sentences into words (or words to characters) and giving an integer id for each possible token
+
+#### Vocabulary:
+- unique words within learning corpus
+
+## Appendix
+### Word Mover's Distance
+The distance between two text documents A and B is calculated by the minimum cumulative distance that words from the text document A needs to travel to match exactly the point cloud of text document B.
+
+### Named Entity Relation (NER)
+- Classifying named entities mentioned in unstructured text into pre-defined categories
+	- Because mapping the whole vocabulary is too time consuming
+	- Stress on certain keywords/entities
+	- Extract boundaries of words
+	- E.g. chemical, protein, drug, gene etc.
+	- E.g. person, location, event etc.
+- recoginze the entity the corpus needs
+- E.g. extract **chemical** in biomedical corpus -> **chemical** is regarded as an entity
+
+### IOB Tagging
+- Usually used in NER for identifying words within entity phrase
+- Tags:
+  - **Inside**: token inside of chunk
+  - **Outside**: token outside of chunk
+  - **Beginning**: beginning of chunk
+  - **End**: end of chunk
+  - **Single**: represent a chunk containing a single token
+
+[Reference](http://cs229.stanford.edu/proj2005/KrishnanGanapathy-NamedEntityRecognition.pdf)
+
+### Part-of-speech Tagging (POS)
+- Parts of speech: noun, verb, pronoun, preposition, adverb, conjunction, participle, and article
+|Symbol| Meaning     | Example   |
+|------|-------------|-----------|
+| S    | sentence    | the man walked |
+| NP   | noun phrase | a dog |
+| VP   | verb phrase | saw a park |
+| PP   | prepositional phrase |	with a telescope |
+| Det  | determiner  | the |
+| N    | noun        | dog  |
+| V    | verb        | walked |
+| P    | preposition | in |
+
+### Dependency Tree
+Dependency tree parses two words in a sentence by dependency arc to express their syntactic(grammatical) relationship
+
+![](https://www.nltk.org/images/depgraph0.png)
+
+### Subword Modeling
+- Turn words into subwords. E.g. subwords $\to$ sub, words
+- Used in Language Models (e.g. fastText) and Tokenization (e.g. Byte-Pair Encoding)
+![](https://i.imgur.com/udjUH6F.png =360x)
