@@ -91,6 +91,19 @@
     - Retrieval-based
     - Generative-based
 
+## Introduction
+
+Word Vectors <=> Word Embeddings <=> Word Representations
+- a set of language modeling techniques for mapping words to a vector of numbers (turns a text into numbers)
+- a numeric vector represents a word
+- comparitively sparse: more words == higher dimension
+
+Key properties for Embeddings:
+- Dimensionality Reduction: a more efficient representation
+- Contextual Similarity: a more expressive representation
+  - Syntax(syntactic): Grammatical structure
+  - Semantics(Sentiment): Meaning of vocabulary
+
 ## Process
 0. Define goal
 1. Crawl/Prepare Data
@@ -116,6 +129,19 @@
 - nlp-architect
 - flair
 
+## Text Pre-processing
+- removing tags (HTML, XML)
+- removing accented characters (é)
+- expanding contractions (don't, i'd)
+- removing special characters (!@#$%^&\*)
+- stemming and lemmatization
+    - remove affixes
+    - root word/stem
+- removing stopwords (a, an, the, and)
+- remove whitespace, lowercasing, spelling/grammar corrections etc.
+- replace special tokens (digits to `[NUM]` token)
+- [Example Code](https://github.com/dipanjanS/practical-machine-learning-with-python/blob/master/notebooks/Ch07_Analyzing_Movie_Reviews_Sentiment/Text%20Normalization%20Demo.ipynb)
+
 ## Decoding
 
 ### Likelihood-maximizing decoding
@@ -132,6 +158,7 @@
 - Top-k sampling: Randomly sample from $P_t$ with restriction of the top-$k$ most probable words
   - $k = 1$ is greedy search
   - Large $k$ is more diverse/risky, smaller $k$ is more generic/safe
+- Neucleus sampling: For a given threshold $p$, at each timestep, we sample from the most probable words whose cumulative probability comprises the top-$p$ of the entire vocabulary
 
 ## Evaluation Metrics
 Goal: Assign higher probability to "real"/"frequent" sentences
@@ -381,3 +408,11 @@ Dependency tree parses two words in a sentence by dependency arc to express thei
 - Turn words into subwords. E.g. subwords $\to$ sub, words
 - Used in Language Models (e.g. fastText) and Tokenization (e.g. Byte-Pair Encoding)
 ![](https://i.imgur.com/udjUH6F.png =360x)
+
+### Gradient Clipping
+
+$$
+g \gets \frac{\eta g}{||g||}
+$$
+
+![](https://i.imgur.com/fZcDDgr.png)

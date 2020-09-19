@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 This is an example for implementing a RNN model class using PyTorch.
 Notes:
 - We will be using torch.nn modules here.
 - torch.nn.functional is low-level, stateless functions that are used by the modules, you could use them for flexibility(?)
-'''
+"""
 import torch
 import torch.nn as nn
 import tqdm
 
 class RNN(nn.Module):
-    def __init__(self, input_dim, hidden_dim, output_dim, rnn_layers, linear_layers, bidirectional, vocab_size, embedding_weight=None):
+    def __init__(self, input_dim, hidden_dim, output_dim, rnn_layers, linear_layers, bidirectional, vocab_size, is_logits, embedding_weight=None):
         super(RNN, self).__init__()
 
         # Embedding layer
@@ -20,6 +20,11 @@ class RNN(nn.Module):
 
         if embedding_weight is not None:
             self.embedding_layer.weight = nn.Parameter(embedding_weight)
+        else:
+            with torch.no_grad():
+                for parameter in self.embedding_layer.parameters():
+                    parameter.normal_(mean=0.0, std=0.1)
+
 
         # RNN layer
         self.rnn_layer = nn.RNN(input_size=input_dim,
@@ -27,6 +32,10 @@ class RNN(nn.Module):
                                 num_layers=rnn_layers,
                                 bidirectional=bidirectional,
                                 batch_first=True)
+
+        with torch.no_grad():
+            for parameter in self.rnn_layer.parameters():
+                parameter.normal_(mean=0.0, std=0.1)
 
         # Linear layer
         self.linear = nn.ModuleList()
@@ -40,19 +49,30 @@ class RNN(nn.Module):
 
         self.linear.append(torch.nn.Linear(hidden_dim, output_dim))
 
+        if is_logits:
+            self.linear.append(torch.nn.Softmax())
+
+        with torch.no_grad():
+            for parameter in self.sequential.parameters():
+                parameter.normal_(mean=0.0, std=0.1)
+
     def forward(self, x):
 
         # Embedding layer
-        x = self.embedding_layer(x)
+        # B x S x E
+        embedding_tensor = self.embedding_layer(x)
 
         # RNN layer
-        hidden_tensor, _ = self.rnn_layer(x)
+        # B x S x H
+        hidden_tensor, _ = self.rnn_layer(embedding_tensor)
 
         # Linear layer
-        hidden_tensor = self.linear(hidden_tensor)
+        # B x S x O
+        y = self.linear(hidden_tensor)
 
-        # Output
-        y = hidden_tensor.matmul(x.weight.transpose(0,1))
+        # Inference layer
+        # B x S x V
+        # yt = ht.matmul(self.embedding_layer.weight.transpose(0, 1))
 
         return y
 
@@ -62,10 +82,10 @@ class LSTM(RNN):
 
     # Overload RNN layer
     self.rnn_layer = nn.LSTM(input_size=input_dim,
-                            hidden_size=hidden_dim,
-                            num_layers=num_layers,
-                            bidirectional=bidirectional,
-                            batch_first=True)
+                             hidden_size=hidden_dim,
+                             num_layers=num_layers,
+                             bidirectional=bidirectional,
+                             batch_first=True)
 
 class GRU(RNN):
     def __init__(self, input_dim, hidden_dim, output_dim, rnn_layers, linear_layers, bidirectional):

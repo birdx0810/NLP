@@ -4,7 +4,6 @@ This repository was inspired to help those who are interested in learning NLP, b
 
 The following is a list of resources from this repository:
 - [NLP Cheat Sheet](https://github.com/birdx0810/NLP/blob/master/NLP_CheatSheet.md): A very quick introduction to NLP tasks and goals
-- [NLP Papers](https://github.com/birdx0810/NLP/blob/master/NLP_Papers.md): Review, summary and notes on NLP Papers
 - [NLP DL](https://github.com/birdx0810/NLP/blob/master/NLP_DL.md): Summary of some deep learning algorithms 
 - Code: Python code implementations of...
     - [Preprocessing](https://github.com/birdx0810/NLP/tree/master/code/preprocessor): Python code for text preprocessing

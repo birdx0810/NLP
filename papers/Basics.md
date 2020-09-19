@@ -1,11 +1,7 @@
-# NLP Papers
-###### tags: `NLP`
-
+# NLP Basics
 ## Introduction
 
-![](https://raw.githubusercontent.com/thunlp/PLMpapers/master/PLMfamily.jpg)
-
-Word Vectors <=> Word Embeddings
+Word Vectors <=> Word Embeddings <=> Word Representations
 - a set of language modeling techniques for mapping words to a vector of numbers (turns a text into numbers)
 - a numeric vector represents a word
 - comparitively sparse: more words == higher dimension
@@ -17,101 +13,20 @@ Key properties for Embeddings:
   - Semantics(Sentiment): Meaning of vocabulary
 
 <!-- TODO: Read
-[Neural Language Modeling](https://ofir.io/Neural-Language-Modeling-From-Scratch/)  
-[Embed, Encode, Attend, Predict](https://explosion.ai/blog/deep-learning-formula-nlp)  
-[What can we cram into a vector](https://arxiv.org/abs/1805.01070)  
+[Neural Language Modeling](https://ofir.io/Neural-Language-Modeling-From-Scratch/)
+[Embed, Encode, Attend, Predict](https://explosion.ai/blog/deep-learning-formula-nlp)
+[What can we cram into a vector](https://arxiv.org/abs/1805.01070)
  -->
- 
----
-
-## Text Pre-processing
-- removing tags (HTML, XML)
-- removing accented characters (é)
-- expanding contractions (don't, i'd)
-- removing special characters (!@#$%^&\*)
-- stemming and lemmatization
-    - remove affixes
-    - root word/stem
-- removing stopwords (a, an, the, and)
-- remove whitespace, lowercasing, spelling/grammar corrections etc.
-- replace special tokens (digits to `[NUM]` token)
-- [Example Code](https://github.com/dipanjanS/practical-machine-learning-with-python/blob/master/notebooks/Ch07_Analyzing_Movie_Reviews_Sentiment/Text%20Normalization%20Demo.ipynb)
-
-## Text Mining
-
-## Tokenizers
-
-### Byte Pair Encoding (BPE)
-> Neural Machine Translation of Rare Words with Subword Units
-> Sennrich et. al (2015)
-> Paper: [Link](https://arxiv.org/abs/1508.07909)
-> Code: [Link](https://github.com/rsennrich/subword-nmt)
-
-- replaces the most frequent pair of characters in a sequence with a single (unused) character ngrams
-- add frequent n-gram character pairs in to vocabulary (something like association rule)
-- stop when vocabulary size has reached target
-- do deterministic longest piece segmentation of words
-- segmentation is only within words identified by some prior tokenizer
-- Variants:
-    - WordPiece/SentencePiece (Google)
-
-Example Code:
-```python
-import re, collections
-
-def get_stats(vocab):
-    pairs = collections.defaultdict(int)
-    for word, freq in vocab.items():
-        symbols = word.split()
-        for i in range(len(symbols)-1):
-            pairs[symbols[i],symbols[i+1]] += freq
-    return pairs
-
-def merge_vocab(pair, v_in):
-    v_out = {}
-    bigram = re.escape(' '.join(pair))
-    p = re.compile(r'(?<!\S)' + bigram + r'(?!\S)')
-    for word in v_in:
-        w_out = p.sub(''.join(pair), word)
-        v_out[w_out] = v_in[word]
-    return v_out
-
-# Dictionary {'word': # of occurence}
-vocab = {'l o w </w>':5, 'l o w e r </w>':2,
-         'n e w e s t </w>':6, 'w i d e s t </w>':3}
-
-num_merges = 10
-
-for i in range(num_merges):
-    pairs = get_stats(vocab)
-    best = max(pairs, key=pairs.get)
-    vocab = merge_vocab(best, vocab)
-    print(best)
-```
-
-### SentencePiece(WordPiece)
-> Affiliation: Google
-> Paper: [SentencePiece](https://arxiv.org/abs/1808.06226) & [WordPiece](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/37842.pdf)
-> Code: [Code](https://github.com/google/sentencepiece)
-
-- WordPiece tokenizes characters within words (BERT uses a variant of WP)
-- SentencePiece tokenizes words and retaining whitespaces with a special token `_`
-
-### Byte-to-Span
-> Paper: [Link](https://arxiv.org/abs/1512.00103)
-> Code: [Link]
-
----
 
 ## Word Embeddings
 
-### Word2Vec: 
+### Word2Vec:
 > Mikolov et. al (2013)
 > Affiliates: Google
 > Paper:
 > - [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/abs/1301.3781): CBOW & SkipGram
-> - [Distributed Representations of Words and Phrases and their Compositionality](https://arxiv.org/abs/1310.4546): Hierarchical Softmax & Negative Sampling 
-> Code: 
+> - [Distributed Representations of Words and Phrases and their Compositionality](https://arxiv.org/abs/1310.4546): Hierarchical Softmax & Negative Sampling
+> Code:
 > - [GitHub](https://github.com/tensorflow/tensorflow/blob/r1.1/tensorflow/examples/tutorials/word2vec/word2vec_basic.py) (Tensorflow)
 > - [Original Project](https://code.google.com/archive/p/word2vec/)
 
@@ -252,11 +167,11 @@ Bi-directional LSTM
 ## Language Models
 
 ### Class-Based $n$-gram Models of Natural Language
-> n-gram Language Model  
-> Statistical Language Model  
-> Brown et al. (1992)  
-> Affiliates: IBM  
-> Paper: [Link](https://www.aclweb.org/anthology/J92-4003.pdf)  
+> n-gram Language Model
+> Statistical Language Model
+> Brown et al. (1992)
+> Affiliates: IBM
+> Paper: [Link](https://www.aclweb.org/anthology/J92-4003.pdf)
 
 Language Models have been long used in:
 - speech recognition (Bahl et al., 1983)
@@ -271,7 +186,7 @@ $P(w|h)$
 We assume that production of English text can be characterized by a set of conditional probabilities:
 $$
 \begin{aligned}
-P(w_1^k) &= P(w_1)P(w_2|w_1)...P(w_k|w_{1}^{k-1}) \\    
+P(w_1^k) &= P(w_1)P(w_2|w_1)...P(w_k|w_{1}^{k-1}) \\
 &\approx \prod_{i=1}^k P(w_i|w_{i-1})
 \end{aligned}
 $$
@@ -302,7 +217,7 @@ Besides predicting the probability of next word, this paper suggests that we cou
 $$
 \begin{aligned}
 P(w|c) &= \frac{C(w)}{C(c)} \\
-P(c) &= \frac{C(c)}{V}     
+P(c) &= \frac{C(c)}{V}
 \end{aligned}
 $$
 This could be "merged" with our 3-gram model into
@@ -315,8 +230,8 @@ Reference:
 - [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 ### A Neural Probabilistic Language Model
-> Bengio et. al (2003) #JMLR  
-> Affiliates: University of Montreal  
+> Bengio et. al (2003) #JMLR
+> Affiliates: University of Montreal
 > Paper: [Link](http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)
 
 Curse of Dimensionality: a word or sequence on which the model will be tested is likely to be different from all the word sequences seen during training
@@ -338,9 +253,9 @@ Objective Function: Maximize Log-Likelihood
 ### RNN Based Language Model
 > Mikolov et. al (2013) #ACL
 > Affiliates: Microsoft
-> Paper:  
-> [ACL](https://www.aclweb.org/anthology/N13-1090/)  
-> [INTERSPEECH](https://www.isca-speech.org/archive/interspeech_2010/i10_1045.html)  
+> Paper:
+> [ACL](https://www.aclweb.org/anthology/N13-1090/)
+> [INTERSPEECH](https://www.isca-speech.org/archive/interspeech_2010/i10_1045.html)
 
 ![](https://i.imgur.com/8LBdgID.png)
 
@@ -406,13 +321,13 @@ Where
 
 ### ULMFiT: Universal Language Model Fine-tuning for Text Classification
 > Affiliates: Fast.ai
-> Paper: [Link](https://arxiv.org/abs/1801.06146)  
-> Code: [Link](https://github.com/fastai/fastai/blob/master/examples/ULMFit.ipynb)  
-> Official Site: [Link](http://nlp.fast.ai/ulmfit)  
+> Paper: [Link](https://arxiv.org/abs/1801.06146)
+> Code: [Link](https://github.com/fastai/fastai/blob/master/examples/ULMFit.ipynb)
+> Official Site: [Link](http://nlp.fast.ai/ulmfit)
 
 ### UNILM: Unified Language Model Pre-training for Natural Language Understanding and Generation
-> Paper: [Link](https://arxiv.org/abs/1905.03197)  
-> Code: [Link](https://github.com/microsoft/unilm)  
+> Paper: [Link](https://arxiv.org/abs/1905.03197)
+> Code: [Link](https://github.com/microsoft/unilm)
 
 ---
 
@@ -420,11 +335,10 @@ Where
 
 ### NMT & Seq2Seq Models: A tutorial...
 > Paper: [Link](https://arxiv.org/abs/1703.01619)
-> 
 > Neural Machine Translation Code:
-> - [Tensorflow](https://github.com/tensorflow/nmt)  
-> - [Google](https://google.github.io/seq2seq/nmt/)  
-> - [OpenNMT](http://opennmt.net/)  
+> - [Tensorflow](https://github.com/tensorflow/nmt)
+> - [Google](https://google.github.io/seq2seq/nmt/)
+> - [OpenNMT](http://opennmt.net/)
 
 ### On the properties of Neural Machine Translation: Encoder-Decoder Approaches
 > Cho et al. (2014)
@@ -432,21 +346,21 @@ Where
 > Paper: [Link](https://arxiv.org/pdf/1409.1259.pdf)
 
 ### Sequence to Sequence Learning with Neural Networks
-> Affiliation: Google  
-> Paper: [Link](https://arxiv.org/abs/1409.3215)  
-> Code: [Link](https://github.com/google/seq2seq)  
+> Affiliation: Google
+> Paper: [Link](https://arxiv.org/abs/1409.3215)
+> Code: [Link](https://github.com/google/seq2seq)
 
 Source Language $\to$ **encode** $\to$ compressed state (vector) $\to$ **decode** $\to$ Target Language
 $V_{src} \text{: \{I love apple\} } \to V_{tgt} \text{: \{我喜歡蘋果\} }$
 
 ### Neural Machine Translation by Jointly Learning to Align and Translate
-> A.k.a RNNencdec & RNNsearch  
-> Paper: [Link](https://arxiv.org/abs/1409.0473)  
+> A.k.a RNNencdec & RNNsearch
+> Paper: [Link](https://arxiv.org/abs/1409.0473)
 
 ### Google's Neural Machine Translation System
-> Affiliation: Google  
-> Paper:  
-> [Bridging the Gap between Human and Machine Translation](https://arxiv.org/pdf/1609.08144.pdf)  
+> Affiliation: Google
+> Paper:
+> [Bridging the Gap between Human and Machine Translation](https://arxiv.org/pdf/1609.08144.pdf)
 > [Enabling Zero-Shot Translation](https://arxiv.org/abs/1611.04558)
 
 - Human translation: Translating part by part (memorization)
@@ -473,208 +387,4 @@ $\alpha^{<t,t'>}$ is the amount of attention $y^{<t>}$ should pay to $a^{<t'>}$.
 A larger the scalar (dot) product ($\approx 1$) means higher similarity. Thus, leads to "more attention".
 
 Problem: Slow and still limited by size of context vector of RNN; could we remove the continuous RNN states?
-
-### Attention is all you need
-> a.k.a Transformers  
-> Vaswani et al. (2017)  
-> Affiliates: Google  
-> Paper: [Link](https://arxiv.org/abs/1706.03762)  
-> Code: [Havard: The Annotated Transformer](https://nlp.seas.harvard.edu/2018/04/03/attention.html)  
-
-Loss Function: Cross Entropy
-
-![](https://i.imgur.com/w5XmS2C.png)
-
-Consists of an Encoder and Decoder
-- Encoder (self attention)
-    1. Self attention layer
-    2. Feed-forward network
-
-- Decoder
-    1. Self attention layer
-    2. Encoder-Decoder attention
-    3. Feed-forward network
-
-How does the model know the word sequence/order (without RNN)?
-- Positional encoding
-    - add a (one-hot) vector representing the sequence of each input word
-
-Reference:
-[Transformer - Heo Min-suk](https://www.youtube.com/watch?v=z1xs9jdZnuY)
-
-#### Scaled Dot-Product Attention
-$\text{Attention}(Q, K, V) = \text{softmax} (\frac{QK^T}{\sqrt{d_k}}) \times V$
-
-- $QK^T$ is the attention score where $Q$ (m $\times$ 1)
-- $d_k$ is keys of dimension
-- The output is the attention layer output (vector)
-
-#### Multi-Head Attention
-- Parallelization (8 attention layers)
-$$
-\begin{aligned}
-Multihead(Q,K,V) &= \text{concat}(head_1, ...,head_h)W^O \\
-\text{where } head_i &= \text{Attention}(QW^Q_i,KW^K_i,VW^V_i)
-\end{aligned}
-$$
-References:
-
-#### Encoder Layer (6 identical layers with different weights)
-- Input: Word embeddings $\to$ Positional encoding $\to$ Attention Layer
-- Concat Attention outputs * Weight Matrix -> FC Layer
-- Output: Word embedding (same size as input)
-* Residual Connection followed by normalization
-    * for retaining the information in the positional encodings
-
-#### Decoder Layer (6 identical layers)
-**Masked MH Att. -> MH Att. -> FC Layer**
-- Input word vectors one at a time
-- Generates a word from input word
-* Masked layer prevents future words to be part of the attention
-* Second MH Att. layer $q$ are from the decoder and $k$, $v$ the are from encoder
-
-#### Final Linear Layer & Softmax Layer
-Linear: Generate logit
-Softmax: Probability of word
-Label smoothing (regularization for noisy labels)
-
----
-
-## Transformers
-Code: [Huggingface](https://github.com/huggingface/transformers)
-
-### BERT (Biderectional Encoder Representation from Transformers)
-###### Encoder
-> Devlin et. al (2018) #NAACL
-> Code: [Link](https://github.com/google-research/bert)
-> Paper: [Link](https://arxiv.org/abs/1810.04805)
-
-Reads entire sequence at once (non-directional)
-
-$$
-\text{Input: [CLS] } s_1 \text{ [SEP] } s_2 \text{ [SEP] }
-$$
-
-- Pre-train Objective (Optional)
-    - Masked Language Model (MLM): Predicts masked tokens over vocabulary
-    - Next Sentence Prediction (NSP): Binary Classification of whether both sentences are taken from the same context/reference
-- Fine-tune Inference
-  - GLUE: [CLS] for prediction
-  - SQuAD: [CLS] Document [SEP] Question [SEP]
-  - CNN-DM: BERT(Word Representation) + Downstream
-
-#### Dataset
-Wikipedia
-BookCorpus
-
-### SpanBERT
-###### Encoder
-> Joshi et al. (2019 July 24)
-> Affiliation: facebook
-> Paper: [Link](https://arxiv.org/abs/1907.10529)
-> Code: [Link](https://github.com/facebookresearch/SpanBERT)
-
-Span Masking (WWM)
-Span Boundary Objective (SBO): Predict current words using front and back words
-~~NSP~~
-
-### RoBERTa
-###### Encoder
-> Liu et al. (2019 July 26)
-> Paper: [Link](https://arxiv.org/abs/1907.11692)
-> Code: [Link]
-
-Dataset Size: 40GB
-Batch Size: 2048, 4096
-Dynamic Masking (BERT always mask same > overfit)
-No NSP
-Add sentences until fit sequence length 512
-
-### ALBERT
-###### Encoder
-> Lan et al. (2019 Sept)
-> Paper: [Link](https://arxiv.org/abs/1909.11942)
-> Code: [Link](https://github.com/google-research/ALBERT)
-
-Weight Sharing
-Sentence Order Prediction (SOP)
-
-### GPT: Improving Language Understanding by Generative Pre-training
-###### Decoder
-> Paper: [Link](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf)
-> Code: [Link](https://github.com/openai/finetune-transformer-lm)
-
-### GPT-2: Language Models are Unsupervised Multitask Learners
-###### Decoder
-> Paper: [Link](https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf)
-> Code: [Link](https://github.com/openai/gpt-2)
-
-### GPT-3: Language Models are Few-Shot Learners
-###### Decoder
-> Paper: [Link](https://arxiv.org/abs/2005.14165)
-> Code: [Link](https://github.com/openai/gpt-3)
-
-### TransformerXL: Attentive Language Models Beyond a Fixed-Length Context
-###### AutoEncoder
-> Paper: [Link](https://arxiv.org/abs/1901.02860)
-> Code: [Link](https://github.com/kimiyoung/transformer-xl)
-
-The vanilla transformer faces a couple of limitations:
-- fixed maximum sequence length
-- segments do not respect the sentence boundaries
-
-To address this issue, two techniques were introduced:
-- Segment-level Recurrence
-![](https://2.bp.blogspot.com/--MRVzjIXx5I/XFCm-nmEDcI/AAAAAAAADuM/HoS7BQOmvrQyk833pMVHlEbdq_s_mXT2QCLcBGAs/s640/GIF2.gif)
-- Relative Positional Encodings
-![](https://4.bp.blogspot.com/-Do42uKiMvKg/XFCns7oXi5I/AAAAAAAADuc/ZS-p1XHZUNo3K9wv6nRG5AmdEK7mJsrugCLcBGAs/s640/xl-eval.gif)
-
-### XLM: Cross-lingual Language Model Pretraining
-###### AutoEncoder
-> Paper: [Link](https://arxiv.org/abs/1901.07291)
-> Code: [Link](https://github.com/facebookresearch/XLM/)
-
-A transformer pre-trained using **one of the following** objectives, where each objective is selected w.r.t the downstream task:
-- Masked Language Modeling
-- Causal Language Modeling (next token prediction)
-- Translation Language Modeling
-
-### XLNet: Generalized Autoregressive Pretraining for Language Understanding
-###### AutoRegressive
-> Paper: [Link](https://arxiv.org/abs/1906.08237)
-> Code: [Link](https://github.com/zihangdai/xlnet)
-
-Denoising autoencoders aim to denoise/reconstruct the corrupted (masked) input data into the original data. They have the advantage of learning from forward-backward context. But the disadvantage lies in the `[MASK]` token being absent in finetuning and they are being assumed to be independent from other tokens.
-
-Auto-regressive LMs are good for decoding tasks, but has loses forward-backward context.
-
-### T5
-###### AutoEncoders
-> Paper: [Link](https://arxiv.org/abs/1910.10683)
-> Code: [Link](https://github.com/google-research/text-to-text-transfer-transformer)
-
----
-
-## Generative Adversarial Networks
-
-### Generating Text via Adversarial Training 
-> NIPS GAN Workshop 2016
-> Paper: [Link](https://people.duke.edu/~yz196/pdf/textgan.pdf)
-
-### SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient
-> AAAI 2017
-> Paper: [Link](https://arxiv.org/abs/1609.05473)
-> Code: [GitHub](https://github.com/LantaoYu/SeqGAN)
-
-
-### Adversarial Learning for Neural Dialogue Generation
-> ACL 2017
-> Paper: [Link](https://arxiv.org/abs/1701.06547)
-> Code: [GitHub](https://github.com/jiweil/Neural-Dialogue-Generation)
-
-
-### ELECTRA: 
-> Paper: [Link](https://openreview.net/forum?id=r1xMH1BtvB)
-> Code: [GitHub]()
-
 

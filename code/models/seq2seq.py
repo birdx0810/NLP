@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 This is an example for implementing a seq2seq model class using PyTorch.
 Notes:
 - We will be using torch.nn modules here.
 - torch.nn.functional is low-level, stateless functions that are used by the modules, you could use them for flexibility(?)
-'''
+"""
+
 import torch
 import torch.nn as nn
-import tqdm
 
 class Seq2seq(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim, encoder_layers, decoder_layers, bidirectional, vocab_size, embedding_weight=None):
@@ -69,10 +69,10 @@ class Seq2seq(nn.Module):
     def forward(self, x):
 
         # Embedding layer
-        x = self.embedding_layer(x)
+        embedding_tensor = self.embedding_layer(x)
 
         # Encoder
-        hidden_tensor, _ = self.encoder(x)
+        hidden_tensor, _ = self.encoder(embedding_tensor)
 
         # Decoder
         hidden_tensor, _ = self.decoder(hidden_tensor)
@@ -82,8 +82,27 @@ class Seq2seq(nn.Module):
 
         return y
 
-    def generator(self, y):
-        #TODO: sentence generator with beam search
-        pass
+    def generator(self, features, beam_width, max_len=200):
+
+        results = [self.bos_token_idx]
+        prob = []
+
+        while len(results) < max_len and results[-1] != self.eos_token_idx:
+
+            # 1 x 1 x V
+            yt = self(
+                features,
+                torch.LongTensor(results).unsqueeze(0) # 1 x S
+            )[:,-1,:].squeeze().argmax()
+
+            pr = torch.nn.functional.softmax(self(
+                features,
+                torch.LongTensor(results).unsqueeze(0) # 1 x S
+            )[:,-1,:].squeeze(), dim=0).max()
+
+            results.append(yt)
+            prob.append(pr)
+
+        return self.tokenizer.decode([results]), prob
 
 
